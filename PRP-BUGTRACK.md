@@ -3,14 +3,16 @@ The version in git is always tagged newer as it's development.
 
 Deduplication tracker remaining:
 - Fallout4.esm \[ 2771 of 3300 \]
-- DLC01Robot \[ 346 of 358 \]
+- DLC01Robot \[ 343 of 358 \]
 - DLC02Workshop01 \[ N/A \]
-- DLC03Coast \[ 459 of 459 \]
+- DLC03Coast \[ 85 of 459 \]
 - DLC04Workshop02 \[ N/A \]
 - DLC05Workshop03 \[ Completed \]
 - DLC06NukaWorld \[ 536 of 977 \]
 
 Current known issues:
+- \[PRP\] Future multilingual build setup.
+- \[???\] Check Vault81 Room Bounds (Priority: Very Very Very Very Very Low)
 - \[PRP\] **World cell records may need reevaluated.**
 - \[PRP\] 144d49
 - \[PRP\] 92b21
@@ -60,9 +62,189 @@ Models marked non-occlude (bandaid fix): 60138D1 (DLC04ZooCageWallTallDoorSingle
 
 Models in the Meshes/ folder have been contributed from everyone listed on the mod description page and their associated mods, if you have contributed and it's not on there, let me know so I can fix it.
 
-Current fixed issues:
+Current fixed issues list, anything marked 'Dedup' means Deduplication as in the record is at least one exact duplicate in the associated plugin master file:
+
 0.58
 
+
+- \[PRP\] (-33, -20, CW): Dedup 0017DDB2
+- \[PRP\] (-17, 4, CW): Dedup 000E4CF5
+- \[PRP\] (-21, 9, CW): Dedup 001BE760
+- \[PRP\] (-25, -1, CW): Dedup 010018F2
+- \[PRP\] (21, 30, CW): Dedup 03032AD8
+- \[PRP\] (-6, 1, FH): Dedup 0305D3E1
+- \[PRP\] (0, -11, FH): Dedup 0304E64A
+- \[PRP\] (7, 8, FH): Dedup 0303795C
+- \[PRP\] (7, 7, FH): Dedup 030217E9
+- \[PRP\] (3, 6, FH): Dedup 03029CBF
+- \[PRP\] (3, 5, FH): Dedup 0301972D
+- \[PRP\] (2, 4, FH): Dedup 03028DF3, 03028DF4
+- \[PRP\] (2, 0, FH): Dedup 0302DEF4
+- \[PRP\] (1, 7, FH): Dedup 0302EE28
+- \[PRP\] (0, 0, FH): Dedup 0302ACA2, 0302ACA3, 0302ACA4, 0302ACA5, 0302ACA7
+- \[PRP\] (5, 15, FH): Dedup 0303F51A, 0303F53A
+- \[PRP\] (7, 9, FH): Dedup 03021190, 03032528, 03032529
+- \[PRP\] (7, 8, FH): Dedup 0302E478, 0302E479, 0302E47A, 03031456
+- \[PRP\] (6, 13, FH): Dedup 0303F2F8, 0303F2F9
+- \[PRP\] (6, 10, FH): Dedup 030363C9
+- \[PRP\] (4, 12, FH): Dedup 0303D6B7
+- \[PRP\] (4, 10, FH): Dedup 03036531
+- \[PRP\] (3, 8, FH): Dedup 03010454
+- \[PRP\] (2, 14, FH): Dedup 0303F68A
+- \[PRP\] (2, 8, FH): Dedup 03031A4E
+- \[PRP\] (1, 15, FH): Dedup 0303F6D2, 0303F6DF
+- \[PRP\] (0, 12, FH): Dedup 0302EB64
+- \[PRP\] (3, 15, FH): Dedup 0303F5ED
+- \[PRP\] (14, 6, FH): Dedup 0304FEAD
+- \[PRP\] (15, 1, FH): Dedup 030035F0
+- \[PRP\] (14, 4, FH): Dedup 03011BB8
+- \[PRP\] (13, 7, FH): Dedup 0303DE23, 0303DE28
+- \[PRP\] (13, 5, FH): Dedup 03023294
+- \[PRP\] (12, 6, FH): Dedup 03023120
+- \[PRP\] (12, 0, FH): Dedup 030253B3
+- \[PRP\] (11, 7, FH): Dedup 03004FA2, 03044F25
+- \[PRP\] (13, 10, FH): Dedup 03012855
+- \[PRP\] (13, 8, FH): Dedup 0300350D, 0300350E, 03003535, 03003536, 03003538, 0300353A, 0300353B, 0303DDEA, 0303DE26, 03056373, 03056374, 03056375, 03056376, 03056377, 0305637A, 0305639B, 0305639D
+- \[PRP\] (11, 11, FH): Dedup 03015D9D
+- \[PRP\] (10, 8, FH): Dedup 03022C78, 03022C7A
+- \[PRP\] (16, 0, FH): Dedup 030254CB, 030047F1
+-- Second reference has no geometry. Punted to UF4OP as U32356
+- \[PRP\] (7, -12, FH): Dedup 0300DD87
+- \[PRP\] (7, -13, FH): Dedup 0300CB4A, 0303E5A2
+- \[PRP\] (7, -14, FH): Dedup 0300C42C
+- \[PRP\] (4, -13, FH): Dedup 0303A010
+- \[PRP\] (1, -11, FH): Dedup 0302C51B
+- \[PRP\] (0, -12, FH): Dedup 0303CE6A
+- \[PRP\] (4, -12, FH): Dedup 0304FFAF
+- \[PRP\] (2, -13, FH): Dedup 0303936C
+- \[PRP\] (2, -14, FH): Dedup 0300F438
+- \[PRP\] (0, -9, FH): Dedup 03025B6F
+- \[PRP\] (5, -2, FH): Dedup 0303EF78
+- \[PRP\] (5, -8, FH): Dedup 0300A3A6, 03030CA9
+- \[PRP\] (2, -8, FH): Dedup 0301C59B
+- \[PRP\] (7, -4, FH): Dedup 0302CE86
+- \[PRP\] (7, -5, FH): Dedup 0302DA72, 0302DA73, 030345BA
+- \[PRP\] (7, -7, FH): Dedup 0302CEBB, 03031B4E
+- \[PRP\] (6, -4, FH): Dedup 0302CE8C
+- \[PRP\] (6, -5, FH): Dedup 0302D011
+- \[PRP\] (6, -6, FH): Dedup 03018924, 03018B73
+- \[PRP\] (5, -4, FH): Dedup 03014FB3
+- \[PRP\] (5, -5, FH): Dedup 03014F40
+- \[PRP\] (5, -6, FH): Dedup 0302CDB9, 0302CDC3, 0302D0C2
+- \[PRP\] (5, -7, FH): Dedup 03018933
+- \[PRP\] (4, -5, FH): Dedup 03018690
+- \[PRP\] (4, -6, FH): Dedup 03018741
+- \[PRP\] (4, -7, FH): Dedup 030077C0
+- \[PRP\] (3, -4, FH): Dedup 0303308B
+- \[PRP\] (3, -5, FH): Dedup 030150B5, 030150BE, 0304FFA3
+- \[PRP\] (3, -6, FH): Dedup 03015098, 03018707
+- \[PRP\] (2, -5, FH): Dedup 030076E7, 03014C99, 03018FEF, 0301901A, 0304FFA4
+- \[PRP\] (1, -6, FH): Dedup 03025E03
+- \[PRP\] (0, -3, FH): Dedup 0302DBD6
+- \[PRP\] (0, -5, FH): Dedup 03014B0D
+- \[PRP\] (0, -6, FH): Dedup 03025DD1
+- \[PRP\] (0, -7, FH): Dedup 03025DCB
+- \[PRP\] (0, -8, FH): Dedup 030332A8
+- \[PRP\] (10, -9, FH): Dedup 0305013B
+- \[PRP\] (9, -9, FH): Dedup 03050115
+- \[PRP\] (9, -10, FH): Dedup 0300B0DA
+- \[PRP\] (9, -11, FH): Dedup 0300A430
+- \[PRP\] (15, -2, FH): Dedup 03005E3F
+- \[PRP\] (13, -1, FH): Dedup 03005FC7
+- \[PRP\] (13, -3, FH): Dedup 030544CB
+- \[PRP\] (12, -3, FH): Dedup 03013ABD, 030146DA, 030544C5
+- \[PRP\] (11, -1, FH): Dedup 03007150
+- \[PRP\] (11, -2, FH): Dedup 03005FCA
+- \[PRP\] (10, -6, FH): Dedup 0301397E, 03013985, 03033714
+- \[PRP\] (10, -7, FH): Dedup 03034C70
+- \[PRP\] (9, -7, FH): Dedup 0300309E, 0300309F
+- \[PRP\] (8, -7, FH): Dedup 03034536
+- \[PRP\] (12, -7, FH): Dedup 03031E31
+- \[PRP\] (16, -3, FH): Dedup 0303F7D6, 0303F7EC
+- \[PRP\] (-9, 2, FH): Dedup 03030004, 03030005, 03030006, 03030007, 03030008, 03030009, 0303000A, 0303000B, 0303000C, 0303000D, 0303000E, 0303000F, 03030010, 03030011, 03030012, 03030013, 03030014, 03030015, 03030016, 03030017, 03030018, 03030019, 0303001A, 0303001B, 0303001C, 0303001D, 0303001E, 0303001F, 03030020, 03030021, 03030022, 03030023, 03030024, 03030025, 03030026, 03030027
+- \[PRP\] (-10, 4, FH): Dedup 0301328C, 0301331F
+- \[PRP\] (-10, 2, FH): Dedup 03010C88
+- \[PRP\] (-10, 8, FH): Dedup 0301842F
+- \[PRP\] (-1, 2, FH): Dedup 03024506
+- \[PRP\] (-2, 6, FH): Dedup 0302376A
+- \[PRP\] (-2, 5, FH): Dedup 03009D4D, 030238CA, 030238D3
+- \[PRP\] (-2, 3, FH): Dedup 03023D60
+- \[PRP\] (-2, 2, FH): Dedup 03007BCB
+- \[PRP\] (-2, 1, FH): Dedup 0303C9BB
+- \[PRP\] (-3, 1, FH): Dedup 030382E4
+- \[PRP\] (-3, 0, FH): Dedup 0300FA5D
+- \[PRP\] (-5, 6, FH): Dedup 03022EE8
+- \[PRP\] (-5, 5, FH): Dedup 03006660, 03006662
+- \[PRP\] (-5, 2, FH): Dedup 03022D64, 03022D65, 03022DDB, 03022DEE, 03035A46
+- \[PRP\] (-5, 1, FH): Dedup 03035A9B
+- \[PRP\] (-6, 3, FH): Dedup 030064F8
+- \[PRP\] (-6, 2, FH): Dedup 03008FFA, 03009003
+- \[PRP\] (-6, 1, FH): Dedup 03035AFF, 030377B9
+- \[PRP\] (-6, 0, FH): Dedup 0300ACA9
+- \[PRP\] (-7, 2, FH): Dedup 030061C3
+- \[PRP\] (-7, 0, FH): Dedup 0300A23B, 0300D2ED, 0300D3C7
+- \[PRP\] (-8, 6, FH): Dedup 03003C72, 03003CF9
+- \[PRP\] (-8, 4, FH): Dedup 030040C9
+- \[PRP\] (-8, 3, FH): Dedup 030040CF
+- \[PRP\] (-8, 2, FH): Dedup 0300612C
+- \[PRP\] (-2, 14, FH): Dedup 0302D6D8
+- \[PRP\] (-3, 8, FH): Dedup 03007A83, 0301A73E
+- \[PRP\] (-4, 12, FH): Dedup 03028920, 03028990
+- \[PRP\] (-6, 9, FH): Dedup 0302BDD3
+- \[PRP\] (-9, -9, FH): Dedup 0303FE44
+- \[PRP\] (-11, -10, FH): Dedup 0304F55B
+- \[PRP\] (-13, -11, FH): Dedup 03057070
+- \[PRP\] (-9, -8, FH): Dedup 03024623
+- \[PRP\] (-10, -8, FH): Dedup 0302474C
+- \[PRP\] (-11, -6, FH): Dedup 03035999
+- \[PRP\] (-2, -16, FH): Dedup 03014546
+- \[PRP\] (-1, -16, FH): Dedup 0301EBBA
+- \[PRP\] (-1, -9, FH): Dedup 03025B46
+- \[PRP\] (-1, -12, FH): Dedup 0302D430, 030406A2, 030406BA
+- \[PRP\] (-2, -12, FH): Dedup 0301AF5A
+- \[PRP\] (-4, -9, FH): Dedup 0301484E
+- \[PRP\] (-5, -9, FH): Dedup 03012D7C
+- \[PRP\] (-5, -13, FH): Dedup 03011985
+- \[PRP\] (-5, -14, FH): Dedup 0304FC5A, 0304FC5B
+- \[PRP\] (-7, -15, FH): Dedup 03013F37
+- \[PRP\] (-2, -7, FH): Dedup 03011E94, 03012AD7, 0302AF24, 0302AF25
+- \[PRP\] (-3, -6, FH): Dedup 03012164, 03012165, 03012166, 030121A1, 030121C0, 030121C1, 030292AD, 030292E0
+- \[PRP\] (-1, -1, FH): Dedup 0300FB72
+- \[PRP\] (-1, -2, FH): Dedup 0303CAF5, 0303CBB7
+- \[PRP\] (-1, -7, FH): Dedup 03010E11, 0302AF55
+- \[PRP\] (-2, -2, FH): Dedup 0303CA5B
+- \[PRP\] (-3, -4, FH): Dedup 0302A933
+- \[PRP\] (-4, -2, FH): Dedup 0304E28A
+- \[PRP\] (-4, -3, FH): Dedup 030100F6
+- \[PRP\] (-4, -4, FH): Dedup 0300E505
+- \[PRP\] (-4, -5, FH): Dedup 03013D9B, 030379AE
+- \[PRP\] (-4, -6, FH): Dedup 03012880
+- \[PRP\] (-4, -8, FH): Dedup 03012356
+- \[PRP\] (-5, -4, FH): Dedup 03026932
+- \[PRP\] (-5, -5, FH): Dedup 03013CFD
+- \[PRP\] (-5, -7, FH): Dedup 03012278
+- \[PRP\] (-5, -8, FH): Dedup 03012D7E, 03012D81
+- \[PRP\] (-6, -2, FH): Dedup 0300E657
+- \[PRP\] (-6, -3, FH): Dedup 03037437
+- \[PRP\] (-6, -5, FH): Dedup 03026869
+- \[PRP\] (-6, -6, FH): Dedup 03012BF2, 03012BF4, 03012C0C
+- \[PRP\] (-6, -7, FH): Dedup 03028F5C, 03028F9C
+- \[PRP\] (-7, -1, FH): Dedup 0300D3E4
+- \[PRP\] (-7, -4, FH): Dedup 03026768
+- \[PRP\] (-7, -6, FH): Dedup 03026A08, 03027DB8
+- \[PRP\] (-7, -7, FH): Dedup 030135C1, 03013C49
+- \[PRP\] (-8, -2, FH): Dedup 030370E5
+- \[PRP\] (-8, -4, FH): Dedup 030266BA, 030266C6
+- \[PRP\] (-8, -6, FH): Dedup 0301149B
+- \[PRP\] (-8, -7, FH): Dedup 03010ABB, 0301131C
+- \[PRP\] (-8, -8, FH): Dedup 03013704, 03027D3D, 03027D90
+- \[PRP\] (1, 0, FHVR): Dedup 03043E6A, 03054B03
+- \[PRP\] (0, 0, FHVR): Dedup 0302F01A, 0302F51F
+- \[PRP\] (1, 1, FHVR): Dedup 03045566, 03045567, 03045568
+- \[PRP\] (0, -1, FHVR): Dedup 0301D94C, 0301D94D, 0301D94E, 0301DA53, 0301DA55, 0301DA81, 0301DA83, 0301DA92, 0301DA94, 0301DAA2, 0301DAB2, 0301DAB4, 0302F533, 03043CF9, 03054E1A, 03054E8B, 03054E8D, 03054E9D, 03054EAB, 03054EAD, 03054EBC, 03054EBE, 03054EEA, 03054EEC
+- \[PRP\] (1, -1, FHVR): Dedup 03043CD1, 03043CD2, 03043CD3, 03043CD4, 03043CD5, 03054C85, 03054C86, 03054C87, 03054C88, 03054C89, 0305720C
+- \[PRP\] (-1, 1, FHVR): Dedup 03027B84, 030551B8
+- \[PRP\] (-1, -2, FHVR): Dedup 0304E015
 - \[PRP\] (-26, 6, CW): Dedup 0600B1C1, 0600B1BF
 - \[PRP\] (-27, 6, CW): Dedup 0600A7BA
 - \[PRP\] (-28, 6, CW): Dedup 0600B1B8
@@ -73,7 +255,7 @@ Current fixed issues:
 - \[PRP\] (1, 4, NW): Dedup 060283EE
 - \[PRP\] (-4, -6, NW): Dedup 06028332, 06028333, 06028334, 06028335, 06028336
 - \[PRP\] (-1, -4, NW): Dedup 060281FE, 060281FF, 06028200, 06028201, 06028202, 06028203, 06028204
--- The above four entries will affect textures in the area, as the duplicate entries were application of texturesets.
+-- The last four entries will affect textures in the area, as the duplicate entries were application of texture sets.
 - \[PRP\] (7, 2, NW): Dedup 06051EA9
 - \[PRP\] (6, 7, NW): Dedup 060181EF
 - \[PRP\] (6, 5, NW): Dedup 0601AAB4
@@ -279,16 +461,24 @@ Current fixed issues:
 - \[PRP\] Fix positioning of 68A78 to stop z-fighting. I doubt anyone's going to notice the extra block from where it currently sits.
 - \[U32328\] Fix 1E7723 clipping through roof.
 - \[PRP\] Import remaining Flicker Fixer model set from 5.7 release. (HouseKit/, meshes already in git)
+
 0.57.2
+
 - \[PRP\] Fixed missing header forward in previous release.
 - \[PRP\] Added Meshes (NOT textures, we don't do those) from the Airport Transparency Fix.
+
 0.57.1
+
 - \[PRP\] Generated MDHT for Nuka World.
 - \[PRP\] Compacted PPF.esm to allow for ESL tagging.
 - \[PRP\] Included pair of SCOLs that came with Flicker Fixer into main archive.
+
 ~~0.56~~ 0.57
+
 - \[PRP\] Import Flicker Fixer model set, to include in generation.
+
 0.56
+
 - \[PRP\] (DLC06VaultWorkshop): Dedup 05003C5A, 05001E78, 050022AB, 050022AD, 050022AF, 050022FD, 050022FF
 - Why the fuck is it called DLC06 when it's DLC05?
 - \[PRP\] (2, -4): Dedup 00187B4A, 001CA806
@@ -499,6 +689,7 @@ Current fixed issues:
 - \[PRP\] QASmoke: Migrated DLC01 related cell changes to main cell. Non-essential bugfix.
 
 0.55.1
+
 - \[PRP\] WestRoxburyStationExt (-3, -15): Round off coords for 20E166 to hopefully fix the object flickering.
 - \[PRP\] WestRoxburyStationExt (-3, -15): Move the Motorcycle01 (1D3AE3) reference here to look more believable than stuck in the ground.
 - \[PRP\] CambridgePDExt02 (-8, 2): UDR'd 190B54, looked like it was overlapping 193670 presumably a development oversight at some point, maybe the original model didn't have windows on that side?
@@ -507,6 +698,7 @@ Current fixed issues:
 - \[U31804, PRP\] -1, -15 CW 20B07, 20B3B/3C/3D/3E/3F/40/41/42/43/44/45/46/47/48/49 Various Skylight placement plate shifting to fix a previsibine issue, which fixes the occlusion, but as per the attached bug, the bug is really due to a missing flag in the material file. Placement fix pending removal in 0.55.xx
 
 0.54.26 and earlier.
+
 - \[PRP\] 20, 17 CW: 1C9CD6 has a floating rear piece. ~~Since it's a SCOL, just nudge the placement.~~ Broke the SCOL at least for now. Not seeing a good way to fix this one.
 - \[PRP\] 16, 12 CW: 1B5509 grounded to fix bad placement that revealed a hole to the water nearby. Shoddy construction.
 - \[U31795, PRP\] 12, 20 CW: 91591 ~~needed raised above the sidewalk, shifted to work around navmesh in the area, positioning might need tuning.~~ Marked UDR for now, pending better positioning work else occlusion issues with nearby bush.
