@@ -1,8 +1,10 @@
-Current released PPF Version: 0.57.2
+Current released PPF Version: 0.59
+
 The version in git is always tagged newer as it's development.
 
 Deduplication tracker remaining:
-- Fallout4.esm \[ 2771 of 3300 \]
+
+- Fallout4.esm \[ 2646 of 3300 \]
 - DLC01Robot \[ 343 of 358 \]
 - DLC02Workshop01 \[ N/A \]
 - DLC03Coast \[ 85 of 459 \]
@@ -11,16 +13,15 @@ Deduplication tracker remaining:
 - DLC06NukaWorld \[ 536 of 977 \]
 
 Current known issues:
+
+- \[U32372\] (-25, -1, CW): As reported by The Illusion in discord, a crack in the landscape closest to 0100C087 lets one see the ocean. Punted to UF4OP, I don't have a good quick fix for it.
+- \[PRP\] 030251C6 collision needs redone
+- \[PRP\] 1F57A3 previs issue
+- ??? Terminal hanging in midair in BoS cut content, last room of library nearest ruined blue electronic panels closest to bobblehead. Boston Public Library
 - \[PRP\] Future multilingual build setup.
 - \[???\] Check Vault81 Room Bounds (Priority: Very Very Very Very Very Low)
 - \[PRP\] **World cell records may need reevaluated.**
-- \[PRP\] 144d49
-- \[PRP\] 92b21
-- \[PRP\] 195233
-- \[PRP\] NukaWorldGalaxy xx0277ff needs checked
 - \[PRP\] Vault81Secret Check invisbed records.
-- \[PRP\] DmndSecurity01 Remove the new newly copied column records.
-- \[PRP\] Check 0831 0832 0833 0830 0848 083F.
 - \[PRP\] Bandaid (non-occlude) the airplane wreck meshes as I reported with U32336.
 - \[PRP\] (-5, 1, CW): Leftovers from the Law Offices fixes, Architecture\Buildings\Metal\MetalIntWall1x1Str01.nif needs some cleanup, else z-flicker happens at the edges.
 - \[PRP, U32336\] (-2, 19, CW): 127495 is causing visual flicker as a result of improper collision between floors. Can't fix until collision is fixed in model.
@@ -29,8 +30,6 @@ Current known issues:
 - \[PRP\] Nearest 11A621: \"Captain's hatch\" walls suck and have holes as they are clearly not intended for this.
 - \[PRP\] Wherever the hell https://youtu.be/hFE3jzjq_WY is at.
 - \[PRP\] Croup Manor 2F ref https://www.youtube.com/watch?v=qJAYTCSn7y8
-- \[PRP\] 0.53: CorvegaAssemblyPlant01 in both baseline and UIL flavors are busted for previs. Only an issue for the stable builds. Unstable has this cell working, probably from process improvements.
-- \[PRP\] Future builds should NOT have regenerated precombines for PPF. It's a waste of time. Build precombines in PRP stage.
 - \[PRP\] **High Priority** Once the new stable is set, rebuild ALL patches against it.
 - \[PRP\] Vault114 Third floor railing occlusion is broken \(haven't figured out a good way to fix, tried all the usual methods\)
 - \[U31719\] \[-8, 0\] Commonwealth - 16002F and 16002A missing side of SCOL mesh \(sidewalk\), held pending investigation to model welding.
@@ -40,10 +39,10 @@ Current known issues:
 - \[PRP\] -11, 13 CW: 304F1 window is breaking occlusion, marking not occluded to work around
 - \[PRP\] USSConstitution01: Yet another previs model nudge to A3996, as the mast pole of the ship wasn't showing up. Status: Unfixed.
 - \[PRP\] DLC01FortHagenSatelliteArray01: Nearest 0100d2a5, more previs void, likely a leftover from the previous fix that wasn't accounted for.
-- \[PRP\] DLC01FortHagenSatelliteArray01: 01001BD0, 010046C5, 010046C6, 010047B8, 010047B9, 010088B6, 0100F997 got shifted around to look proper in that room. All large crates. Previously 'fixed', but void holes are showing up in the area, this broke due to the xedit floating point shifting bug.
+~~- \[PRP\] DLC01FortHagenSatelliteArray01: 01001BD0, 010046C5, 010046C6, 010047B8, 010047B9, 010088B6, 0100F997 got shifted around to look proper in that room. All large crates. Previously 'fixed', but void holes are showing up in the area, this broke due to the xedit floating point shifting bug.~~
 - \[PRP\] GoodneighborBobbisPlace: Needs checked. Previs hole.
 - \[PRP\] TheaterHub360Ext: Previs issues as reported on nexus. Unconfirmed.
-- \[PRP\] Nuka World MDHT: Missing and needs generated, do as separate plugin for easier merging.
+~~- \[PRP\] Nuka World MDHT: Missing and needs generated, do as separate plugin for easier merging.~~ Done as of 0.57 branch.
 - \[???\] DF85 - Performance issues?
 - \[PRP\] Financial06: Window void holes. Entire interior is missing external stuff like the sky and shit.
 - \[PRP\] ThicketExcavationExt02: Previs issue?, multiple water volumes.
@@ -64,9 +63,87 @@ Models in the Meshes/ folder have been contributed from everyone listed on the m
 
 Current fixed issues list, anything marked 'Dedup' means Deduplication as in the record is at least one exact duplicate in the associated plugin master file:
 
+0.60
+
+Pending
+
+0.59
+
+- \[U32372\] (-24, -1, CW): Add a brand new pallet to cover up a nasty looking landscape crack at 1.5x size. PRP ID 0800002B (Please note, records were compacted, and new records listed before this point are probably wrong.)
+- \[PRP\] (6, 13, FH): Reported visibility break in the area, fix pending.
+- \[U32369\] (0, 9, NW): Move 06047DB1 AND 0604D493 so that they aren't floating. Upstreamable.
+- \[PRP\] (Financial28): Slightly shift 13C9A8 to make umbra happy. This desk was previously moved by UF4OP. Reminder to self to upstream if confirmed working.
+- \[PRP\] (DmndSecurity01): Prune new records that were taken in from one of the bugfixes that aren't needed with our work. 0800002B to 0800002E
+- \[PRP\] (DLC04GZVaultTec01): Slightly shift 060277ff to prevent railing smashing. I'd also do something about the railing, but that would require model work.
+- \[PRP\] (-18, 19, CW): Reposition 157502 to stop z-fighting.
+- \[PRP\] (BeaconHillPub): Fix the walls near the Employees Only area. 16C51A, 16C526, 16C6A2, 219DAB, 219DAC, 219DAD, 219DB1 to 219DB9, 219DBA, 219DD3 were touched including objects attached to the wall.
+- \[PRP\] (-5, -6, CW): Fix misalignment of 39B74
+- \[PRP\] (-5, -5, CW): Tentative 2CAFD move to fix a previs hole (there's supposed to be a window near a trash pile), 
+- \[PRP\] (WestonWaterTreatment01): Fix z-fighting by changing 1ED0C0 position.
+- \[PRP\] (16, 12, CW): Lower 1B551C, 1B551E and 1B551F to match the changes to 1B5509 in an earlier revision.
+- \[PRP\] (DmndSecurity01): Optimize Feng Shui by shifting 126DA1. I cannot be held responsible if Tom Nook comes after my ass about pipe damage with relation to the table's position.
+- \[PRP\] (Vault81Entry): Shift position of A9B99 and A9B9A to not be clobbered by the stairs nearby.
+- \[PRP\] (Vault81Secret): Shift position of 19E885 so it's not into the fucking wall.
+- \[PRP\] (Vault81): 19DA74 and 19DA75 got shoved closer to the wall. The folding chairs made no sense standing up like that.
+- \[PRP\] (DLC01FortHagenSatelliteArray01): Round up all values for all seven Crates that were previously touched in PPF to fix the same holes that have been plaguing previs since forever.
+- \[PRP\] (Vault75): Fix 1A8BA8 Z pos in the same way as the UF4OP replacement to see if it finally fixes the previs hole. That's probably what's really going on here. If so, UF4OP's fix should be UDR'd. As of current dev, 07038FB1 is intentionally positioned upwards. Review this after 0.59's release to see if I'm right or not.
+- \[PRP\] Include ALL esm UDRs that you normally get after cleaning the DLC .esm files to remove the DLC Cleaning requirement. The sheer number will not be listed here for brevity, though one could easily look them up themselves against an unclean esm install.
+
 0.58
 
-
+- \[PRP\] (-4, 2, CW): Fix 30FEF positioning to correct z-fighting
+- \[PRP\] (ListeningPostBravo01): Slightly nudge 189557 and 18958E to hopefully fix "invisible world" syndrome for a certain angle. (Not saved to PPF)
+- \[PRP\] (-4, 4, CW): Change 17E458 from ShrubLarge05 to ShrubMedium03 and slightly fix positioning to stop some floating shrubbery.
+- \[PRP\] (0, -1, CW): Dedup 00175FE2
+- \[PRP\] (0, -2, CW): Dedup 0016F1B3
+- \[PRP\] (0, -4, CW): Dedup 001AEA4A, 001AEA4B
+- \[PRP\] (0, -5, CW): Dedup 00175238, 000B8FF5, 0016D899
+- \[PRP\] (0, -6, CW): Dedup 001BEE32, 001767A1
+- \[PRP\] (0, -7, CW): Dedup 000D5665, 000F4628
+- \[PRP\] (0, -8, CW): Dedup 0023D52A, 00188230, 0018822F, 0018822E, 0018822D, 0018822C
+- \[PRP\] (13, -25, CW): Dedup 001F29CC
+- \[PRP\] (13, -18, CW): Dedup 0004A26C, 0004A268
+- \[PRP\] (9, -18, CW): Dedup 0009F16F, 00115D84, 00115D85, 00115E74
+- \[PRP\] (13, -19, CW): Dedup 00107DF7, 0005E8E1
+- \[PRP\] (15, -21, CW): Dedup 001EEACB, 00203852, 00203853, 00203854, 00203855, 00203856, 00203857, 00203858
+- \[PRP\] (14, -21, CW): Dedup 001CB3E6, 00203941
+- \[PRP\] (9, -22, CW): Dedup 000B4883, 000B4884, 000B4885
+- \[PRP\] (13, -24, CW): Dedup 001E2037
+- \[PRP\] (12, -24, CW): Dedup 001F2688
+- \[PRP\] (9, -9, CW): Dedup 00198941
+- \[PRP\] (8, -9, CW): Dedup 00171BF1, 0006601A, 0006603E
+- \[PRP\] (8, -11, CW): Dedup 001B2C94
+- \[PRP\] (15, -12, CW): Dedup 001E0C73
+- \[PRP\] (8, -12, CW): Dedup 0017890F
+- \[PRP\] (12, -1, CW): Dedup 000D6FFF, 000D6FD3, 001BD508, 001BD509, 001BD50A, 001BD50B
+- \[PRP\] (11, -1, CW): Dedup 001D4D39, 001D4CF1, 001D4CF2, 001BD4E1, 001BD4EB, 001BD4EC, 001BD4ED, 001BD4EE, 001BD4EF, 001BD4F0
+-- Slightly shift 001D4D39 as well.
+- \[PRP\] (8, -1, CW): Dedup 001864D7
+- \[PRP\] (12, -2, CW): Dedup 001907E3, 001ACBF4, 001BD50C, 001BD50D, 001BD50E, 001BD50F, 001BD510, 001BD511, 001BD512, 001BD513, 001BD514, 001BD522, 001BD523, 001BD524, 001BD525, 001BD526
+- \[PRP\] (11, -2, CW): Dedup 001907E7, 001BD4DF, 001BD4E0, 001BD4E2, 001BD4E3
+- \[PRP\] (8, -2, CW): Dedup 001F23D4, 001E8806
+- \[PRP\] (13, -3, CW): Dedup 002457B0
+- \[PRP\] (12, -3, CW): Dedup 001907E9, 001907EA, 001BBCAC, 001BBCAD, 001BE548, 001BE549, 002456C3, 00247A6E, 00247A6F, 00247A70, 00247A71, 00247A72, 00247A73, 00247A74, 00247A75, 00247A76, 00247A77, 00247A78, 00247A7A, 00247A7B, 00247A7C, 00247A7D, 00247A7E
+- \[PRP\] (11, -3, CW): Dedup 002259D0, 002259D1
+- \[PRP\] (8, -3, CW): Dedup 001F23E5, 001C2362, 001E6F9C
+- \[PRP\] (8, -4, CW): Dedup 001F2498, 001EEEC2, 001C2336, 001C22E1
+- \[PRP\] (10, -5, CW): Dedup 001D43CE
+- \[PRP\] (8, -5, CW): Dedup 001F9785
+- \[PRP\] (9, -3, CW): Dedup 001B9EC6, 001B9EC7, 001B9EC8
+- \[PRP\] (19, -17, CW): Dedup 001ECDF7
+- \[PRP\] (18, -18, CW): Dedup 001E410A
+- \[PRP\] (16, -18, CW): Dedup 0016E686
+- \[PRP\] (19, -22, CW): Dedup 001EA0C9
+- \[PRP\] (22, -24, CW): Dedup 001ECE2D
+- \[PRP\] (23, -14, CW): Dedup 001E0E2A
+- \[PRP\] (18, -14, CW): Dedup 0019F76C
+- \[PRP\] (21, -1, CW): Dedup 0016110D
+- \[PRP\] (20, -4, CW): Dedup 001E1159
+- \[PRP\] (18, -5, CW): Dedup 001DE92F
+- \[PRP\] (25, -10, CW): Dedup 00166CFA, 00166CE7, 00166CE6, 00166CE5, 00166CE4, 00166CE3
+- \[PRP\] (25, -11, CW): Dedup 00163DEC
+- \[PRP\] (24, -11, CW): Dedup 00166D63, 00166D5B, 00166D4E
+- \[PRP\] (4, 3, NW): Convert 06014677 to it's non-destructive version, as per Glitchfinder. Apparently the destructive version of the sign has no destructive data.
 - \[PRP\] (-33, -20, CW): Dedup 0017DDB2
 - \[PRP\] (-17, 4, CW): Dedup 000E4CF5
 - \[PRP\] (-21, 9, CW): Dedup 001BE760
@@ -793,15 +870,15 @@ Current fixed issues list, anything marked 'Dedup' means Deduplication as in the
 - \[U21508\] -5, 1 CW 3013D Flipped around a bookcase.
 - \[U31657\] -2, 15; -1, 14; -2, 14; -3, 14; -2, 13 CW Yet more DLCCoast previsibine header clobbering that was repaired.
 - \[U?????\] -6, 11 CW 1BED90 A lamp got changed here. Ask UF4OP.
-- \[PRP\] -8, 9 CW F9EFB I believe this was that building piece that was positioned wierdly.
+- \[PRP\] -8, 9 CW F9EFB I believe this was that building piece that was positioned weirdly.
 - \[U24786\] -3, 16 CW 19FD5C Insert amusing bug description about a metal rod here.
 - \[U23652\] -22, -11 CW 1C0F05 Moved a trash pile.
 - \[PRP\] -19, -1 CW D1551, D1552 Shift slightly a pair of staircases.
 - \[U31518\] -9, -13 CW 8EE09 Getting really tired of these toilet bugs.
 - \[PRP\] -2, -11 CW 129105 Moved a grass blob.
 - \[U31658, PRP\] -2. -15 CW 08000001 Add new SWCurb8x1Str01 to cap off a hole.
-- \[U31657\] -5, -1 CW Getting motonous, isn't it? Another DLCNukaWorld cell clobber.
-- \[U28903\] -2, -2; -4, -2 CW 08000002/03/04/05 Implemented a pair of contributed trash cover ups in these cells, don't remember the bug ID source. To be updated.
+- \[U31657\] -5, -1 CW Getting monotonous, isn't it? Another DLCNukaWorld cell clobber.
+- \[U28903\] -2, -2; -4, -2 CW 08000002/03/04/05 Implemented a pair of contributed trash cover ups in these cells, thanks to Glitchfinder for this one.
 - \[U22977\] -2, -4 CW 23B2C2 Move a trash decal here.
 - \[U28424\] -5, -6 CW 90AD4 Fix rotation and placement for light fixture so it's not embedded in the wall.
 - \[U28185\] 1, 7 FH 305DA94 Move the Leaf Pile nearby so it's not floating in the air.
