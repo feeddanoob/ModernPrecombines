@@ -22,7 +22,6 @@ param (
             } 
         }
     )]
-    
     #[ValidateScript({($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) -and (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) -and ($_.EndsWith(".esp") -or $_.EndsWith(".esm"))})]
     [Alias("ESP", "ESM")]
     [string[]]
@@ -281,5 +280,3 @@ Function Get-xEdit {
 
 #MainFunction
 $Disclaimer
-$ESPName
-$PathXEdit
