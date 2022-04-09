@@ -5,7 +5,12 @@ param (
     [Parameter()]
     [ValidateNotNullOrEmpty]
     [Alias("ESP", "ESM")]
-    [string]$ESPName
+    [string]$ESPName,
+
+    [Parameter()]
+    [ValidateNotNullOrEmpty]
+    [Alias("XEdit", "FO4Edit", "xEdit")]
+    [string]$PathXEdit
 )
 #Automatically looks for the FO4 installation path using Registry Keys
 $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
