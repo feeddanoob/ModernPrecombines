@@ -3,21 +3,52 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [ValidateNotNullOrEmpty]
+    [ValidateNotNullOrEmpty()]
+    
+    [ValidateScript(
+        { 
+            if ($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
+                if (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) {
+                    if ($_.EndsWith(".esp") -or $_.EndsWith(".esm")) {
+                        $true
+                    } else {
+                        throw "Please include the .esp or .esm extension."
+                    }
+                } else {
+                    throw "Insert a name for the esp/esm extension."
+                }
+            } else {
+                throw "Not a valid file name."
+            } 
+        }
+    )]
+    
+    #[ValidateScript({($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) -and (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) -and ($_.EndsWith(".esp") -or $_.EndsWith(".esm"))})]
     [Alias("ESP", "ESM")]
-    [string]$ESPName,
+    [string[]]
+    $ESPName,
 
     [Parameter()]
-    [ValidateNotNullOrEmpty]
-    [Alias("XEdit", "FO4Edit", "xEdit")]
-    [string]$PathXEdit
+    [ValidateNotNullOrEmpty()]
+    [ValidateScript(
+        { 
+            if (Test-Path -Path $_\FO4Edit.exe) {
+                $true
+            } else {
+                throw "Could not find FO4Edit with that file path."
+            }
+        }
+    )]
+    [Alias("XEdit", "FO4Edit")]
+    [string[]]
+    $PathXEdit
 )
 #Automatically looks for the FO4 installation path using Registry Keys
 $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
 #Blank ESP/ESM file name, I decided to have the user input the ESP/ESM file for precombine generation in the case there might be multiple files in the DATA folder. 
-$script:ESPName = $null
+#$script:ESPName = $null
 #Blank Path to XEdit folder location, kinda wish there was a way to find XEdit without using Get-ChildItem "C:\" -recurse -ErrorAction:SilentlyContinue -Include "FO4Edit.exe" as that will take forever.
-$script:PathXEdit = $null
+#$script:PathXEdit = $null
 
 $MessageXEditPath = "Please put in your FO4Edit folder path here"
 
@@ -31,7 +62,7 @@ $MessageCK = "Checking to make sure the CK is in the FO4 root directory"
 
 $MessageFO4location = "Please put in your Fallout 4 Directory here"
 
-$Disclaimer = DATA{
+$Disclaimer = DATA {
     "DISCLAIMER: This script is only to be used after you created the base previsibine ESP/ESM."
     "It will not guide you how to create the base previsibine ESP/ESM, for that look at StarHammer's Guide in the Github REPO"
     "Although this script tries to fully automate the process, it cannot. Your participation will be required."
@@ -240,7 +271,7 @@ Function Get-ESPExtension {
 Function Get-xEdit {  
     do {
         $script:PathXEdit = Read-Host -Prompt $MessageXEditPath
-        if ($PathXEditCheck = Test-Path -Path $PathXEdit\FO4Edit.exe -PathType:Leaf) {
+        if ($PathXEditCheck = Test-Path -Path $PathXEdit\FO4Edit.exe) {
             Write-Information -MessageData "Found FO4Edit.exe. Continuing." -InformationAction:Continue
         } else {
             Write-Information -MessageData "Did not find FO4Edit.exe, please provide the correct directory to FO4Edit" -InformationAction:Inquire
@@ -250,4 +281,5 @@ Function Get-xEdit {
 
 #MainFunction
 $Disclaimer
-$Messages.ESPNamePrecombine
+$ESPName
+$PathXEdit
