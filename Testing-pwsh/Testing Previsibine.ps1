@@ -4,7 +4,6 @@
 param (
     [Parameter()]
     [ValidateNotNullOrEmpty()]
-    
     [ValidateScript(
         { 
             if ($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
