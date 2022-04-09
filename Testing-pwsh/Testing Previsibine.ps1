@@ -67,14 +67,7 @@ $MessageInsert = "Insert a valid name for the esp/esm"
 #$MessageFO4location = "Please put in your Fallout 4 Directory here"
 
 $Disclaimer = DATA {
-    "DISCLAIMER: This script is only to be used after you created the base previsibine ESP/ESM."
-    "It will not guide you how to create the base previsibine ESP/ESM, for that look at StarHammer's Guide in the Github REPO"
-    "Although this script tries to fully automate the process, it cannot. Your participation will be required."
-    "If you have any problems with the Powershell Script create an issue/PR in MY, feeddanoob, Github REPO."
-    "The ESP/ESM as well as all its masters are to be assumed in the Fallout 4 Data folder, you would need to copy paste, create hardlinks, or use MO2's uvfs (not recommended) for your ESP/ESM."
-    "This script will look into your Registry to find Fallout 4, therefore only legit FO4 installations are supported."
-    "This script will be only in English (US) but translations can be supported "
-    "This script was created using VSCode and with Powershell 7.x in mind, please download and install the latest Powershell"
+    "Insert MIT license here."
 }
 
 $Messages = DATA {
