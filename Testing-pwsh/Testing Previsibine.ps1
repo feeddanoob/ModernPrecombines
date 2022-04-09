@@ -1,3 +1,12 @@
+#Min Powershell version.
+#Requires -Version 7.0
+[CmdletBinding()]
+param (
+    [Parameter()]
+    [ValidateNotNullOrEmpty]
+    [Alias("ESP", "ESM")]
+    [string]$ESPName
+)
 #Automatically looks for the FO4 installation path using Registry Keys
 $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
 #Blank ESP/ESM file name, I decided to have the user input the ESP/ESM file for precombine generation in the case there might be multiple files in the DATA folder. 
@@ -42,7 +51,8 @@ $Messages = DATA {
     ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the CombinedObjects.esp to your plugin?
     ESPCK = You chose to use the CK, running the CK now. Please save the CombinedObjects.esp in the CK then close the CK.
     ESPXEdit = You chose to use FO4Edit, running FO4Edit now. Please use Searge's 03_MergeCombinedObjects xedit script to your plugin.
-
+    ArchiveMesh = Packing the meshes to an archive.
+    NoMesh = Meshes were not generated from the CK, Aborting.
 '@
 }
 
@@ -110,11 +120,11 @@ Function Save-ESP1 {
             }
             $CaseManager = $true
         } elseif ($ChoicesNum -eq "2") {
-            Write-Information -MessageData "You chose to use FO4Edit, running FO4Edit now. Please use Searge's 03_MergeCombinedObjects xedit script to your plugin."
+            Write-Information -MessageData $Messages.ESPXEdit
             Start-Process -FilePath "$XEdit\FO4Edit.exe" -Wait -ArgumentList "-quickedit:$ESPName"
             $CaseManager = $true
         } else {
-            Write-Information -MessageData "Incorrect input." -InformationAction:Continue
+            Write-Information -MessageData $Messages.WrongInput -InformationAction:Continue
         }
     } until ($CaseManager)
     do {
