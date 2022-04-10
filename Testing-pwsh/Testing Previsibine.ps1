@@ -1,20 +1,37 @@
 #Min Powershell version.
 #Requires -Version 7.0
 #Parameter blocks to add arguments for the script in case user doesn't want to write on console.
+<#
+    .SYNOPSIS
+        The goal of the script is to automate certain processes of generating previsibine (precombine + previs) using the clean method.
+    .DESCRIPTION
+        The script automates processes which have command line arguments for generating previsibine (precombine + previs) using the clean method.
+        Due to the nature of generating with the clean method, this script will be running almost none stop.
+        However, I have inputted Stops if the user wishes to stop at a certain process or function, they will be able to continue the process or function of where they left off.
+        The script first tries to find the Fallout 4 path using registry keys, if the registry exists then the script continues. 
+        However, if the registry key was not found the user would have to tell the script where Fallout4.exe is located, it's directory.
+        The parameters of the script are not mandatory, they were meant to be replacements for writing in the console.
+        The variables can be stored in a text file for future usages of the script on another plugin.
+    .PARAMETER $ESPName
+        The User will input a valid file name of the ESP/ESM and checks if the ESP/ESM that they inputted exists in the Fallout 4\Data folder.
+    .PARAMETER $PathXEdit
+        The User will input a valid directory to their FO4Edit.exe's location
+#>
 [CmdletBinding()]
 param (
     #Not Mandatory on purpose, user should not be forced to run script with arguments when user input is available in console.
     [Parameter()]
     #Since this is a string input, should not be null or empty.
     [ValidateNotNullOrEmpty()]
-    #Grouped up conditions
+    <#
+        Checks to see if there are any invalid characters in the file name, 
+        if the .esp/.esm extension is in the file, 
+        and there is a name for the .esp/.esm
+    #>
     [ValidateScript(
         {
-            #If there are invalid characters such as '<', '>', and '*' in the file name stop and throw the exception
             if ($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
-                #If the name is just .esp return false and throw the exception
                 if (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) {
-                    #Make sure the file name ends with a .esp or .esm extension. Not including .esl's because I am 100% not sure how the CK reacts to it.
                     if ($_.EndsWith(".esp") -or $_.EndsWith(".esm")) {
                         $true
                     } else {
@@ -28,7 +45,6 @@ param (
             } 
         }
     )]
-    #[ValidateScript({($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) -and (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) -and ($_.EndsWith(".esp") -or $_.EndsWith(".esm"))})]
     [Alias("ESP", "ESM")]
     [string[]]
     $ESPName,
@@ -37,7 +53,7 @@ param (
     [Parameter()]
     #Like above, do not want null or empty
     [ValidateNotNullOrEmpty()]
-    #See if the File exists in the path the user provided.
+    #See if FO4Edit exists in the path the user provided for CLI.
     [ValidateScript(
         { 
             if (Test-Path -Path $_\FO4Edit.exe) {
@@ -50,21 +66,11 @@ param (
     [Alias("XEdit", "FO4Edit")]
     [string[]]
     $PathXEdit
+
+    #May add more parameters, when I complete the script.
 )
 #Automatically looks for the FO4 installation path using Registry Keys
 $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-
-$MessageXEditPath = "Please put in your FO4Edit folder path here"
-
-$MessageNoESP = "Please include the .esp or .esm extension"
-
-$MessageInsert = "Insert a valid name for the esp/esm"
-
-#$MessageMovingToFO4 = "Moving to the FO4 Directory"
-
-#$MessageCK = "Checking to make sure the CK is in the FO4 root directory"
-
-#$MessageFO4location = "Please put in your Fallout 4 Directory here"
 
 $Disclaimer = DATA {
     "Insert MIT license here."
@@ -72,26 +78,36 @@ $Disclaimer = DATA {
 
 $Messages = DATA {
     ConvertFrom-StringData -StringData @'
-    ESPNamePrecombine = Beginning the Precombine Setup for {0}.
-    Startup = Did you start the powershell script previously? [Y] or [N]
+    ArchiveMesh = Packing the meshes to an archive.
+    CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
+    CheckCK = Checking to make sure the CK is in FO4's root directory.
+    ESPCK = You chose to use the CK, running the CK now. Please save the CombinedObjects.esp in the CK then close the CK.
+    ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the CombinedObjects.esp to your plugin?
+    ESPPrecombine = Valid ESP/ESM input. Beginning the Precombine Setup for {0}.
+    ESPWork = Type the name of your esp file.
+    ESPXEdit = You chose to use FO4Edit, running FO4Edit now. Please use Searge's 03_MergeCombinedObjects xedit script to your plugin.
+    F4CK = Found the F4CK loader, will be using that instead.
+    FO4Loc = Could not find Fallout 4's location using registry key. Please put in your Fallout 4 Directory here.
+    FO4ESP = Found the plugin at {0}.
+    FO4NoESP = Could not find the plugin in the Fallout 4/Data folder. Please put the plugin in the Data folder.
+    FoundDir = Found {0} with the directory provided.
     LeftOff1 = Where did you leave off?
     LeftOff2 = Precombines? [1]
     LeftOff3 = PSG Compression? [2]
     LeftOff4 = CSG Creation? [3]
     LeftOff5 = or Previs Generation? [4]
+    NoCK = Could not find the Creation Kit in Fallout 4's directory.
+    NoESPExt = Please include the esp/esm extension.
+    NoESPName = Please put the file name after the extension.
+    NoESPValid = Not a valid file name.
+    NoF4CK = F4CK loader was not found, using the creation kit for all CLI actions.
+    NoFoundDir = Could not find {0} with the location provided.
+    NoMesh = Meshes were not generated from the CK, Aborting.
+    NoXEdit = Could not find FO4Edit.exe with the location provided.
+    Startup = Did you start the powershell script previously? [Y] or [N]
     WrongInput = Inputted a wrong value. Please choose a valid option.
     WrongInputEnd = Incorrect Response, script is ending
-    ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the CombinedObjects.esp to your plugin?
-    ESPCK = You chose to use the CK, running the CK now. Please save the CombinedObjects.esp in the CK then close the CK.
-    ESPXEdit = You chose to use FO4Edit, running FO4Edit now. Please use Searge's 03_MergeCombinedObjects xedit script to your plugin.
-    ArchiveMesh = Packing the meshes to an archive.
-    NoMesh = Meshes were not generated from the CK, Aborting.
-    CheckCK = Checking to make sure the CK is in FO4's root directory.
-    NoCK = Could not find the Creation Kit in Fallout 4's directory.
-    FO4Loc = Could not find Fallout 4's location using registry key. Please put in your Fallout 4 Directory here.
-    FO4Found = Found Fallout4.exe with the directory provided.
-    CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
-    NOFO4 = Could not find Fallout4.exe with the location provided.
+    XeditPath = Please input FO4Edit's directory.
 '@
 }
 
@@ -142,6 +158,13 @@ Function MainFunction {
     }
 }
 
+<#
+    .SYNOPSIS
+        The Save-ESP1 function provides the user a choice on whether to save the data in the Precombined.esp to their plugin.
+        Once the User made their choice, the program will open. After the user is done saving the info from the Precombined.esp to their plugin, the function ends.
+    .DESCRIPTION
+    The Save-ESP1 function takes the variables $PathXEdit and $FO4InstallPath and has the user choose an option on how to save their Precombined
+#>
 Function Save-ESP1 {
     param {
         [string]$XEdit
@@ -225,24 +248,24 @@ Function Set-CK {
     do {
         $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
         if ($FO4InstallCheck = Test-Path -Path $FO4InstallPath\Fallout4.exe) {
-            Write-Information -MessageData $Messages.FO4Found -InformationAction:Continue
+            Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
             if (Test-Path -Path $FO4InstallPath\CreationKit.exe) {
                 Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
             } else {
                 Write-Information -MessageData $Messages.NoCK -InformationAction:Stop
             }
         } else {
-            Write-Information -MessageData $Messages.NOFO4 -InformationAction:Continue
+            Write-Information -MessageData ($Messages.NoFoundDir -f "Fallout4.exe") -InformationAction:Continue
         }
     } until($FO4InstallCheck)
 }
 
 Function Get-f4ck {
     if (Test-Path -Path $FO4InstallPath\f4ck_loader.exe) {
-        Write-Information -MessageData "Found f4ck loader, commands will use f4ck loader" -InformationAction:Continue
+        Write-Information -MessageData $Messages.F4CK -InformationAction:Continue
         return 1
     } else {
-        Write-Information -MessageData "f4ck loader was not found, using default." -InformationAction:Continue
+        Write-Information -MessageData $Messages.NoF4CK -InformationAction:Continue
         return 0
     }
 }
@@ -250,34 +273,41 @@ Function Get-f4ck {
 Function Get-ESPExtension {
     [bool]$Complications = $false
     do {
-        $script:ESPName = Read-Host -Prompt 'Type the name of your esp including the extension'
+        $script:ESPName = Read-Host -Prompt $Messages.ESPWork
         if ($ESPName.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
             if (-not $ESPName.Equals(".esp") -and -not $ESPName.Equals(".esm")) {
                 if ($ESPName.EndsWith(".esp") -or $ESPName.EndsWith(".esm")) {
-                    Write-Information -MessageData ($Messages.ESPNamePrecombine -f $ESPName) -InformationAction:Continue
+                    #Write-Information -MessageData ($Messages.ESPPrecombine -f $ESPName) -InformationAction:Continue
                     $Complications = $true
                 } else {
-                    Write-Information -MessageData $MessageNoESP -InformationAction:Continue
+                    Write-Information -MessageData $Messages.NoESPExt -InformationAction:Continue
                 }
             } else {
-                Write-Information -MessageData $MessageInsert -InformationAction:Continue
+                Write-Information -MessageData $Messages.NoESPName -InformationAction:Continue
             }
         } else {
-            Write-Information -MessageData "Not a valid filename" -InformationAction:Continue
+            Write-Information -MessageData $Messages.NoESPValid -InformationAction:Continue
         }
     } until ($Complications)
+    if (Test-Path -Path "$FO4InstallPath\Data\$ESPName") {
+        Write-Information -MessageData ($Messages.FO4ESP -f ($FO4InstallPath + "Data\")) -InformationAction:Continue
+    }
+    else {
+        Write-Error -Message $Messages.FO4NoESP
+    }
 }
 
 Function Get-xEdit {  
     do {
-        $script:PathXEdit = Read-Host -Prompt $MessageXEditPath
+        $script:PathXEdit = Read-Host -Prompt $Messages.XeditPath
         if ($PathXEditCheck = Test-Path -Path $PathXEdit\FO4Edit.exe) {
-            Write-Information -MessageData "Found FO4Edit.exe. Continuing." -InformationAction:Continue
+            Write-Information -MessageData ($Messages.FoundDir -f "FO4Edit.exe") -InformationAction:Continue
         } else {
-            Write-Information -MessageData "Did not find FO4Edit.exe, please provide the correct directory to FO4Edit" -InformationAction:Inquire
+            Write-Information -MessageData ($Messages.NoFoundDir -f "FO4Edit.exe") -InformationAction:Inquire
         }
     } until ($PathXEditCheck)
 }
 
 #MainFunction
 $Disclaimer
+#Get-ESPExtension
