@@ -33,7 +33,12 @@ param (
             if ($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
                 if (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) {
                     if ($_.EndsWith(".esp") -or $_.EndsWith(".esm")) {
-                        $true
+                        $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
+                        if (Test-Path -Path $FO4InstallPath\Data\$_) {
+                            $true
+                        } else {
+                            throw "Could not find the plugin in the Data folder."
+                        }
                     } else {
                         throw "Please include the .esp or .esm extension."
                     }
@@ -42,7 +47,7 @@ param (
                 }
             } else {
                 throw "Not a valid file name."
-            } 
+            }
         }
     )]
     [Alias("ESP", "ESM")]
@@ -81,14 +86,14 @@ $Messages = DATA {
     ArchiveMesh = Packing the meshes to an archive.
     CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
     CheckCK = Checking to make sure the CK is in FO4's root directory.
+    CreateSettings = Creating the setting file for future use.
     ESPCK = You chose to use the CK, running the CK now. Please save the CombinedObjects.esp in the CK then close the CK.
     ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the CombinedObjects.esp to your plugin?
-    ESPPrecombine = Valid ESP/ESM input. Beginning the Precombine Setup for {0}.
     ESPWork = Type the name of your esp file.
     ESPXEdit = You chose to use FO4Edit, running FO4Edit now. Please use Searge's 03_MergeCombinedObjects xedit script to your plugin.
     F4CK = Found the F4CK loader, will be using that instead.
     FO4Loc = Could not find Fallout 4's location using registry key. Please put in your Fallout 4 Directory here.
-    FO4ESP = Found the plugin at {0}.
+    FO4ESP = Found the plugin at {0}. Beginning the precombine setup for {1}.
     FO4NoESP = Could not find the plugin in the Fallout 4/Data folder. Please put the plugin in the Data folder.
     FoundDir = Found {0} with the directory provided.
     LeftOff1 = Where did you leave off?
@@ -102,8 +107,10 @@ $Messages = DATA {
     NoESPValid = Not a valid file name.
     NoF4CK = F4CK loader was not found, using the creation kit for all CLI actions.
     NoFoundDir = Could not find {0} with the location provided.
-    NoMesh = Meshes were not generated from the CK, Aborting.
+    NoMesh = Meshes were not generated from the CK, Aborting. Check your created plugin.
     NoXEdit = Could not find FO4Edit.exe with the location provided.
+    SettingsLoad = Found a settings file, loading data from the file.
+    SettingsQ = Would you like to create a settings file? This may save you time from inputting things again when running the script. [Y] or [N]
     Startup = Did you start the powershell script previously? [Y] or [N]
     WrongInput = Inputted a wrong value. Please choose a valid option.
     WrongInputEnd = Incorrect Response, script is ending
@@ -146,15 +153,61 @@ Function MainFunction {
         Write-Information -MessageData $Messages.WrongInput
     }
     #>
+    if (-not (Test-Path -Path ".\Testing Precombines.txt")) {
+        $SettingsCreation = Read-Host -Prompt $Messages.SettingsQ
+        if ($SettingsCreation -eq "Y" -or $SettingsCreation -eq "Yes") {
+            Write-Information -MessageData $Messages.CreateSettings -InformationAction:Continue
+            Set-Content -Path ".\Testing-Precombines.txt" -Value '[Settings]'
+            If (Get-CK) {
+                if ([string]::IsNullOrEmpty($PathXEdit)) {
+                    Set-xEdit -Settings $true
+                } else {
+                    Add-Content -Path ".\Testing-Precombines.txt" -Value "PathXEdit = $PathXEdit"
+                }
+                if ([string]::IsNullOrEmpty($ESPName)) {
+                    Get-ESPExtension
+                }
+                CK1 -ESP $script:ESPName
+            } else {
+                Set-CK -Settings $true
+                Set-xEdit -Settings $true
+                Get-ESPExtension
+                CK1 -ESP $script:ESPName
+            }
+        } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
+            If (Get-CK) {
+                Set-xEdit
+                Get-ESPExtension
+                CK1 -ESP $script:ESPName
+            } else {
+                Set-CK
+                Set-xEdit
+                Get-ESPExtension
+                CK1 -ESP $script:ESPName
+            }
+        } else {
+            Write-Error -Message $Messages.WrongInputEnd
+        }
+    } else {
+        Write-Information -MessageData $Messages.SettingsLoad -InformationAction:Continue
+        Read-File
+    }
     If (Get-CK) {
-        Get-xEdit
+        Set-xEdit
         Get-ESPExtension
-        #CK1($script:ESPName)
+        CK1 -ESP $script:ESPName
     } else {
         Set-CK
-        Get-xEdit
+        Set-xEdit
         Get-ESPExtension
-        CK1($script:ESPName)
+        CK1 -ESP $script:ESPName
+    }
+}
+
+Function Read-File {
+    Get-Content -Path ".\Testing-Precombines.txt" | ForEach-Object {
+        $var = $_ -split ' = '
+        Set-Variable -Name $var[0] -Value $var[1] -Scope:Script
     }
 }
 
@@ -230,7 +283,7 @@ function ArchiveInit {
         Write-Information -MessageData $Messages.ArchiveMesh -InformationAction:Continue
         Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\Meshes"" -c=""$FO4InstallPath\Data\$ESP - Main.ba2"""
     } else {
-        Write-Information -MessageData $Messages.NoMesh -InformationAction:Stop
+        Write-Error -Message $Messages.NoMesh
     }
 }
 
@@ -245,6 +298,11 @@ Function Get-CK {
 }
 
 Function Set-CK {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [bool]$Settings = $false
+    )
     do {
         $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
         if ($FO4InstallCheck = Test-Path -Path $FO4InstallPath\Fallout4.exe) {
@@ -252,12 +310,15 @@ Function Set-CK {
             if (Test-Path -Path $FO4InstallPath\CreationKit.exe) {
                 Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
             } else {
-                Write-Information -MessageData $Messages.NoCK -InformationAction:Stop
+                Write-Error -Message $Messages.NoCK
             }
         } else {
             Write-Information -MessageData ($Messages.NoFoundDir -f "Fallout4.exe") -InformationAction:Continue
         }
     } until($FO4InstallCheck)
+    if ($Settings) {
+        Add-Content -Path ".\Testing-Precombines.txt" -Value "PathCK = $FO4InstallPath"
+    }
 }
 
 Function Get-f4ck {
@@ -277,7 +338,6 @@ Function Get-ESPExtension {
         if ($ESPName.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
             if (-not $ESPName.Equals(".esp") -and -not $ESPName.Equals(".esm")) {
                 if ($ESPName.EndsWith(".esp") -or $ESPName.EndsWith(".esm")) {
-                    #Write-Information -MessageData ($Messages.ESPPrecombine -f $ESPName) -InformationAction:Continue
                     $Complications = $true
                 } else {
                     Write-Information -MessageData $Messages.NoESPExt -InformationAction:Continue
@@ -290,14 +350,18 @@ Function Get-ESPExtension {
         }
     } until ($Complications)
     if (Test-Path -Path "$FO4InstallPath\Data\$ESPName") {
-        Write-Information -MessageData ($Messages.FO4ESP -f ($FO4InstallPath + "Data\")) -InformationAction:Continue
-    }
-    else {
+        Write-Information -MessageData ($Messages.FO4ESP -f ($FO4InstallPath + "Data\"), $ESPName) -InformationAction:Continue
+    } else {
         Write-Error -Message $Messages.FO4NoESP
     }
 }
 
-Function Get-xEdit {  
+Function Set-xEdit {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [bool]$Settings = $false
+    )
     do {
         $script:PathXEdit = Read-Host -Prompt $Messages.XeditPath
         if ($PathXEditCheck = Test-Path -Path $PathXEdit\FO4Edit.exe) {
@@ -306,6 +370,9 @@ Function Get-xEdit {
             Write-Information -MessageData ($Messages.NoFoundDir -f "FO4Edit.exe") -InformationAction:Inquire
         }
     } until ($PathXEditCheck)
+    if ($Settings) {
+        Add-Content -Path ".\Testing-Precombines.txt" -Value "PathXEdit = $PathXEdit"
+    }
 }
 
 #MainFunction
