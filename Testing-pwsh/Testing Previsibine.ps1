@@ -75,7 +75,7 @@ param (
     #May add more parameters, when I complete the script.
 )
 #Automatically looks for the FO4 installation path using Registry Keys
-$FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
+$FO4InstallPath = $null
 
 $Disclaimer = DATA {
     "Insert MIT license here."
@@ -120,6 +120,7 @@ XeditPath = Please input FO4Edit's directory.
 }
 
 Function MainFunction {
+    $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
     if (-not (Test-Path -Path ".\Testing Previsibine.txt")) {
         $SettingsCreation = Read-Host -Prompt $Messages.SettingsQ
         if ($SettingsCreation -eq "Y" -or $SettingsCreation -eq "Yes") {
