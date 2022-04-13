@@ -7,7 +7,7 @@
 			<optionalFileGroups order="Explicit"> 
 				<group name="Languages" type="SelectExactlyOne"> 
 					<plugins order="Explicit"> 
-						<plugin name="English"> 
+						<plugin name="EN - English"> 
 							<description></description> 
 							<conditionFlags> 
 								<flag name="English">On</flag> 
@@ -16,7 +16,7 @@
 								<type name="Optional"/> 
 							</typeDescriptor> 
 						</plugin> 
-						<plugin name="Español"> 
+						<plugin name="ES - Español"> 
 							<description></description> 
 							<conditionFlags> 
 								<flag name="Spanish">On</flag> 
@@ -25,7 +25,7 @@
 								<type name="Optional"/> 
 							</typeDescriptor> 
 						</plugin> 
-						<plugin name="Italiano"> 
+						<plugin name="IT - Italiano"> 
 							<description></description> 
 							<conditionFlags> 
 								<flag name="Italian">On</flag> 
@@ -367,6 +367,11 @@ SIN SOPORTE  debido a que es un parche muy antiguo.</description>
 			</optionalFileGroups> 
 		</installStep> 
 		<installStep name="Archivi Principali + Compat Grabbag"> 
+			<visible> 
+				<dependencies operator="And"> 
+						<flagDependency flag="Italian" value="On"/> 
+				</dependencies> 
+			</visible> 
 			<optionalFileGroups order="Explicit"> 
 				<group name="Archivi Principali" type="SelectAny"> 
 					<plugins order="Explicit"> 
@@ -489,6 +494,11 @@ SIN SOPORTE  debido a que es un parche muy antiguo.</description>
 			</optionalFileGroups> 
 		</installStep> 
 		<installStep name="Extra"> 
+			<visible> 
+				<dependencies operator="And"> 
+						<flagDependency flag="Italian" value="On"/> 
+				</dependencies> 
+			</visible> 
 			<optionalFileGroups order="Explicit"> 
 				<group name="Extra" type="SelectAny"> 
 					<plugins order="Explicit"> 
