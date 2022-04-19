@@ -73,7 +73,6 @@ param (
     #May add more parameters, when I complete the script.
 )
 #Automatically looks for the FO4 installation path using Registry Keys
-$FO4InstallPath = $null
 
 $Disclaimer = DATA {
     "Insert MIT license here."
@@ -118,79 +117,127 @@ XeditPath = Please input FO4Edit's directory.
 '@
 }
 
-Function MainFunction {
-    $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-    if (-not (Test-Path -Path ".\Testing Previsibine.txt")) {
+# Function MainFunction {
+#     $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
+#     if (-not (Test-Path -Path ".\Testing Previsibine.txt")) {
+#         $SettingsCreation = Read-Host -Prompt $Messages.SettingsQ
+#         if ($SettingsCreation -eq "Y" -or $SettingsCreation -eq "Yes") {
+#             Write-Information -MessageData $Messages.CreateSettings -InformationAction:Continue
+#             Set-Content -Path ".\Testing Previsibine.txt" -Value '[Settings]'
+#             If (Test-CK) {
+#                 if ([string]::IsNullOrEmpty($PathXEdit)) {
+#                     Set-XEdit -Settings $true
+#                 } else {
+#                     Add-Content -Path ".\Testing Previsibine.txt" -Value "PathXEdit = $PathXEdit"
+#                 }
+#                 if ([string]::IsNullOrEmpty($ESPName)) {
+#                     Set-ESPExtension
+#                 }
+#                 Start-CK1 -ESP $script:ESPName
+#             } else {
+                
+#             }
+#         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
+#             If (Test-CK) {
+#                 if ([string]::IsNullOrEmpty($PathXEdit)) {
+#                     Set-XEdit
+#                 }
+#                 if ([string]::IsNullOrEmpty($ESPName)) {
+#                     Set-ESPExtension
+#                 }
+#                 Start-CK1 -ESP $script:ESPName
+#             } else {
+                
+#             }
+#         } else {
+#             Write-Error -Message $Messages.WrongInputEnd
+#         }
+#     } else {
+#         Write-Information -MessageData $Messages.SettingsLoad -InformationAction:Continue
+#         Read-File
+#         If (Test-CK) {
+#             Set-XEdit -File $true
+#             Set-ESPExtension
+#             Start-CK1 -ESP $script:ESPName
+#         } else {
+
+#         }
+#     }
+#     If (Test-CK) {
+#         Set-XEdit
+#         Set-ESPExtension
+#         Start-CK1 -ESP $script:ESPName
+#     } else {
+
+#     }
+# }
+
+function Main {
+    if (Test-File) {
+        $CKMain = Test-CK
+        $XEditMain = Test-XEdit
+        if ($CKMain -and $XEditMain) {
+            Set-ESPExtension
+            #Start-CK1
+        } elseif ($CKMain) {
+            
+        } elseif ($XEditMain) {
+            
+        } else {
+            
+        }
+
+    } else {
         $SettingsCreation = Read-Host -Prompt $Messages.SettingsQ
         if ($SettingsCreation -eq "Y" -or $SettingsCreation -eq "Yes") {
             Write-Information -MessageData $Messages.CreateSettings -InformationAction:Continue
-            Set-Content -Path ".\Testing Previsibine.txt" -Value '[Settings]'
-            If (Test-CK) {
-                if ([string]::IsNullOrEmpty($PathXEdit)) {
-                    Set-XEdit -Settings $true
-                } else {
-                    Add-Content -Path ".\Testing Previsibine.txt" -Value "PathXEdit = $PathXEdit"
-                }
-                if ([string]::IsNullOrEmpty($ESPName)) {
-                    Set-ESPExtension
-                }
-                Start-CK1 -ESP $script:ESPName
-            } else {
-                
+            $CKMain = Test-CK
+            $XEditMain = Test-XEdit
+            if ($CKMain -and $XEditMain) {
+                Set-ESPExtension
+                #Start-CK1
             }
+            Write-File
         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
-            If (Test-CK) {
-                if ([string]::IsNullOrEmpty($PathXEdit)) {
-                    Set-XEdit
-                }
-                if ([string]::IsNullOrEmpty($ESPName)) {
-                    Set-ESPExtension
-                }
-                Start-CK1 -ESP $script:ESPName
-            } else {
-                
+            $CKMain = Test-CK
+            $XEditMain = Test-XEdit
+            if ($CKMain -and $XEditMain) {
+                Set-ESPExtension
+                #Start-CK1
             }
         } else {
             Write-Error -Message $Messages.WrongInputEnd
         }
-    } else {
-        Write-Information -MessageData $Messages.SettingsLoad -InformationAction:Continue
-        Read-File
-        If (Test-CK) {
-            Set-XEdit -File $true
-            Set-ESPExtension
-            Start-CK1 -ESP $script:ESPName
-        } else {
-
-        }
-    }
-    If (Test-CK) {
-        Set-XEdit
-        Set-ESPExtension
-        Start-CK1 -ESP $script:ESPName
-    } else {
-
     }
 }
 
 Function Test-File {
-    if (Test-Path -Path ".\Testing Previsibine.txt") {
+    if ($FileChecker = Test-Path -Path ".\Testing Previsibine.txt") {
         Read-File
-    } else {
-        Write-File
+        return $FileChecker
     }
 }
 
 Function Write-File {
     Set-Content -Path ".\Testing Previsibine.txt" -Value '[Settings]'
+    Add-Content -Path ".\Testing Previsibine.txt" -Value "FO4InstallPath = $FO4InstallPath"
+    Add-Content -Path ".\Testing Previsibine.txt" -Value "PathXEdit = $PathXEdit"
 }
+
 Function Read-File {
+    $Words = @('[Settings]', 'FO4InstallPath', 'PathXEdit')
+    (Get-Content -Path ".\Testing Previsibine.txt") | ForEach-Object {
+        foreach ($Word in $Words) {
+            if ($_.StartsWith($Word)) {
+                $_
+            }
+        }
+    }| Set-Content -Path ".\Testing Previsibine.txt"
     Get-Content -Path ".\Testing Previsibine.txt" | ForEach-Object {
         $var = $_ -split ' = '
         Set-Variable -Name $var[0] -Value $var[1] -Scope:Script
     }
 }
-
 <#
     .SYNOPSIS
         The Save-ESP1 function provides the user a choice on whether to save the data in the Precombined.esp to their plugin.
@@ -269,29 +316,95 @@ function Start-Archive1 {
     }
 }
 
-Function Test-CK {
-    [CmdletBinding()]
-    param (
-        [Parameter()]
-        [bool]$Settings = $false
-    )
-    Write-Information -MessageData $Messages.CheckCK -InformationAction:Continue
-    if (Test-FO4) {
-        $CKPath = Get-CK
-        if ($TestCKLoc = Test-Path -Path $CKPath) {
-            Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
-            return $TestCKLoc
+Function Set-ESPExtension {
+    [bool]$Complications = $false
+    do {
+        $script:ESPName = Read-Host -Prompt $Messages.ESPWork
+        if ($ESPName.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
+            if (-not $ESPName.Equals(".esp") -and -not $ESPName.Equals(".esm")) {
+                if ($ESPName.EndsWith(".esp") -or $ESPName.EndsWith(".esm")) {
+                    $Complications = $true
+                } else {
+                    Write-Information -MessageData $Messages.NoESPExt -InformationAction:Continue
+                }
+            } else {
+                Write-Information -MessageData $Messages.NoESPName -InformationAction:Continue
+            }
         } else {
-            Write-Error -Message $Messages.NoCK
+            Write-Information -MessageData $Messages.NoESPValid -InformationAction:Continue
+        }
+    } until ($Complications)
+    if (Test-Path -Path "$FO4InstallPath\Data\$ESPName") {
+        $ESPMessage = $Messages.FO4ESP -f ($FO4InstallPath + "Data\"), $ESPName
+        Write-Information -MessageData $ESPMessage -InformationAction:Continue
+    } else {
+        Write-Error -Message $Messages.FO4NoESP
+    }
+}
+
+Function Test-f4ck {
+    if (Test-Path -Path $FO4InstallPath\f4ck_loader.exe) {
+        Write-Information -MessageData $Messages.F4CK -InformationAction:Continue
+        return 1
+    } else {
+        Write-Information -MessageData $Messages.NoF4CK -InformationAction:Continue
+        return 0
+    }
+}
+
+Function Test-FO4CK {
+    if ([String]::IsNullOrEmpty($FO4InstallPath)) {
+        Edit-FO4CK
+    } else {
+        $CKFileLoc = Get-CK
+        $FO4FileLoc = Get-FO4
+        $CKFileCheck = Test-Path -Path $CKFileLoc
+        $FO4FileCheck = Test-Path -Path $FO4FileLoc
+        if ($CKFileCheck -and $FO4FileCheck) {
+            Write-Information -MessageData ($Messages.FoundDir -f "CreationKit.exe") -InformationAction:Continue
+            return $true
+        } else {
+            Edit-FO4CK
         }
     }
 }
 
-Function Get-CK {
-    #$script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-    #Write-Information -MessageData $FO4InstallPath -InformationAction:Continue
-    $CK = $FO4InstallPath + "\CreationKit.exe"
-    return $CK
+Function Edit-FO4CK {
+    if ([string]::IsNullOrEmpty($FO4InstallPath)) {
+        (Get-Content -Path ".\Testing Previsibine.txt") | Where-Object { $_ -notmatch "FO4InstallPath" } | Set-Content -Path ".\Testing Previsibine.txt"
+        $FO4Testing = Test-CK
+        if ($FO4Testing) {
+            Add-Content -Path ".\Testing Previsibine.txt" -Value "FO4InstallPath = $FO4InstallPath"
+        }
+    } else {
+        $FileCheck = Get-CK
+        if (Test-Path -Path $FileCheck) {
+            Write-Information -MessageData ($Messages.FoundDir -f "CreationKit.exe") -InformationAction:Continue
+        } else {
+            $one = "FO4InstallPath = $FO4InstallPath"        
+            do {
+                Set-FO4CK
+                if ($FO4InstallCheck = Test-Path -Path $FO4Exe2) {
+                    Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
+                    $CKPath = Get-CK
+                    if (Test-Path -Path $CKPath) {
+                        Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
+                    } else {
+                        Write-Error -Message $Messages.NoCK
+                    }
+                } else {
+                    Write-Warning -Message ($Messages.NoFoundDir -f "Fallout4.exe")
+                }
+            } until ($FO4InstallCheck)
+            $two = "FO4InstallPath = $FO4InstallPath2"
+            (Get-Content -Path ".\Testing Previsibine.txt").Replace($one, $two) | Set-Content -Path ".\Testing Previsibine.txt"
+        }
+    }
+}
+
+Function Set-FO4CK{
+    $script:FO4InstallPath2 = Read-Host -Prompt $Messages.FO4Loc
+    $script:FO4Exe2 = $FO4InstallPath2 + "\Fallout4.exe"
 }
 
 # Function Set-CK {
@@ -325,40 +438,70 @@ Function Get-CK {
 #     }
 # }
 
-Function Test-f4ck {
-    if (Test-Path -Path $FO4InstallPath\f4ck_loader.exe) {
-        Write-Information -MessageData $Messages.F4CK -InformationAction:Continue
-        return 1
-    } else {
-        Write-Information -MessageData $Messages.NoF4CK -InformationAction:Continue
-        return 0
+Function Test-CK {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [bool]$Settings = $false
+    )
+    Write-Information -MessageData $Messages.CheckCK -InformationAction:Continue
+    if (Test-FO4) {
+        $CKPath = Get-CK
+        if ($TestCKLoc = Test-Path -Path $CKPath) {
+            Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
+            return $TestCKLoc
+        } else {
+            Write-Error -Message $Messages.NoCK
+        }
     }
 }
 
-Function Set-ESPExtension {
-    [bool]$Complications = $false
-    do {
-        $script:ESPName = Read-Host -Prompt $Messages.ESPWork
-        if ($ESPName.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
-            if (-not $ESPName.Equals(".esp") -and -not $ESPName.Equals(".esm")) {
-                if ($ESPName.EndsWith(".esp") -or $ESPName.EndsWith(".esm")) {
-                    $Complications = $true
-                } else {
-                    Write-Information -MessageData $Messages.NoESPExt -InformationAction:Continue
-                }
-            } else {
-                Write-Information -MessageData $Messages.NoESPName -InformationAction:Continue
-            }
-        } else {
-            Write-Information -MessageData $Messages.NoESPValid -InformationAction:Continue
-        }
-    } until ($Complications)
-    if (Test-Path -Path "$FO4InstallPath\Data\$ESPName") {
-        $ESPMessage = $Messages.FO4ESP -f ($FO4InstallPath + "Data\"), $ESPName
-        Write-Information -MessageData $ESPMessage -InformationAction:Continue
+Function Get-CK {
+    #$script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
+    #Write-Information -MessageData $FO4InstallPath -InformationAction:Continue
+    if ($FO4InstallPath.EndsWith("\")) {
+        $CK = $FO4InstallPath + "CreationKit.exe"
+        return $CK
     } else {
-        Write-Error -Message $Messages.FO4NoESP
+        $CK = $FO4InstallPath + "\CreationKit.exe"
+        return $CK
     }
+}
+
+Function Test-FO4 {
+    if (Test-Path -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\') {
+        $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
+        $FO4Exe = Get-FO4
+        if ($FO4InstallCheck = Test-Path -Path $FO4Exe) {
+            Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
+            return $FO4InstallCheck
+        }
+    } else {
+        do {
+            Set-FO4
+            if ($FO4InstallCheck = Test-Path -Path $FO4) {
+                Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
+                return $FO4InstallCheck
+            } else {
+                Write-Warning -MessageData ($Messages.NoFoundDir -f "Fallout4.exe")
+            }
+        } until($FO4InstallCheck)
+    }
+}
+
+Function Get-FO4 {
+    if ($FO4InstallPath.EndsWith("\")) {
+        $FO4 = $FO4InstallPath + "Fallout4.exe"
+        return $FO4
+    } else {
+        $FO4 = $FO4InstallPath + "\Fallout4.exe"
+        return $FO4
+    }
+}
+
+Function Set-FO4 {
+    $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
+    $script:FO4 = $FO4InstallPath + "\Fallout4.exe"
 }
 
 # Function Set-XEdit {
@@ -430,39 +573,10 @@ Function Set-XEdit {
     $script:XEdit = $PathXEdit + "\FO4Edit.exe"
 }
 
-Function Test-FO4 {
-    if (Test-Path -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\') {
-        $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-        $FO4Exe = Get-FO4
-        if ($FO4InstallCheck = Test-Path -Path $FO4Exe) {
-            Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
-            return $FO4InstallCheck
-        }
-    } else {
-        do {
-            Set-FO4
-            if ($FO4InstallCheck = Test-Path -Path $FO4) {
-                Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
-                return $FO4InstallCheck
-            } else {
-                Write-Information -MessageData ($Messages.NoFoundDir -f "Fallout4.exe") -InformationAction:Continue
-            }
-        } until($FO4InstallCheck)
-    }
-}
-
-Function Get-FO4 {
-    $FO4 = $FO4InstallPath + "Fallout4.exe"
-    return $FO4
-}
-
-Function Set-FO4 {
-    $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
-    $script:FO4 = $FO4InstallPath + "\Fallout4.exe"
-}
-
 #MainFunction
 $Disclaimer
 #Set-ESPExtension
 
 #Test-CK
+#Main
+#(Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
