@@ -7,13 +7,13 @@
     <Version>2</Version>
   </Params>
   <Content>
-    <String List="0" Partial="2">
+    <String List="0">
       <EDID>[00000000]</EDID>
       <REC>TES4:CNAM</REC>
       <Source>BenRierimanu</Source>
       <Dest>BenRierimanu</Dest>
     </String>
-    <String List="0" Partial="2">
+    <String List="0">
       <EDID>[00000000]</EDID>
       <REC>TES4:SNAM</REC>
       <Source>https://www.nexusmods.com/fallout4/mods/46403 0.59</Source>
@@ -533,7 +533,7 @@
       <EDID>FaneuilHall01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Faneuil Hall</Source>
-      <Dest>Faneuil Hall</Dest>
+      <Dest>Sala Faneuil</Dest>
     </String>
     <String List="0">
       <EDID>FortHagen01</EDID>
@@ -791,7 +791,7 @@
       <EDID>zLexingtonGarage</EDID>
       <REC>CELL:FULL</REC>
       <Source>Lexington Parking Garage</Source>
-      <Dest>Parcheggio garage di Lexington</Dest>
+      <Dest>Parcheggio Lexington</Dest>
     </String>
     <String List="0">
       <EDID>zUnusedSubwayTerminalShowcase</EDID>
@@ -989,7 +989,7 @@
       <EDID>USSConstitution01</EDID>
       <REC>CELL:FULL</REC>
       <Source>U.S.S. Constitution</Source>
-      <Dest>U.S.S. Constitution</Dest>
+      <Dest>Costituzione americana</Dest>
     </String>
     <String List="0">
       <EDID>BobbisNewPlace01</EDID>
@@ -1223,7 +1223,7 @@
       <EDID>zLexingtonPharmacy</EDID>
       <REC>CELL:FULL</REC>
       <Source>Lexington Pharmacy</Source>
-      <Dest>Farmacia di Lexington</Dest>
+      <Dest>Farmacia Lexington</Dest>
     </String>
     <String List="0">
       <EDID>RelayTowerInt03</EDID>
@@ -1325,7 +1325,7 @@
       <EDID>UniversityPoint01</EDID>
       <REC>CELL:FULL</REC>
       <Source>University Point: Sedgwick Hall</Source>
-      <Dest>University Point: Sedgwick Hall</Dest>
+      <Dest>University Point: Sala Sedgwick</Dest>
     </String>
     <String List="0">
       <EDID>zInstituteRotunda</EDID>
@@ -1775,7 +1775,7 @@
       <EDID>zPOIJoel06</EDID>
       <REC>CELL:FULL</REC>
       <Source>Electrical Hobbyist&apos;s Club Cellar</Source>
-      <Dest>Electrical Hobbyist&apos;s Club Cellar</Dest>
+      <Dest>Cantina del club degli hobbisti elettrici</Dest>
     </String>
     <String List="0">
       <EDID>DLC03POI40Int</EDID>
