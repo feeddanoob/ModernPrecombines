@@ -1,0 +1,3 @@
+[Settings]
+FO4InstallPath = C:\Steam\steamapps\common\Fallout 4\
+PathXEdit = D:\nouba\Downloads\Fallout 4 mods\FO4Edit
