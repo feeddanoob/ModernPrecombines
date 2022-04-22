@@ -133,61 +133,6 @@ XeditPathSetting = Could not find FO4Edit's location using the settings file. Pl
 '@
 }
 
-# Function MainFunction {
-#     $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-#     if (-not (Test-Path -Path ".\Testing Previsibine.txt")) {
-#         $SettingsCreation = Read-Host -Prompt $Messages.SettingsQ
-#         if ($SettingsCreation -eq "Y" -or $SettingsCreation -eq "Yes") {
-#             Write-Information -MessageData $Messages.CreateSettings -InformationAction:Continue
-#             Set-Content -Path ".\Testing Previsibine.txt" -Value '[Settings]'
-#             If (Test-CK) {
-#                 if ([string]::IsNullOrEmpty($PathXEdit)) {
-#                     Set-XEdit -Settings $true
-#                 } else {
-#                     Add-Content -Path ".\Testing Previsibine.txt" -Value "PathXEdit = $PathXEdit"
-#                 }
-#                 if ([string]::IsNullOrEmpty($ESPName)) {
-#                     Set-ESPExtension
-#                 }
-#                 Start-CK1 -ESP $script:ESPName
-#             } else {
-                
-#             }
-#         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
-#             If (Test-CK) {
-#                 if ([string]::IsNullOrEmpty($PathXEdit)) {
-#                     Set-XEdit
-#                 }
-#                 if ([string]::IsNullOrEmpty($ESPName)) {
-#                     Set-ESPExtension
-#                 }
-#                 Start-CK1 -ESP $script:ESPName
-#             } else {
-                
-#             }
-#         } else {
-#             Write-Error -Message $Messages.WrongInputEnd
-#         }
-#     } else {
-#         Write-Information -MessageData $Messages.SettingsLoad -InformationAction:Continue
-#         Read-File
-#         If (Test-CK) {
-#             Set-XEdit -File $true
-#             Set-ESPExtension
-#             Start-CK1 -ESP $script:ESPName
-#         } else {
-
-#         }
-#     }
-#     If (Test-CK) {
-#         Set-XEdit
-#         Set-ESPExtension
-#         Start-CK1 -ESP $script:ESPName
-#     } else {
-
-#     }
-# }
-
 function Main {
     if (Test-File) {
         $CKTrial = Test-Path -Path (Get-CK)
@@ -466,43 +411,7 @@ Function Set-FO4CK {
     $script:FO4Exe2 = $FO4InstallPath2 + "\Fallout4.exe"
 }
 
-# Function Set-CK {
-#     $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
-#     Write-Information -MessageData $FO4InstallPath -InformationAction:Continue
-#     $script:CKPath = $script:FO4InstallPath + "\CreationKit.exe"
-#     Write-Information -MessageData $CKPath -InformationAction:Continue
-# }
-
-# Function Set-CK {
-#     [CmdletBinding()]
-#     param (
-#         [Parameter()]
-#         [bool]$Settings = $false
-#     )
-#     do {
-#         $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
-#         if ($FO4InstallCheck = Test-Path -Path $FO4InstallPath\Fallout4.exe) {
-#             Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
-#             if (Test-Path -Path $FO4InstallPath\CreationKit.exe) {
-#                 Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
-#             } else {
-#                 Write-Error -Message $Messages.NoCK
-#             }
-#         } else {
-#             Write-Information -MessageData ($Messages.NoFoundDir -f "Fallout4.exe") -InformationAction:Continue
-#         }
-#     } until($FO4InstallCheck)
-#     if ($Settings) {
-#         Add-Content -Path ".\Testing Previsibine.txt" -Value "FO4InstallPath = $FO4InstallPath"
-#     }
-# }
-
 Function Test-CK {
-    # [CmdletBinding()]
-    # param (
-    #     [Parameter()]
-    #     [bool]$Settings = $false
-    # )
     Write-Information -MessageData $Messages.CheckCK -InformationAction:Continue
     if (Test-FO4) {
         # $CKPath = Get-CK
@@ -562,47 +471,6 @@ Function Set-FO4 {
     $script:FO4InstallPath = Read-Host -Prompt $Messages.FO4Loc
     $script:FO4 = $FO4InstallPath + "\Fallout4.exe"
 }
-
-# Function Set-XEdit {
-#     [CmdletBinding()]
-#     param (
-#         # [Parameter()]
-#         # [bool]$Settings = $false,
-
-#         [Parameter()]
-#         [bool]$File = $false
-#     )
-#     if ($File) {
-#         $one = "PathXEdit = $PathXEdit"
-#         if ($PathXEditCheck = Test-Path -Path $PathXEdit\FO4Edit.exe) {
-#             Write-Information -MessageData ($Messages.SettingsFound -f "FO4Edit.exe") -InformationAction:Continue
-#         } else {
-#             Write-Information -MessageData ($Messages.SettingsNotFound -f "FO4Edit.exe") -InformationAction:Continue
-#             do {
-#                 $script:PathXEdit2 = Read-Host -Prompt $Messages.XeditPath
-#                 if ($PathXEditCheck = Test-Path -Path $PathXEdit2\FO4Edit.exe) {
-#                     Write-Information -MessageData ($Messages.FoundDir -f "FO4Edit.exe") -InformationAction:Continue
-#                 } else {
-#                     Write-Warning -Message ($Messages.NoFoundDir -f "FO4Edit.exe") -WarningAction:Inquire
-#                 }
-#             } until ($PathXEditCheck)
-#             $two = "PathXEdit = $PathXEdit2"
-#             (Get-Content -Path ".\Testing Previsibine.txt").Replace($one, $two) | Set-Content -Path ".\Testing Previsibine.txt"
-#         }
-#     } else {
-#         do {
-#             $script:PathXEdit = Read-Host -Prompt $Messages.XeditPath
-#             if ($PathXEditCheck = Test-Path -Path $PathXEdit\FO4Edit.exe) {
-#                 Write-Information -MessageData ($Messages.FoundDir -f "FO4Edit.exe") -InformationAction:Continue
-#             } else {
-#                 Write-Warning -Message ($Messages.NoFoundDir -f "FO4Edit.exe") -WarningAction:Inquire
-#             }
-#         } until ($PathXEditCheck)
-#         # if ($Settings) {
-#         #     Add-Content -Path ".\Testing Previsibine.txt" -Value "PathXEdit = $PathXEdit"
-#         # }
-#     }
-# }
 
 Function Test-XEditFile {
     if ([String]::IsNullOrEmpty($PathXEdit)) {
