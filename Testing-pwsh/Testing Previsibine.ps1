@@ -187,8 +187,6 @@ XeditPathSetting = Could not find FO4Edit's location using the settings file. Pl
 
 function Main {
     if (Test-File) {
-        # $CKMain = Test-FO4CK
-        # $XEditMain = Test-XEdit
         $CKTrial = Test-Path -Path (Get-CK)
         $XEditTrial = Test-Path -Path (Get-XEdit)
         if ($CKTrial -and $XEditTrial) {
@@ -211,16 +209,6 @@ function Main {
             }
         }
         (Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
-        # if ($CKMain -and $XEditMain) {
-        #     Set-ESPExtension
-        #     #Start-CK1
-        # } elseif ($CKMain) {
-        #     Write-Information -MessageData "Found CK but not Xedit" -InformationAction:Continue
-        # } elseif ($XEditMain) {
-        #     Write-Information -MessageData "Found XEdit but not CK" -InformationAction:Continue
-        # } else {
-        #     Write-Information -MessageData "Found neither CK or XEdit" -InformationAction:Continue
-        # }
     } else {
         $SettingsCreation = Read-Host -Prompt $Messages.SettingsQ
         if ($SettingsCreation -eq "Y" -or $SettingsCreation -eq "Yes") {
