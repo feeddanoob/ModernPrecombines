@@ -90,14 +90,17 @@ $Disclaimer = DATA {
 
 $Messages = DATA {
     ConvertFrom-StringData -StringData @'
+ArchiveCreated = The BA2 archive was successfully created.
 ArchiveMesh = Packing the meshes to an archive.
+ArchiveNotCreated = Error the BA2 was not created. Aborting.
 CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
 CheckCK = Checking to make sure the CK is in FO4's root directory.
 CreateSettings = Creating the setting file for future use.
 ESPCK = You chose to use the CK, running the CK now. Please save the CombinedObjects.esp in the CK then close the CK.
+ESPCKSave = Opening FO4Edit. Use the "Merge overrides into master.pas" script to the CombinedObjects.esp and select your plugin only. Don't forget to check for errors.
 ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the CombinedObjects.esp to your plugin?
 ESPWork = Type the name of your esp file.
-ESPXEdit = You chose to use FO4Edit, running FO4Edit now. Please use Searge's 03_MergeCombinedObjects xedit script to your plugin.
+ESPXEdit = You chose to use FO4Edit, opening FO4Edit now with CombinedObjects.esp. Please use Searge's "03_MergeCombinedObjects.pas" xedit script to your plugin.
 F4CK = Found the F4CK loader, will be using that instead.
 FO4ESP = Found the plugin at {0}. Beginning the precombine setup for {1}.
 FO4Loc = Could not find Fallout 4's location using registry key. Please put in your Fallout 4 Directory here
@@ -192,20 +195,28 @@ function Main {
         if ($CKTrial -and $XEditTrial) {
             Write-Information -MessageData "My Brother" -InformationAction:Continue
             # Set-ESPExtension
+            # Start-CK1 -ESP $script:ESPName
+            # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
         } elseif ($CKTrial) {
             Write-Information -MessageData "Found CK" -InformationAction:Continue
             if (Test-XEditFile) {
                 # Set-ESPExtension
+                # Start-CK1 -ESP $script:ESPName
+                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         } elseif ($XEditTrial) {
             Write-Information -MessageData "Found Xedit" -InformationAction:Continue
             if (Test-FO4CK) {
                 # Set-ESPExtension
+                # Start-CK1 -ESP $script:ESPName
+                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         } else {
             Write-Information -MessageData "neither" -InformationAction:Continue
             if ((Test-FO4CK) -and (Test-XEditFile)) {
                 # Set-ESPExtension
+                # Start-CK1 -ESP $script:ESPName
+                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         }
         (Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
@@ -217,7 +228,8 @@ function Main {
             $XEditMain = Test-XEdit
             if ($CKMain -and $XEditMain) {
                 Set-ESPExtension
-                #Start-CK1
+                # Start-CK1 -ESP $script:ESPName
+                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
             Write-File
         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
@@ -225,7 +237,8 @@ function Main {
             $XEditMain = Test-XEdit
             if ($CKMain -and $XEditMain) {
                 Set-ESPExtension
-                #Start-CK1
+                # Start-CK1 -ESP $script:ESPName
+                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         } else {
             Write-Error -Message $Messages.WrongInputEnd
@@ -269,7 +282,7 @@ Function Read-File {
 #>
 Function Save-ESP1 {
     param {
-        [string]$XEdit
+        [string]$XEditFile
         [string]$FO4Install
     }
     [bool]$CaseManager = $false
@@ -279,13 +292,17 @@ Function Save-ESP1 {
             Write-Information -MessageData $Messages.ESPCK -InformationAction:Continue
             if (Test-f4ck) {
                 Start-Process -FilePath "$FO4Install\f4ck_loader.exe" -Wait
+                Write-Information -MessageData $Messages.ESPCKSave -InformationAction:Continue
+                Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
             } else {
                 Start-Process -FilePath "$FO4Install\CreationKit.exe" -Wait
+                Write-Information -MessageData $Messages.ESPCKSave -InformationAction:Continue
+                Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
             }
             $CaseManager = $true
         } elseif ($ChoicesNum -eq "2") {
             Write-Information -MessageData $Messages.ESPXEdit
-            Start-Process -FilePath "$XEdit\FO4Edit.exe" -Wait -ArgumentList "-quickedit:$ESPName"
+            Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
             $CaseManager = $true
         } else {
             Write-Information -MessageData $Messages.WrongInput -InformationAction:Continue
@@ -306,6 +323,7 @@ Function Start-CK1 {
         }
         #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive1 -ESP $ESPSplit
+        Remove-Item -Path ".\Meshes\" -Recurse -Verbose
     } else {
         Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePrecombined:""$ESP"" clean all"
         if ($ESP.EndsWith(".esp")) {
@@ -315,6 +333,7 @@ Function Start-CK1 {
         }
         #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive1 -ESP $ESPSplit
+        Remove-Item -Path ".\Meshes\" -Recurse -Verbose
     }  
 }
 
@@ -327,6 +346,11 @@ function Start-Archive1 {
     if ([bool](Get-ChildItem -Recurse | Where-Object Name -Like "*.nif")) {
         Write-Information -MessageData $Messages.ArchiveMesh -InformationAction:Continue
         Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\Meshes"" -c=""$FO4InstallPath\Data\$ESP - Main.ba2"""
+        if (Test-Path -Path "$FO4InstallPath\Data\$ESP - Main.ba2") {
+            Write-Information -MessageData $Messages.ArchiveCreated -InformationAction:Continue
+        } else {
+            Write-Error -Message $Messages.ArchiveNotCreated
+        }
     } else {
         Write-Error -Message $Messages.NoMesh
     }
@@ -415,6 +439,7 @@ Function Edit-FO4CK {
                         Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
                         $two = "FO4InstallPath = $FO4InstallPath2"
                         (Get-Content -Path ".\Testing Previsibine.txt").Replace($one, $two) | Set-Content -Path ".\Testing Previsibine.txt"
+                        $script:FO4InstallPath = $FO4InstallPath2
                     } else {
                         Write-Error -Message $Messages.NoCK
                     }
@@ -623,6 +648,7 @@ Function Edit-XEditFile {
                     Write-Information -MessageData ($Messages.FoundDir -f "FO4Edit.exe") -InformationAction:Continue
                     $two = "PathXEdit = $PathXEdit2"
                     (Get-Content -Path ".\Testing Previsibine.txt").Replace($one, $two) | Set-Content -Path ".\Testing Previsibine.txt"
+                    $script:PathXEdit = $PathXEdit2
                 } else {
                     Write-Warning -Message ($Messages.NoFoundDir -f "FO4Edit.exe")
                 }
