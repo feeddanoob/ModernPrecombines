@@ -140,28 +140,32 @@ function Main {
         if ($CKTrial -and $XEditTrial) {
             Write-Information -MessageData "My Brother" -InformationAction:Continue
             # Set-ESPExtension
-            # Start-CK1 -ESP $script:ESPName
+            # Start-Precombine -ESP $script:ESPName
             # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+            # Start-CSG -ESP $script:ESPName
         } elseif ($CKTrial) {
             Write-Information -MessageData "Found CK" -InformationAction:Continue
             if (Test-XEditFile) {
                 # Set-ESPExtension
-                # Start-CK1 -ESP $script:ESPName
+                # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                # Start-CSG -ESP $script:ESPName
             }
         } elseif ($XEditTrial) {
             Write-Information -MessageData "Found Xedit" -InformationAction:Continue
             if (Test-FO4CK) {
                 # Set-ESPExtension
-                # Start-CK1 -ESP $script:ESPName
+                # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                # Start-CSG -ESP $script:ESPName
             }
         } else {
             Write-Information -MessageData "neither" -InformationAction:Continue
             if ((Test-FO4CK) -and (Test-XEditFile)) {
                 # Set-ESPExtension
-                # Start-CK1 -ESP $script:ESPName
+                # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                # Start-CSG -ESP $script:ESPName
             }
         }
         (Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
@@ -173,8 +177,9 @@ function Main {
             $XEditMain = Test-XEdit
             if ($CKMain -and $XEditMain) {
                 Set-ESPExtension
-                # Start-CK1 -ESP $script:ESPName
+                # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                # Start-CSG -ESP $script:ESPName
             }
             Write-File
         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
@@ -182,8 +187,9 @@ function Main {
             $XEditMain = Test-XEdit
             if ($CKMain -and $XEditMain) {
                 Set-ESPExtension
-                # Start-CK1 -ESP $script:ESPName
+                # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                # Start-CSG -ESP $script:ESPName
             }
         } else {
             Write-Error -Message $Messages.WrongInputEnd
@@ -218,6 +224,23 @@ Function Read-File {
         Set-Variable -Name $var[0] -Value $var[1] -Scope:Script
     }
 }
+
+Function Start-CSG {
+    param (
+        [string]$ESP
+    )
+    if (Test-f4ck) {
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
+    } else {
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
+    }
+    if(Test-Path -Path "$FO4InstallPath\DATA\$ESP - Geometry.csg"){
+        
+    } else{
+        Write-Error
+    }
+}
+
 <#
     .SYNOPSIS
         The Save-ESP1 function provides the user a choice on whether to save the data in the Precombined.esp to their plugin.
@@ -255,7 +278,7 @@ Function Save-ESP1 {
     } until ($CaseManager)
 }
 
-Function Start-CK1 {
+Function Start-Precombine {
     param (
         [string]$ESP
     )
