@@ -113,6 +113,7 @@ LeftOff2 = Precombines? [1]
 LeftOff3 = PSG Compression? [2]
 LeftOff4 = CSG Creation? [3]
 LeftOff5 = or Previs Generation? [4]
+MonitorCDX = If you are using the latest F4 Creation Kit fixes (not the version 1.6.3), please monitor the CK log for errors. Press [Enter] or [Y] if you understand.
 NoCK = Could not find the Creation Kit in Fallout 4's directory.
 NoCKNoFO4 = Could not find neither the Creation Kit or Fallout 4 through the Registry Keys.
 NoESPExt = Please include the esp/esm extension.
@@ -121,6 +122,7 @@ NoESPValid = Not a valid file name.
 NoF4CK = F4CK loader was not found, using the creation kit for all CLI actions.
 NoFoundDir = Could not find {0} with the location provided.
 NoMesh = Meshes were not generated from the CK, Aborting. Check your created plugin.
+NoPrevis = Previs Data was not generated from the CK, Aborting. Check your plugin for no previs flags in xedit, or if you skipped generating on a worldspace cell.
 SettingsFound = Found {0} from settings file. Continuing.
 SettingsLoad = Found a settings file, loading data from the file.
 SettingsNotFound = Did not find {0} in the settings file.
@@ -143,6 +145,7 @@ function Main {
             # Start-Precombine -ESP $script:ESPName
             # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             # Start-CSG -ESP $script:ESPName
+            # Start-CDX -ESP $script:ESPName
         } elseif ($CKTrial) {
             Write-Information -MessageData "Found CK" -InformationAction:Continue
             if (Test-XEditFile) {
@@ -150,6 +153,7 @@ function Main {
                 # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
                 # Start-CSG -ESP $script:ESPName
+                # Start-CDX -ESP $script:ESPName
             }
         } elseif ($XEditTrial) {
             Write-Information -MessageData "Found Xedit" -InformationAction:Continue
@@ -158,6 +162,7 @@ function Main {
                 # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
                 # Start-CSG -ESP $script:ESPName
+                # Start-CDX -ESP $script:ESPName
             }
         } else {
             Write-Information -MessageData "neither" -InformationAction:Continue
@@ -166,6 +171,7 @@ function Main {
                 # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
                 # Start-CSG -ESP $script:ESPName
+                # Start-CDX -ESP $script:ESPName
             }
         }
         (Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
@@ -180,6 +186,7 @@ function Main {
                 # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
                 # Start-CSG -ESP $script:ESPName
+                # Start-CDX -ESP $script:ESPName
             }
             Write-File
         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
@@ -190,6 +197,7 @@ function Main {
                 # Start-Precombine -ESP $script:ESPName
                 # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
                 # Start-CSG -ESP $script:ESPName
+                # Start-CDX -ESP $script:ESPName
             }
         } else {
             Write-Error -Message $Messages.WrongInputEnd
@@ -225,6 +233,64 @@ Function Read-File {
     }
 }
 
+Function Start-Previs {
+    param (
+        [string]$ESP
+    )
+    if (Test-f4ck) {
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-GeneratePreVisData:""$ESP"" clean all"
+        if ($ESP.EndsWith(".esp")) {
+            $ESPSplit = $ESP.Replace(".esp", "")
+        } elseif ($ESP.EndsWith(".esm")) {
+            $ESPSplit = $ESP.Replace(".esm", "")
+        }
+        #Write-Information -MessageData $ESPSplit -InformationAction:Continue
+        Start-Archive1 -ESP $ESPSplit
+        Remove-Item -Path ".\Meshes\" -Recurse -Verbose
+    } else {
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePreVisData:""$ESP"" clean all"
+        if ($ESP.EndsWith(".esp")) {
+            $ESPSplit = $ESP.Replace(".esp", "")
+        } elseif ($ESP.EndsWith(".esm")) {
+            $ESPSplit = $ESP.Replace(".esm", "")
+        }
+        #Write-Information -MessageData $ESPSplit -InformationAction:Continue
+        Start-Archive1 -ESP $ESPSplit
+        Remove-Item -Path ".\Meshes\" -Recurse -Verbose
+    }
+}
+
+Function Start-Archive2{
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]$ESP
+    )
+    if ([bool](Get-ChildItem -Recurse | Where-Object Name -Like "*.uvd")) {
+        Write-Information -MessageData $Messages.ArchiveMesh -InformationAction:Continue
+        Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\$ESP - Main.ba2"""
+        if (Test-Path -Path "$FO4InstallPath\Data\$ESP - Main.ba2") {
+            Write-Information -MessageData $Messages.ArchiveCreated -InformationAction:Continue
+        } else {
+            Write-Error -Message $Messages.ArchiveNotCreated
+        }
+    } else {
+        Write-Error -Message $Messages.NoPrevis
+    }
+}
+
+Function Start-CDX {
+    param (
+        [string]$ESP
+    )
+    Write-Warning -Message $Messages.MonitorCDX -WarningAction:Inquire
+    if (Test-f4ck) {
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
+    } else {
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
+    }
+}
+
 Function Start-CSG {
     param (
         [string]$ESP
@@ -233,11 +299,6 @@ Function Start-CSG {
         Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
     } else {
         Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
-    }
-    if(Test-Path -Path "$FO4InstallPath\DATA\$ESP - Geometry.csg"){
-        
-    } else{
-        Write-Error
     }
 }
 
@@ -302,7 +363,7 @@ Function Start-Precombine {
         #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive1 -ESP $ESPSplit
         Remove-Item -Path ".\Meshes\" -Recurse -Verbose
-    }  
+    }
 }
 
 function Start-Archive1 {
@@ -596,7 +657,9 @@ $Disclaimer
 #Set-ESPExtension
 
 #Test-CK
-Main
+#Main
 #(Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
 # Read-File
 # Test-FO4CK
+$FO4InstallPath = "C:\Steam\steamapps\common\Fallout 4"
+Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\PRP - Main.ba2"""
