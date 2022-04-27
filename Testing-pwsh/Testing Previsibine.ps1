@@ -82,11 +82,10 @@ param (
 
     #May add more parameters, when I complete the script.
 )
-#Automatically looks for the FO4 installation path using Registry Keys
 
-$Disclaimer = DATA {
-    "Insert MIT license here."
-}
+# $Disclaimer = DATA {
+#     "Insert MIT license here."
+# }
 
 $Messages = DATA {
     ConvertFrom-StringData -StringData @'
@@ -97,11 +96,11 @@ ArchivePrevis = Manually pack your previs files to the archive.
 CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
 CheckCK = Checking to make sure the CK is in FO4's root directory.
 CreateSettings = Creating the setting file for future use.
-ESPCK = You chose to use the CK, running the CK now. Please save the CombinedObjects.esp in the CK then close the CK.
-ESPCKSave = Opening FO4Edit. Use the "Merge overrides into master.pas" script to the CombinedObjects.esp and select your plugin only. Don't forget to check for errors.
-ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the CombinedObjects.esp to your plugin?
+ESPCK = You chose to use the CK, running the CK now. Please save the {0} in the CK then close the CK.
+ESPCKSave = Opening FO4Edit. Use the "Merge overrides into master.pas" script to the {0} and select your plugin only. Don't forget to check for errors.
+ESPCKXEdit = Would you want to open the Creation Kit [1] or FO4Edit [2] to copy the contents of the {0} to your plugin?
 ESPWork = Type the name of your esp file.
-ESPXEdit = You chose to use FO4Edit, opening FO4Edit now with CombinedObjects.esp. Please use Searge's "03_MergeCombinedObjects.pas" xedit script to your plugin.
+ESPXEdit = You chose to use FO4Edit, opening FO4Edit now with {0}. Please use Searge's "{1}" xedit script to your plugin.
 F4CK = Found the F4CK loader, will be using that instead.
 FO4ESP = Found the plugin at {0}. Beginning the precombine setup for {1}.
 FO4Loc = Could not find Fallout 4's location using registry key. Please put in your Fallout 4 Directory here
@@ -116,7 +115,6 @@ LeftOff4 = CSG Creation? [3]
 LeftOff5 = or Previs Generation? [4]
 MonitorCDX = If you are using the latest F4 Creation Kit fixes (not the version 1.6.3), please monitor the CK log for errors. Press [Enter] or [Y] if you understand.
 NoCK = Could not find the Creation Kit in Fallout 4's directory.
-NoCKNoFO4 = Could not find neither the Creation Kit or Fallout 4 through the Registry Keys.
 NoESPExt = Please include the esp/esm extension.
 NoESPName = Please put the file name after the extension.
 NoESPValid = Not a valid file name.
@@ -125,9 +123,10 @@ NoFoundDir = Could not find {0} with the location provided.
 NoMesh = Meshes were not generated from the CK, Aborting. Check your created plugin.
 NoPrevis = Previs Data was not generated from the CK, Aborting. Check your plugin for no previs flags in xedit, or if you skipped generating on a worldspace cell.
 RemoveVIS = Would you like to remove the UVD files? (This is only a question because I could not add files into existing archives). [Y] or press any other key to skip deleting
-SettingsFound = Found {0} from settings file. Continuing.
+SettingsFound = Found valid settings in settings file. Continuing.
 SettingsLoad = Found a settings file, loading data from the file.
-SettingsNotFound = Did not find {0} in the settings file.
+SettingsNotFound = Error, could either not find {0} in the settings file or the path was wrong. Attempting to correct/add the path.
+SettingsNotFoundBoth = Error, could not find neither PathXEdit and FO4InstallPath in the settings file. Attempting to correct/add the path.
 SettingsQ = Would you like to create a settings file? This may save you time from inputting things again when running the script. [Y] or [N]
 Startup = Did you start the powershell script previously? [Y] or [N] (Choose [N] if you did not create a settings file.)
 WrongInput = Inputted a wrong value. Please choose a valid option.
@@ -142,42 +141,46 @@ function Main {
         $CKTrial = Test-Path -Path (Get-CK)
         $XEditTrial = Test-Path -Path (Get-XEdit)
         if ($CKTrial -and $XEditTrial) {
-            Write-Information -MessageData "Found Both" -InformationAction:Continue
-            # Set-ESPExtension
-            # Start-Precombine -ESP $script:ESPName
-            # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
-            # Start-CSG -ESP $script:ESPName
-            # Start-CDX -ESP $script:ESPName
-            # Start-Previs -ESP $script:ESPName
+            Write-Information -MessageData $Messages.SettingsFound -InformationAction:Continue
+            Set-ESPExtension
+            Start-Precombine -ESP $script:ESPName
+            Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+            Start-CSG -ESP $script:ESPName
+            Start-CDX -ESP $script:ESPName
+            Start-Previs -ESP $script:ESPName
+            Save-ESP2 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
         } elseif ($CKTrial) {
-            Write-Information -MessageData "Found CK" -InformationAction:Continue
+            Write-Information -MessageData ($Messages.SettingsNotFound -f "PathXEdit") -InformationAction:Continue
             if (Test-XEditFile) {
-                # Set-ESPExtension
-                # Start-Precombine -ESP $script:ESPName
-                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
-                # Start-CSG -ESP $script:ESPName
-                # Start-CDX -ESP $script:ESPName
-                # Start-Previs -ESP $script:ESPName
+                Set-ESPExtension
+                Start-Precombine -ESP $script:ESPName
+                Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                Start-CSG -ESP $script:ESPName
+                Start-CDX -ESP $script:ESPName
+                Start-Previs -ESP $script:ESPName
+                Save-ESP2 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         } elseif ($XEditTrial) {
-            Write-Information -MessageData "Found Xedit" -InformationAction:Continue
+            Write-Information -MessageData ($Messages.SettingsNotFound -f "FO4InstallPath") -InformationAction:Continue
             if (Test-FO4CK) {
-                # Set-ESPExtension
-                # Start-Precombine -ESP $script:ESPName
-                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
-                # Start-CSG -ESP $script:ESPName
-                # Start-CDX -ESP $script:ESPName
-                # Start-Previs -ESP $script:ESPName
+                Set-ESPExtension
+                Start-Precombine -ESP $script:ESPName
+                Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                Start-CSG -ESP $script:ESPName
+                Start-CDX -ESP $script:ESPName
+                Start-Previs -ESP $script:ESPName
+                Save-ESP2 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         } else {
-            Write-Information -MessageData "neither" -InformationAction:Continue
+            Write-Information -MessageData $Messages.SettingsNotFoundBoth -InformationAction:Continue
             if ((Test-FO4CK) -and (Test-XEditFile)) {
-                # Set-ESPExtension
-                # Start-Precombine -ESP $script:ESPName
-                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
-                # Start-CSG -ESP $script:ESPName
-                # Start-CDX -ESP $script:ESPName
-                # Start-Previs -ESP $script:ESPName
+                Set-ESPExtension
+                Start-Precombine -ESP $script:ESPName
+                Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                Start-CSG -ESP $script:ESPName
+                Start-CDX -ESP $script:ESPName
+                Start-Previs -ESP $script:ESPName
+                Save-ESP2 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         }
         (Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
@@ -189,10 +192,12 @@ function Main {
             $XEditMain = Test-XEdit
             if ($CKMain -and $XEditMain) {
                 Set-ESPExtension
-                # Start-Precombine -ESP $script:ESPName
-                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
-                # Start-CSG -ESP $script:ESPName
-                # Start-CDX -ESP $script:ESPName
+                Start-Precombine -ESP $script:ESPName
+                Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                Start-CSG -ESP $script:ESPName
+                Start-CDX -ESP $script:ESPName
+                Start-Previs -ESP $script:ESPName
+                Save-ESP2 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
             Write-File
         } elseif ($SettingsCreation -eq "N" -or $SettingsCreation -eq "No") {
@@ -200,10 +205,12 @@ function Main {
             $XEditMain = Test-XEdit
             if ($CKMain -and $XEditMain) {
                 Set-ESPExtension
-                # Start-Precombine -ESP $script:ESPName
-                # Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
-                # Start-CSG -ESP $script:ESPName
-                # Start-CDX -ESP $script:ESPName
+                Start-Precombine -ESP $script:ESPName
+                Save-ESP1 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
+                Start-CSG -ESP $script:ESPName
+                Start-CDX -ESP $script:ESPName
+                Start-Previs -ESP $script:ESPName
+                Save-ESP2 -XEditFile $script:XEdit -FO4Install $script:FO4InstallPath
             }
         } else {
             Write-Error -Message $Messages.WrongInputEnd
@@ -246,22 +253,22 @@ Function Save-ESP2 {
     }
     [bool]$CaseManager = $false
     do {
-        $ChoicesNum = Read-Host -Prompt $Messages.ESPCKXEdit
+        $ChoicesNum = Read-Host -Prompt ($Messages.ESPCKXEdit -f "PreVis.esp")
         if ($ChoicesNum -eq "1") {
-            Write-Information -MessageData $Messages.ESPCK -InformationAction:Continue
+            Write-Information -MessageData ($Messages.ESPCK -f "PreVis.esp") -InformationAction:Continue
             if (Test-f4ck) {
                 Start-Process -FilePath "$FO4Install\f4ck_loader.exe" -Wait
-                Write-Information -MessageData $Messages.ESPCKSave -InformationAction:Continue
-                Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
+                Write-Information -MessageData ($Messages.ESPCKSave -f "PreVis.esp") -InformationAction:Continue
+                Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:PreVis.esp"
             } else {
                 Start-Process -FilePath "$FO4Install\CreationKit.exe" -Wait
-                Write-Information -MessageData $Messages.ESPCKSave -InformationAction:Continue
-                Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
+                Write-Information -MessageData ($Messages.ESPCKSave -f "PreVis.esp") -InformationAction:Continue
+                Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:PreVis.esp"
             }
             $CaseManager = $true
         } elseif ($ChoicesNum -eq "2") {
-            Write-Information -MessageData $Messages.ESPXEdit
-            Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
+            Write-Information -MessageData ($Messages.ESPXEdit -f "PreVis.esp", "05_MergePrevis.pas") -InformationAction:Continue
+            Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:PreVis.esp"
             $CaseManager = $true
         } else {
             Write-Information -MessageData $Messages.WrongInput -InformationAction:Continue
@@ -280,7 +287,6 @@ Function Start-Previs {
         } elseif ($ESP.EndsWith(".esm")) {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
-        #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive2 -ESP $ESPSplit
         $RmVIS = Read-Host -Prompt $Messages.RemoveVIS
         if ($RmVIS -eq "Y" -or $RmVIS -eq "Yes") {
@@ -293,7 +299,6 @@ Function Start-Previs {
         } elseif ($ESP.EndsWith(".esm")) {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
-        #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive2 -ESP $ESPSplit
         $RmVIS = Read-Host -Prompt $Messages.RemoveVIS
         if ($RmVIS -eq "Y" -or $RmVIS -eq "Yes") {
@@ -353,21 +358,21 @@ Function Save-ESP1 {
     }
     [bool]$CaseManager = $false
     do {
-        $ChoicesNum = Read-Host -Prompt $Messages.ESPCKXEdit
+        $ChoicesNum = Read-Host -Prompt ($Messages.ESPCKXEdit -f "CombinedObjects.esp")
         if ($ChoicesNum -eq "1") {
-            Write-Information -MessageData $Messages.ESPCK -InformationAction:Continue
+            Write-Information -MessageData ($Messages.ESPCK -f "CombinedObjects.esp") -InformationAction:Continue
             if (Test-f4ck) {
                 Start-Process -FilePath "$FO4Install\f4ck_loader.exe" -Wait
-                Write-Information -MessageData $Messages.ESPCKSave -InformationAction:Continue
+                Write-Information -MessageData ($Messages.ESPCKSave -f "CombinedObjects.esp") -InformationAction:Continue
                 Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
             } else {
                 Start-Process -FilePath "$FO4Install\CreationKit.exe" -Wait
-                Write-Information -MessageData $Messages.ESPCKSave -InformationAction:Continue
+                Write-Information -MessageData ($Messages.ESPCKSave -f "CombinedObjects.esp") -InformationAction:Continue
                 Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
             }
             $CaseManager = $true
         } elseif ($ChoicesNum -eq "2") {
-            Write-Information -MessageData $Messages.ESPXEdit
+            Write-Information -MessageData ($Messages.ESPXEdit -f "CombinedObjects.esp", "03_MergeCombinedObjects.pas") -InformationAction:Continue
             Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:CombinedObjects.esp"
             $CaseManager = $true
         } else {
@@ -387,7 +392,6 @@ Function Start-Precombine {
         } elseif ($ESP.EndsWith(".esm")) {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
-        #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive1 -ESP $ESPSplit
         Remove-Item -Path ".\Meshes\" -Recurse -Verbose
     } else {
@@ -397,7 +401,6 @@ Function Start-Precombine {
         } elseif ($ESP.EndsWith(".esm")) {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
-        #Write-Information -MessageData $ESPSplit -InformationAction:Continue
         Start-Archive1 -ESP $ESPSplit
         Remove-Item -Path ".\Meshes\" -Recurse -Verbose
     }
@@ -460,10 +463,9 @@ Function Test-f4ck {
 
 Function Test-FO4CK {
     if ([String]::IsNullOrEmpty($FO4InstallPath)) {
-        Write-Information -MessageData ($Messages.InvalidSetting -f "FO4InstallPath")
+        Write-Information -MessageData ($Messages.InvalidSetting -f "FO4InstallPath") -InformationAction:Continue
         Edit-FO4CK
         $FO4InstallCheck1 = Test-Path -Path (Get-CK)
-        # $FO4InstallCheck2 = Test-Path -Path (Get-FO4CK)
         if ($FO4InstallCheck1) {
             return $true
         }
@@ -491,7 +493,6 @@ Function Edit-FO4CK {
             Add-Content -Path ".\Testing Previsibine.txt" -Value "FO4InstallPath = $FO4InstallPath"
         }
     } else {
-        # $FileCheck = Get-CK
         if (Test-Path -Path (Get-CK)) {
             Write-Information -MessageData ($Messages.FoundDir -f "CreationKit.exe") -InformationAction:Continue
         } else {
@@ -500,7 +501,6 @@ Function Edit-FO4CK {
                 Set-FO4CK
                 if ($FO4InstallCheck = Test-Path -Path $FO4Exe2) {
                     Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
-                    # $CKPath = Get-FO4CK
                     if (Test-Path -Path (Get-FO4CK)) {
                         Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
                         $two = "FO4InstallPath = $FO4InstallPath2"
@@ -535,7 +535,6 @@ Function Set-FO4CK {
 Function Test-CK {
     Write-Information -MessageData $Messages.CheckCK -InformationAction:Continue
     if (Test-FO4) {
-        # $CKPath = Get-CK
         if ($TestCKLoc = Test-Path -Path (Get-CK)) {
             Write-Information -MessageData $Messages.CKFound -InformationAction:Continue
             return $TestCKLoc
@@ -546,8 +545,6 @@ Function Test-CK {
 }
 
 Function Get-CK {
-    #$script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-    #Write-Information -MessageData $FO4InstallPath -InformationAction:Continue
     if ($FO4InstallPath.EndsWith("\")) {
         $CK = $FO4InstallPath + "CreationKit.exe"
         return $CK
@@ -560,7 +557,6 @@ Function Get-CK {
 Function Test-FO4 {
     if (Test-Path -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\') {
         $script:FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-        # $FO4Exe = Get-FO4
         if ($FO4InstallCheck = Test-Path -Path (Get-FO4)) {
             Write-Information -MessageData ($Messages.FoundDir -f "Fallout4.exe") -InformationAction:Continue
             return $FO4InstallCheck
@@ -595,10 +591,9 @@ Function Set-FO4 {
 
 Function Test-XEditFile {
     if ([String]::IsNullOrEmpty($PathXEdit)) {
-        Write-Information -MessageData ($Messages.InvalidSetting -f "PathXEdit")
+        Write-Information -MessageData ($Messages.InvalidSetting -f "PathXEdit") -InformationAction:Continue
         Edit-XEditFile
         $XEditCheck1 = Test-Path -Path (Get-XEdit)
-        # $XEditCheck2 = Test-Path -Path (Get-XEditFile)
         if ($XEditCheck1) {
             return $true
         }
@@ -621,12 +616,10 @@ Function Test-XEditFile {
 Function Edit-XEditFile {
     if ([string]::IsNullOrEmpty($PathXEdit)) {
         (Get-Content -Path ".\Testing Previsibine.txt") | Where-Object { $_ -notmatch "PathXEdit" } | Set-Content -Path ".\Testing Previsibine.txt"
-        # $XEditTesting = Test-XEdit
         if (Test-XEdit) {
             Add-Content -Path ".\Testing Previsibine.txt" -Value "PathXEdit = $PathXEdit"
         }
     } else {
-        # $FileCheck = Get-CK
         if (Test-Path -Path (Get-XEdit)) {
             Write-Information -MessageData ($Messages.FoundDir -f "FO4Edit.exe") -InformationAction:Continue
         } else {
@@ -662,7 +655,6 @@ Function Set-XEditFile {
 }
 
 Function Test-XEdit {
-    # $XPathEdit = Get-xEdit
     if ($PathXEditCheck = Test-Path -Path (Get-XEdit)) {
         Write-Information -MessageData ($Messages.FoundDir -f "FO4Edit.exe") -InformationAction:Continue
         return $PathXEditCheck
@@ -689,14 +681,5 @@ Function Set-XEdit {
     $script:XEdit = $PathXEdit + "\FO4Edit.exe"
 }
 
-#MainFunction
-$Disclaimer
-#Set-ESPExtension
-
-#Test-CK
-#Main
+Main
 #(Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
-# Read-File
-# Test-FO4CK
-$FO4InstallPath = "C:\Steam\steamapps\common\Fallout 4"
-Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\PRP - Main.ba2"""
