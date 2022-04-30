@@ -86,9 +86,6 @@ Once that is done, save your esp but do not close FO4Edit just yet. If your plug
 ## Clean your patch plugin
 While you could leave everything as an ITM, your plugin may be flagged by programs such as loot as dirty. Since we are just copying records and generating previsibines, it is recommended to clean your patch plugin to make sure another mods' functions could work. Using FO4Edit's QAC argument, clean your patch plugin.
 
-## Clean your patch plugin
-While you could leave everything as an ITM, your plugin may be flagged by programs such as loot as dirty. Since we are just copying records and generating previsibines, it is recommended to clean your patch plugin to make sure another mods' functions could work. Using FO4Edit's QAC argument, clean your patch plugin.
-
 ## Testing Phase
 Now that your have generated everything, it is time to see if your generation worked correctly on the first try. I would select a few CELL locations and just run around the area to check for any preculling issues, if you found any please wait for a future guide on how to fix this (tbd and probably on another md file).
 
