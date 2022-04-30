@@ -83,6 +83,9 @@ The slower option, that I have done in the past. Open the CK and set Previs.esp 
 ## Previs Generation - Part D
 Once that is done, save your esp but do not close FO4Edit just yet. If your plugin contains Worldspace cells, you should check and remove extra Previs files that your plugin does not have, this part is going to be tedious I know but we do this because of a fault in previs generation. RVIS (in xedit) is the center of a 3x3 grid in the map and the CK does a 3x3 block for generating previs on that center but with generating previs, every cell entry is marked like a center and produces UVD files we shouldn't need or want (Thank you Hap in discord). You can pack the newly created VIS folder into your archive from the [Precombine generation step](#precombine-generation---part-c) using these [settings](/Patch-Tutorial-Pics/Archive_2_precombine_packing.png) (The same settings used when you initially created the ba2 archive).
 
+## Clean your patch plugin
+While you could leave everything as an ITM, your plugin may be flagged by programs such as loot as dirty. Since we are just copying records and generating previsibines, it is recommended to clean your patch plugin to make sure another mods' functions could work. Using FO4Edit's QAC argument, clean your patch plugin.
+
 ## Testing Phase
 Now that your have generated everything, it is time to see if your generation worked correctly on the first try. I would select a few CELL locations and just run around the area to check for any preculling issues, if you found any please wait for a future guide on how to fix this (tbd and probably on another md file).
 
