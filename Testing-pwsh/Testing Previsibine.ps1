@@ -95,6 +95,7 @@ ArchiveNotCreated = Error the BA2 was not created. Aborting.
 ArchivePrevis = Manually pack your previs files to the archive.
 CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
 CheckCK = Checking to make sure the CK is in FO4's root directory.
+CollectScript = Before closing Xedit. You should save the esp and then run the Collect Assets script from Pra's FO4Edit scripts.
 CreateSettings = Creating the setting file for future use.
 ESPCK = You chose to use the CK, running the CK now. Please save the {0} in the CK then close the CK.
 ESPCKSave = Opening FO4Edit. Use the "Merge overrides into master.pas" script to the {0} and select your plugin only. Don't forget to check for errors.
@@ -259,15 +260,18 @@ Function Save-ESP2 {
             if (Test-f4ck) {
                 Start-Process -FilePath "$FO4Install\f4ck_loader.exe" -Wait
                 Write-Information -MessageData ($Messages.ESPCKSave -f "PreVis.esp") -InformationAction:Continue
+                Write-Information -MessageData $Messages.CollectScript -InformationAction:Continue
                 Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:PreVis.esp"
             } else {
                 Start-Process -FilePath "$FO4Install\CreationKit.exe" -Wait
                 Write-Information -MessageData ($Messages.ESPCKSave -f "PreVis.esp") -InformationAction:Continue
+                Write-Information -MessageData $Messages.CollectScript -InformationAction:Continue
                 Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:PreVis.esp"
             }
             $CaseManager = $true
         } elseif ($ChoicesNum -eq "2") {
             Write-Information -MessageData ($Messages.ESPXEdit -f "PreVis.esp", "05_MergePrevis.pas") -InformationAction:Continue
+            Write-Information -MessageData $Messages.CollectScript -InformationAction:Continue
             Start-Process -FilePath $XEditFile -Wait -ArgumentList "-quickedit:PreVis.esp"
             $CaseManager = $true
         } else {
@@ -282,44 +286,44 @@ Function Start-Previs {
     )
     if (Test-f4ck) {
         Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-GeneratePreVisData:""$ESP"" clean all"
-        if ($ESP.EndsWith(".esp")) {
-            $ESPSplit = $ESP.Replace(".esp", "")
-        } elseif ($ESP.EndsWith(".esm")) {
-            $ESPSplit = $ESP.Replace(".esm", "")
-        }
-        Start-Archive2 -ESP $ESPSplit
-        $RmVIS = Read-Host -Prompt $Messages.RemoveVIS
-        if ($RmVIS -eq "Y" -or $RmVIS -eq "Yes") {
-            Remove-Item -Path ".\VIS\" -Recurse -Verbose
-        }    
+        # if ($ESP.EndsWith(".esp")) {
+        #     $ESPSplit = $ESP.Replace(".esp", "")
+        # } elseif ($ESP.EndsWith(".esm")) {
+        #     $ESPSplit = $ESP.Replace(".esm", "")
+        # }
+        # Start-Archive2 -ESP $ESPSplit
+        # $RmVIS = Read-Host -Prompt $Messages.RemoveVIS
+        # if ($RmVIS -eq "Y" -or $RmVIS -eq "Yes") {
+        #     Remove-Item -Path ".\VIS\" -Recurse -Verbose
+        # }    
     } else {
         Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePreVisData:""$ESP"" clean all"
-        if ($ESP.EndsWith(".esp")) {
-            $ESPSplit = $ESP.Replace(".esp", "")
-        } elseif ($ESP.EndsWith(".esm")) {
-            $ESPSplit = $ESP.Replace(".esm", "")
-        }
-        Start-Archive2 -ESP $ESPSplit
-        $RmVIS = Read-Host -Prompt $Messages.RemoveVIS
-        if ($RmVIS -eq "Y" -or $RmVIS -eq "Yes") {
-            Remove-Item -Path ".\VIS\" -Recurse -Verbose
-        } 
+        # if ($ESP.EndsWith(".esp")) {
+        #     $ESPSplit = $ESP.Replace(".esp", "")
+        # } elseif ($ESP.EndsWith(".esm")) {
+        #     $ESPSplit = $ESP.Replace(".esm", "")
+        # }
+        # Start-Archive2 -ESP $ESPSplit
+        # $RmVIS = Read-Host -Prompt $Messages.RemoveVIS
+        # if ($RmVIS -eq "Y" -or $RmVIS -eq "Yes") {
+        #     Remove-Item -Path ".\VIS\" -Recurse -Verbose
+        # } 
     }
 }
 
-Function Start-Archive2 {
-    [CmdletBinding()]
-    param (
-        [Parameter()]
-        [string]$ESP
-    )
-    if ([bool](Get-ChildItem -Recurse | Where-Object Name -Like "*.uvd")) {
-        Write-Information -MessageData $Messages.ArchivePrevis -InformationAction:Continue
-        Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\$ESP - Main.ba2"""
-    } else {
-        Write-Error -Message $Messages.NoPrevis
-    }
-}
+# Function Start-Archive2 {
+#     [CmdletBinding()]
+#     param (
+#         [Parameter()]
+#         [string]$ESP
+#     )
+#     if ([bool](Get-ChildItem -Recurse | Where-Object Name -Like "*.uvd")) {
+#         Write-Information -MessageData $Messages.ArchivePrevis -InformationAction:Continue
+#         Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\$ESP - Main.ba2"""
+#     } else {
+#         Write-Error -Message $Messages.NoPrevis
+#     }
+# }
 
 Function Start-CDX {
     param (
