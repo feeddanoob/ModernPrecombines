@@ -138,6 +138,9 @@ XeditPathSetting = Could not find FO4Edit's location using the settings file. Pl
 }
 
 function Main {
+    if (condition) {
+        
+    }
     if (Test-File) {
         $CKTrial = Test-Path -Path (Get-CK)
         $XEditTrial = Test-Path -Path (Get-XEdit)
@@ -217,6 +220,15 @@ function Main {
             Write-Error -Message $Messages.WrongInputEnd
         }
     }
+}
+
+function Get-F4CKFixesVersion {
+    $Removeconsoleinput = Test-FO4
+    [System.Version]$GetF4CKVersion = (Get-Item "$FO4InstallPath\winhttp.dll").VersionInfo.FileVersion
+    if ($GetF4CKVersion -gt [System.Version]"1.6.3.0"){
+        return "Warning"
+    }
+    $GetF4CKVersion -gt [System.Version]"1.6.3.0"
 }
 
 Function Test-File {
@@ -685,5 +697,6 @@ Function Set-XEdit {
     $script:XEdit = $PathXEdit + "\FO4Edit.exe"
 }
 
-Main
+#Main
 #(Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
+Get-F4CKFixesVersion
