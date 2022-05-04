@@ -50,7 +50,7 @@ param (
             }
         }
     )]
-    [Alias("Plugin")]
+    [Alias("ESP", "ESM")]
     [string]$ESPName
 
     #Like above not mandatory incase user wants to write on console but with an addition, have an option to save to a file.
@@ -432,7 +432,7 @@ function Start-Archive1 {
         [Parameter()]
         [string]$ESP
     )
-    if ([bool](Get-ChildItem -Recurse | Where-Object Name -Like "*.nif")) {
+    if ([bool](Get-ChildItem -Path "$FO4InstallPath\Data\" -Recurse | Where-Object Name -Like "*.nif")) {
         Write-Information -MessageData $Messages.ArchiveMesh -InformationAction:Continue
         Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\Meshes"" -c=""$FO4InstallPath\Data\$ESP - Main.ba2"""
         if (Test-Path -Path "$FO4InstallPath\Data\$ESP - Main.ba2") {
