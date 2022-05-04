@@ -692,8 +692,8 @@ Function Test-XEdit {
 }
 
 Function Get-XEdit {
-    $XEdit = $PathXEdit + "\FO4Edit.exe"
-    return $XEdit
+    $script:XEdit = $PathXEdit + "\FO4Edit.exe"
+    return $script:XEdit
 }
 
 Function Set-XEdit {
