@@ -33,11 +33,15 @@ param (
             if ($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
                 if (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) {
                     if ($_.EndsWith(".esp") -or $_.EndsWith(".esm")) {
-                        $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
-                        if (Test-Path -Path $FO4InstallPath\Data\$_) {
-                            $true
+                        if (-not $_ -match " ") {
+                            $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
+                            if (Test-Path -Path $FO4InstallPath\Data\$_) {
+                                $true
+                            } else {
+                                throw "Could not find the plugin in the Data folder."
+                            }
                         } else {
-                            throw "Could not find the plugin in the Data folder."
+                            throw "ESP contains a space."
                         }
                     } else {
                         throw "Please include the .esp or .esm extension."
@@ -95,6 +99,7 @@ ArchiveNotCreated = Error the BA2 was not created. Aborting.
 ArchivePrevis = Manually pack your previs files to the archive.
 CKFound = Found the Creation Kit in the same directory as Fallout4.exe.
 CheckCK = Checking to make sure the CK is in FO4's root directory.
+CLArgsESPName = Command line argument found for the plugin. Using {0}.
 CollectScript = Before closing Xedit. You should save the esp and then run the Collect Assets script from Pra's FO4Edit scripts.
 CreateSettings = Creating the setting file for future use.
 ESPCK = You chose to use the CK, running the CK now. Please save the {0} in the CK then close the CK.
@@ -119,6 +124,7 @@ NoCK = Could not find the Creation Kit in Fallout 4's directory.
 NoCkFixes = You did not install F4 Creation Kit Fixes.
 NoESPExt = Please include the esp/esm extension.
 NoESPName = Please put the file name after the extension.
+NoESPSpace = Contains a space. Normally F4CK fixes allows quotations on esp but with pwsh, csg and cdx do not generate.
 NoESPValid = Not a valid file name.
 NoF4CK = F4CK loader was not found, using the creation kit for all CLI actions.
 NoFoundDir = Could not find {0} with the location provided.
@@ -300,8 +306,9 @@ Function Start-Previs {
     param (
         [string]$ESP
     )
+    Write-Information -MessageData "Previs" -InformationAction:Continue
     if (Test-f4ck) {
-        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-GeneratePreVisData:""$ESP"" clean all"
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-GeneratePreVisData:$ESP clean all"
         # if ($ESP.EndsWith(".esp")) {
         #     $ESPSplit = $ESP.Replace(".esp", "")
         # } elseif ($ESP.EndsWith(".esm")) {
@@ -313,7 +320,7 @@ Function Start-Previs {
         #     Remove-Item -Path ".\VIS\" -Recurse -Verbose
         # }    
     } else {
-        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePreVisData:""$ESP"" clean all"
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePreVisData:$ESP clean all"
         # if ($ESP.EndsWith(".esp")) {
         #     $ESPSplit = $ESP.Replace(".esp", "")
         # } elseif ($ESP.EndsWith(".esm")) {
@@ -345,11 +352,12 @@ Function Start-CDX {
     param (
         [string]$ESP
     )
-    # Write-Warning -Message $Messages.MonitorCDX -WarningAction:Inquire
+    Write-Information -MessageData "Cell Index" -InformationAction:Continue
+    Start-Sleep -Seconds 4
     if (Test-f4ck) {
-        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-BuildCDX:""$ESP"""
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-BuildCDX:$ESP"
     } else {
-        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-BuildCDX:""$ESP"""
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-BuildCDX:$ESP"
     }
 }
 
@@ -357,10 +365,11 @@ Function Start-CSG {
     param (
         [string]$ESP
     )
+    Write-Information -MessageData "Compress PSG" -InformationAction:Continue
     if (Test-f4ck) {
-        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:""$ESP"""
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:$ESP"
     } else {
-        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-CompressPSG:""$ESP"""
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-CompressPSG:$ESP"
     }
 }
 
@@ -405,8 +414,9 @@ Function Start-Precombine {
     param (
         [string]$ESP
     )
+    Write-Information -MessageData "Precombines" -InformationAction:Continue
     if (Test-f4ck) {
-        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-GeneratePrecombined:""$ESP"" clean all"
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-GeneratePrecombined:$ESP clean all"
         if ($ESP.EndsWith(".esp")) {
             $ESPSplit = $ESP.Replace(".esp", "")
         } elseif ($ESP.EndsWith(".esm")) {
@@ -415,7 +425,7 @@ Function Start-Precombine {
         Start-Archive1 -ESP $ESPSplit
         Remove-Item -Path "$FO4InstallPath\Data\Meshes\" -Recurse -Verbose
     } else {
-        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePrecombined:""$ESP"" clean all"
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePrecombined:$ESP clean all"
         if ($ESP.EndsWith(".esp")) {
             $ESPSplit = $ESP.Replace(".esp", "")
         } elseif ($ESP.EndsWith(".esm")) {
@@ -446,28 +456,36 @@ function Start-Archive1 {
 }
 
 Function Set-ESPExtension {
-    [bool]$Complications = $false
-    do {
-        $script:ESPName = Read-Host -Prompt $Messages.ESPWork
-        if ($ESPName.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
-            if (-not $ESPName.Equals(".esp") -and -not $ESPName.Equals(".esm")) {
-                if ($ESPName.EndsWith(".esp") -or $ESPName.EndsWith(".esm")) {
-                    $Complications = $true
+    if ([String]::IsNullOrEmpty($ESPName)) {
+        [bool]$Complications = $false
+        do {
+            $script:ESPName = Read-Host -Prompt $Messages.ESPWork
+            if ($ESPName.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
+                if (-not $ESPName.Equals(".esp") -and -not $ESPName.Equals(".esm")) {
+                    if ($ESPName.EndsWith(".esp") -or $ESPName.EndsWith(".esm")) {
+                        if ($ESPName -match " ") {
+                            Write-Warning -Message $Messages.NoESPSpace
+                        } else {
+                            $Complications = $true
+                        }
+                    } else {
+                        Write-Information -MessageData $Messages.NoESPExt -InformationAction:Continue
+                    }
                 } else {
-                    Write-Information -MessageData $Messages.NoESPExt -InformationAction:Continue
+                    Write-Information -MessageData $Messages.NoESPName -InformationAction:Continue
                 }
             } else {
-                Write-Information -MessageData $Messages.NoESPName -InformationAction:Continue
+                Write-Information -MessageData $Messages.NoESPValid -InformationAction:Continue
             }
+        } until ($Complications)
+        if (Test-Path -Path "$FO4InstallPath\Data\$ESPName") {
+            $ESPMessage = $Messages.FO4ESP -f ($FO4InstallPath + "Data\"), $ESPName
+            Write-Information -MessageData $ESPMessage -InformationAction:Continue
         } else {
-            Write-Information -MessageData $Messages.NoESPValid -InformationAction:Continue
+            Write-Error -Message $Messages.FO4NoESP
         }
-    } until ($Complications)
-    if (Test-Path -Path "$FO4InstallPath\Data\$ESPName") {
-        $ESPMessage = $Messages.FO4ESP -f ($FO4InstallPath + "Data\"), $ESPName
-        Write-Information -MessageData $ESPMessage -InformationAction:Continue
     } else {
-        Write-Error -Message $Messages.FO4NoESP
+        Write-Information -MessageData ($Messages.CLArgsESPName -f $ESPName) -InformationAction:Continue
     }
 }
 
