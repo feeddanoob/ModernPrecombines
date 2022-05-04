@@ -413,7 +413,7 @@ Function Start-Precombine {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
         Start-Archive1 -ESP $ESPSplit
-        Remove-Item -Path ".\Meshes\" -Recurse -Verbose
+        Remove-Item -Path "$FO4InstallPath\Data\Meshes\" -Recurse -Verbose
     } else {
         Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePrecombined:""$ESP"" clean all"
         if ($ESP.EndsWith(".esp")) {
@@ -422,7 +422,7 @@ Function Start-Precombine {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
         Start-Archive1 -ESP $ESPSplit
-        Remove-Item -Path ".\Meshes\" -Recurse -Verbose
+        Remove-Item -Path "$FO4InstallPath\Data\Meshes\" -Recurse -Verbose
     }
 }
 
