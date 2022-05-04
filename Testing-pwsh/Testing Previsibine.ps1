@@ -223,14 +223,15 @@ function Main {
 }
 
 function Get-F4CKFixesVersion {
-    $Removeconsoleinput = Test-FO4
-    if (Test-Path -Path "$FO4InstallPath\winhttp.dll") {
-        [System.Version]$GetF4CKVersion = (Get-Item "$FO4InstallPath\winhttp.dll").VersionInfo.FileVersion
-        if ($GetF4CKVersion -gt [System.Version]"1.6.3.0" -or $GetF4CKVersion -lt [System.Version]"1.6.3.0") {
-            Write-Error -Message $Messages.Winhttp
+    if (Test-FO4) {
+        if (Test-Path -Path "$FO4InstallPath\winhttp.dll") {
+            [System.Version]$GetF4CKVersion = (Get-Item "$FO4InstallPath\winhttp.dll").VersionInfo.FileVersion
+            if ($GetF4CKVersion -gt [System.Version]"1.6.3.0" -or $GetF4CKVersion -lt [System.Version]"1.6.3.0") {
+                Write-Error -Message $Messages.Winhttp
+            }
+        } else {
+            Write-Error -Message $Messages.NoCkFixes
         }
-    } else {
-        Write-Error -Message $Messages.NoCkFixes
     }
 }
 
