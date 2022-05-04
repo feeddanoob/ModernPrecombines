@@ -264,10 +264,10 @@ Function Read-File {
 }
 
 Function Save-ESP2 {
-    param {
-        [string]$XEditFile
+    param (
+        [string]$XEditFile,
         [string]$FO4Install
-    }
+    )
     [bool]$CaseManager = $false
     do {
         $ChoicesNum = Read-Host -Prompt ($Messages.ESPCKXEdit -f "PreVis.esp")
@@ -372,10 +372,10 @@ Function Start-CSG {
     The Save-ESP1 function takes the variables $PathXEdit and $FO4InstallPath and has the user choose an option on how to save their Precombined
 #>
 Function Save-ESP1 {
-    param {
-        [string]$XEditFile
+    param (
+        [string]$XEditFile,
         [string]$FO4Install
-    }
+    )
     [bool]$CaseManager = $false
     do {
         $ChoicesNum = Read-Host -Prompt ($Messages.ESPCKXEdit -f "CombinedObjects.esp")
