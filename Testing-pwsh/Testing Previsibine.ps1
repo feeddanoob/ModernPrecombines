@@ -116,6 +116,7 @@ LeftOff4 = CSG Creation? [3]
 LeftOff5 = or Previs Generation? [4]
 MonitorCDX = If you are using the latest F4 Creation Kit fixes (not the version 1.6.3), please monitor the CK log for errors. Press [Enter] or [Y] if you understand.
 NoCK = Could not find the Creation Kit in Fallout 4's directory.
+NoCkFixes = You did not install F4 Creation Kit Fixes.
 NoESPExt = Please include the esp/esm extension.
 NoESPName = Please put the file name after the extension.
 NoESPValid = Not a valid file name.
@@ -134,13 +135,12 @@ WrongInput = Inputted a wrong value. Please choose a valid option.
 WrongInputEnd = Incorrect Response, script is ending
 XeditPath = Please input FO4Edit's directory.
 XeditPathSetting = Could not find FO4Edit's location using the settings file. Please put in your FO4Edit's Directory here
+Winhttp = You are using a version of the F4 Creation Kit fixes that is not supported for previsibines.
 '@
 }
 
 function Main {
-    if (condition) {
-        
-    }
+    Get-F4CKFixesVersion
     if (Test-File) {
         $CKTrial = Test-Path -Path (Get-CK)
         $XEditTrial = Test-Path -Path (Get-XEdit)
@@ -224,11 +224,14 @@ function Main {
 
 function Get-F4CKFixesVersion {
     $Removeconsoleinput = Test-FO4
-    [System.Version]$GetF4CKVersion = (Get-Item "$FO4InstallPath\winhttp.dll").VersionInfo.FileVersion
-    if ($GetF4CKVersion -gt [System.Version]"1.6.3.0"){
-        return "Warning"
+    if (Test-Path -Path "$FO4InstallPath\winhttp.dll") {
+        [System.Version]$GetF4CKVersion = (Get-Item "$FO4InstallPath\winhttp.dll").VersionInfo.FileVersion
+        if ($GetF4CKVersion -gt [System.Version]"1.6.3.0" -or $GetF4CKVersion -lt [System.Version]"1.6.3.0") {
+            Write-Error -Message $Messages.Winhttp
+        }
+    } else {
+        Write-Error -Message $Messages.NoCkFixes
     }
-    $GetF4CKVersion -gt [System.Version]"1.6.3.0"
 }
 
 Function Test-File {
@@ -697,6 +700,5 @@ Function Set-XEdit {
     $script:XEdit = $PathXEdit + "\FO4Edit.exe"
 }
 
-#Main
+Main
 #(Get-Content -Path ".\Testing Previsibine.txt") | Sort-Object | Set-Content -Path ".\Testing Previsibine.txt"
-Get-F4CKFixesVersion
