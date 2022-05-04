@@ -50,7 +50,7 @@ param (
             }
         }
     )]
-    [Alias("ESP", "ESM")]
+    [Alias("Plugin")]
     [string]$ESPName
 
     #Like above not mandatory incase user wants to write on console but with an addition, have an option to save to a file.
