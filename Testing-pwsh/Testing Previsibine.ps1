@@ -345,7 +345,7 @@ Function Start-CDX {
     param (
         [string]$ESP
     )
-    Write-Warning -Message $Messages.MonitorCDX -WarningAction:Inquire
+    # Write-Warning -Message $Messages.MonitorCDX -WarningAction:Inquire
     if (Test-f4ck) {
         Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
     } else {
