@@ -347,9 +347,9 @@ Function Start-CDX {
     )
     # Write-Warning -Message $Messages.MonitorCDX -WarningAction:Inquire
     if (Test-f4ck) {
-        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
+        Start-Process -FilePath $FO4InstallPath\f4ck_loader.exe -Wait -ArgumentList "-BuildCDX:""$ESP"" clean all"
     } else {
-        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-CompressPSG:""$ESP"" clean all"
+        Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-BuildCDX:""$ESP"" clean all"
     }
 }
 
