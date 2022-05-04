@@ -135,7 +135,7 @@ WrongInput = Inputted a wrong value. Please choose a valid option.
 WrongInputEnd = Incorrect Response, script is ending
 XeditPath = Please input FO4Edit's directory.
 XeditPathSetting = Could not find FO4Edit's location using the settings file. Please put in your FO4Edit's Directory here
-Winhttp = You are using a version of the F4 Creation Kit fixes that is not supported for previsibines.
+Winhttp = You are using a version of the F4 Creation Kit fixes that is not supported for previsibines. You need version 1.6.3.0 (the 1.6 in nexus).
 '@
 }
 
