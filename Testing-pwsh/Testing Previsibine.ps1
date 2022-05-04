@@ -33,15 +33,15 @@ param (
             if ($_.IndexOfAny([System.IO.Path]::GetInvalidFileNameChars()) -eq -1) {
                 if (-not $_.Equals(".esp") -and -not $_.Equals(".esm")) {
                     if ($_.EndsWith(".esp") -or $_.EndsWith(".esm")) {
-                        if (-not $_ -match " ") {
+                        if ($_ -match " ") {
+                            throw "ESP contains a space."
+                        } else {
                             $FO4InstallPath = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\WOW6432Node\Bethesda Softworks\Fallout4\' -Name "installed path"
                             if (Test-Path -Path $FO4InstallPath\Data\$_) {
                                 $true
                             } else {
                                 throw "Could not find the plugin in the Data folder."
                             }
-                        } else {
-                            throw "ESP contains a space."
                         }
                     } else {
                         throw "Please include the .esp or .esm extension."
