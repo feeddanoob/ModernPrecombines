@@ -21,6 +21,7 @@ Current planned changes:
 
 Current known issues:
 
+- \[PRP\] SCOL BA70D DecoMainA2x1CornerWallDmg02_SG apparently has z-fighting that needs correction.
 - \[PRP\] Nearest 238d30, chair flickering as reported in comments.
 - \[PRP\] 030251C6 collision needs redone
 - \[PRP\] 1F57A3 previs issue
@@ -68,7 +69,16 @@ Current fixed issues list, anything marked 'Dedup' means Deduplication as in the
 
 0.60
 
-Pending
+- \[Upend\] (-9, -4, CW): 23C285 appears to have strangely left under the ground, with the only evidence of it's existence being the top of a hook. Mark for deletion and let UF4OP properly deal with it. Thanks to Marvesly for the report.
+- \[Upend\] (1, 1, CW): 15C768 has a missing piece of flooring that's exposed to the ground. Add a pair of DecoLobbyA1x1Cor01 refs to cover this up.
+- \[PRP\] (-1, 0, CW): 13FE52 needs brought forward slightly to prevent z-fighting with neighboring buildings.
+- \[PRP\] (2, -4, CW): 17FD2D needs shifted slightly to make umbra happy.
+- \[PRP\] (-17, -12, CW): 14F9B7 got fragmented and two of the trees that were floating were grounded.
+- \[Upendmaybe\] (-21, -1, CW): 1A5BE0 needed raised up to not be embedded in the mattress it was previously on.
+- \[PRP\] (-3, 21, CW): A7D63 needs lowered to prevent floating tree disorder.
+- \[PRP\] (-6, 8, CW): 1F804B marked for deletion, as there's no reason to have a stain texture apply to the air.
+- \[Upend\] (3, -2, CW): Add a BldgBrick1Story1x1Mid01 to prevent a fall through a big hole that you can't get out of scenario, nearest 163AE0
+- \[
 
 0.59
 
@@ -89,7 +99,7 @@ Pending
 - \[PRP\] (Vault81Secret): Shift position of 19E885 so it's not into the fucking wall.
 - \[PRP\] (Vault81): 19DA74 and 19DA75 got shoved closer to the wall. The folding chairs made no sense standing up like that.
 - \[PRP\] (DLC01FortHagenSatelliteArray01): Round up all values for all seven Crates that were previously touched in PPF to fix the same holes that have been plaguing previs since forever.
-- \[PRP\] (Vault75): Fix 1A8BA8 Z pos in the same way as the UF4OP replacement to see if it finally fixes the previs hole. That's probably what's really going on here. If so, UF4OP's fix should be UDR'd. As of current dev, 07038FB1 is intentionally positioned upwards. Review this after 0.59's release to see if I'm right or not.
+- \[PRP\] (Vault75): ~~Fix 1A8BA8 Z pos in the same way as the UF4OP replacement to see if it finally fixes the previs hole. That's probably what's really going on here. If so, UF4OP's fix should be UDR'd. As of current dev, 07038FB1 is intentionally positioned upwards. Review this after 0.59's release to see if I'm right or not.~~ Reported fixed by Glitchfinder. Will mark UF4OP's fix as UDR in next build.
 - \[PRP\] Include ALL esm UDRs that you normally get after cleaning the DLC .esm files to remove the DLC Cleaning requirement. The sheer number will not be listed here for brevity, though one could easily look them up themselves against an unclean esm install.
 
 0.58
