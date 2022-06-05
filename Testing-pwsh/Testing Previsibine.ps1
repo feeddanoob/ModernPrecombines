@@ -423,7 +423,7 @@ Function Start-Precombine {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
         Start-Archive1 -ESP $ESPSplit
-        Remove-Item -Path "$FO4InstallPath\Data\Meshes\" -Recurse -Verbose
+        Remove-Item -Path "$FO4InstallPath\Data\Meshes\PreCombined\" -Recurse -Verbose
     } else {
         Start-Process -FilePath $FO4InstallPath\CreationKit.exe -Wait -ArgumentList "-GeneratePrecombined:$ESP clean all"
         if ($ESP.EndsWith(".esp")) {
@@ -432,7 +432,7 @@ Function Start-Precombine {
             $ESPSplit = $ESP.Replace(".esm", "")
         }
         Start-Archive1 -ESP $ESPSplit
-        Remove-Item -Path "$FO4InstallPath\Data\Meshes\" -Recurse -Verbose
+        Remove-Item -Path "$FO4InstallPath\Data\Meshes\PreCombined\" -Recurse -Verbose
     }
 }
 
@@ -444,7 +444,7 @@ function Start-Archive1 {
     )
     if ([bool](Get-ChildItem -Path "$FO4InstallPath\Data\" -Recurse | Where-Object Name -Like "*.nif")) {
         Write-Information -MessageData $Messages.ArchiveMesh -InformationAction:Continue
-        Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\Meshes"" -c=""$FO4InstallPath\Data\$ESP - Main.ba2"""
+        Start-Process -FilePath "$FO4InstallPath\Tools\Archive2\Archive2.exe" -Wait -ArgumentList """$FO4InstallPath\Data\Meshes\Precombined"" -c=""$FO4InstallPath\Data\$ESP - Main.ba2"""
         if (Test-Path -Path "$FO4InstallPath\Data\$ESP - Main.ba2") {
             Write-Information -MessageData $Messages.ArchiveCreated -InformationAction:Continue
         } else {
