@@ -3,7 +3,7 @@
   <Params>
     <Addon>PPF.esm</Addon>
     <Source>en</Source>
-    <Dest>pl</Dest>
+    <Dest>cn</Dest>
     <Version>2</Version>
   </Params>
   <Content>
@@ -23,319 +23,319 @@
       <EDID>DLC04ZooCageWallTallDoorSingle01</EDID>
       <REC>DOOR:FULL</REC>
       <Source>Cage Door</Source>
-      <Dest>Drzwi klatki</Dest>
+      <Dest>牢笼门</Dest>
     </String>
     <String List="0">
       <EDID>NpcBedVaultBunkLay01Invisible</EDID>
       <REC>FURN:FULL</REC>
       <Source>Bed</Source>
-      <Dest>Łóżko</Dest>
+      <Dest>床</Dest>
     </String>
     <String List="0">
       <EDID>NpcBedVaultLay01Invisible</EDID>
       <REC>FURN:FULL</REC>
       <Source>Bed</Source>
-      <Dest>Łóżko</Dest>
+      <Dest>床</Dest>
     </String>
     <String List="0">
       <EDID>PrewarVault111</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 111</Source>
-      <Dest>Krypta 111</Dest>
+      <Dest>111号避难所</Dest>
     </String>
     <String List="0">
       <EDID>CambridgeMassChemical01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Mass Chemical</Source>
-      <Dest>Mass Chemical</Dest>
+      <Dest>麻州化工厂</Dest>
     </String>
     <String List="0">
       <EDID>DLC03VimPopFactory01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vim! Corporate Headquarters</Source>
-      <Dest>Siedziba zarządu Vim</Dest>
+      <Dest>“活力！”企业总部</Dest>
     </String>
     <String List="0">
       <EDID>LaytonTowers01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Layton Towers</Source>
-      <Dest>Layton Towers</Dest>
+      <Dest>克莱顿塔楼</Dest>
     </String>
     <String List="0">
       <EDID>DLC03Vault118</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 118</Source>
-      <Dest>Krypta 118</Dest>
+      <Dest>118号避难所</Dest>
     </String>
     <String List="0">
       <EDID>DLC01FortHagenSatelliteArray01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Fort Hagen Hangar</Source>
-      <Dest>Hangar w Fort Hagen</Dest>
+      <Dest>赫根堡机库</Dest>
     </String>
     <String List="0">
       <EDID>FensStreetSewer01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Fens Street Sewer</Source>
-      <Dest>Kanały Fens</Dest>
+      <Dest>后湾沼泽街下水道</Dest>
     </String>
     <String List="0">
       <EDID>DLC04NukaWorldPowerPlant01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Nuka-World Power Plant</Source>
-      <Dest>Elektrownia Nuka-World</Dest>
+      <Dest>核子世界发电厂</Dest>
     </String>
     <String List="0">
       <EDID>BostonPublicLibrary02</EDID>
       <REC>CELL:FULL</REC>
       <Source>Boston Public Library</Source>
-      <Dest>Bostońska Biblioteka Publiczna</Dest>
+      <Dest>波士顿公共图书馆</Dest>
     </String>
     <String List="0">
       <EDID>Vault114</EDID>
       <REC>CELL:FULL</REC>
       <Source>Park Street Station</Source>
-      <Dest>Stacja Park Street</Dest>
+      <Dest>公园街车站</Dest>
     </String>
     <String List="0">
       <EDID>DmndSecurity01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Security Office</Source>
-      <Dest>Biuro ochrony</Dest>
+      <Dest>保安室</Dest>
     </String>
     <String List="0">
       <EDID>DLC04GZVaultTec01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault-Tec: Among the Stars</Source>
-      <Dest>Vault-Tec: Wśród gwiazd</Dest>
+      <Dest>避难所科技：星辰之间</Dest>
     </String>
     <String List="0">
       <EDID>GoodneighborBobbisPlace</EDID>
       <REC>CELL:FULL</REC>
       <Source>Bobbi&apos;s Place</Source>
-      <Dest>Chata Bobbi</Dest>
+      <Dest>芭比的住所</Dest>
     </String>
     <String List="0">
       <EDID>zVitalePumphouse01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Pumphouse</Source>
-      <Dest>Stacja pomp</Dest>
+      <Dest>泵室</Dest>
     </String>
     <String List="0">
       <EDID>MedfordMemorial01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Medford Memorial Hospital</Source>
-      <Dest>Szpital Medford Memorial</Dest>
+      <Dest>梅德福纪念医院</Dest>
     </String>
     <String List="0">
       <EDID>Vault81</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 81</Source>
-      <Dest>Krypta 81</Dest>
+      <Dest>81号避难所</Dest>
     </String>
     <String List="0">
       <EDID>Vault81Secret</EDID>
       <REC>CELL:FULL</REC>
       <Source>Secret Vault 81</Source>
-      <Dest>Tajna Krypta 81</Dest>
+      <Dest>神秘81号避难所</Dest>
     </String>
     <String List="0">
       <EDID>USSConstitution01</EDID>
       <REC>CELL:FULL</REC>
       <Source>U.S.S. Constitution</Source>
-      <Dest>USS Constitution</Dest>
+      <Dest>宪法号</Dest>
     </String>
     <String List="0">
       <EDID>Vault75</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 75</Source>
-      <Dest>Krypta 75</Dest>
+      <Dest>75号避难所</Dest>
     </String>
     <String List="0">
       <EDID>Financial28</EDID>
       <REC>CELL:FULL</REC>
       <Source>Ruined Skyscraper</Source>
-      <Dest>Zrujnowany wieżowiec</Dest>
+      <Dest>毁损的摩天大楼</Dest>
     </String>
     <String List="0">
       <EDID>GwinnettBrewery02</EDID>
       <REC>CELL:FULL</REC>
       <Source>Gwinnett Main Brewery</Source>
-      <Dest>Główny browar Gwinnett</Dest>
+      <Dest>谷内主酿酒厂</Dest>
     </String>
     <String List="0">
       <EDID>UniversityPoint01</EDID>
       <REC>CELL:FULL</REC>
       <Source>University Point: Sedgwick Hall</Source>
-      <Dest>University Point: Sedgwick Hall</Dest>
+      <Dest>大学角塞奇威克大厅</Dest>
     </String>
     <String List="0">
       <EDID>CambridgeCollegeAdminBuilding</EDID>
       <REC>CELL:FULL</REC>
       <Source>College Admin Building</Source>
-      <Dest>Budynek administracji uniwersyteckiej</Dest>
+      <Dest>大学行政大楼</Dest>
     </String>
     <String List="0">
       <EDID>QASmoke</EDID>
       <REC>CELL:FULL</REC>
       <Source>Tunnels</Source>
-      <Dest>Tunele</Dest>
+      <Dest>通道</Dest>
     </String>
     <String List="0">
       <EDID>CorvegaAssemblyPlant01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Corvega Assembly Plant</Source>
-      <Dest>Fabryka samochodów Corvega</Dest>
+      <Dest>可伟佳装配厂</Dest>
     </String>
     <String List="0">
       <EDID>BeaconHillPub</EDID>
       <REC>CELL:FULL</REC>
       <Source>Prost Bar</Source>
-      <Dest>Bar Prost</Dest>
+      <Dest>干杯酒吧</Dest>
     </String>
     <String List="0">
       <EDID>IrishPrideShipyard01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Irish Pride Industries Shipyard</Source>
-      <Dest>Stocznia Irish Pride Industries</Dest>
+      <Dest>爱尔兰之傲工业船厂</Dest>
     </String>
     <String List="0">
       <EDID>Vault95</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 95</Source>
-      <Dest>Krypta 95</Dest>
+      <Dest>95号避难所</Dest>
     </String>
     <String List="0">
       <EDID>WestonWaterTreatment01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Weston Water Treatment Plant</Source>
-      <Dest>Zakład uzdatniania wody Weston</Dest>
+      <Dest>韦斯顿污水处理厂</Dest>
     </String>
     <String List="0">
       <EDID>GeneralAtomicsFactory01</EDID>
       <REC>CELL:FULL</REC>
       <Source>General Atomics Factory</Source>
-      <Dest>Fabryka General Atomics</Dest>
+      <Dest>通用原子工厂</Dest>
     </String>
     <String List="0">
       <EDID>Vault81Entry</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 81</Source>
-      <Dest>Krypta 81</Dest>
+      <Dest>81号避难所</Dest>
     </String>
     <String List="0">
       <EDID>MedTekResearch01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Med-Tek Research</Source>
-      <Dest>Laboratorium Med-Teku</Dest>
+      <Dest>曼科药物研究所</Dest>
     </String>
     <String List="0">
       <EDID>USAFSatellite01</EDID>
       <REC>CELL:FULL</REC>
       <Source>USAF Satellite Station Olivia</Source>
-      <Dest>Stacja satelitarna Sił Powietrznych USA Olivia</Dest>
+      <Dest>美国空军奥莉维亚卫星站</Dest>
     </String>
     <String List="0">
       <EDID>NHMFreightDepot01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Strongroom</Source>
-      <Dest>Skarbiec</Dest>
+      <Dest>保管室</Dest>
     </String>
     <String List="0">
       <EDID>FallonsDepartmentStore01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Fallon&apos;s Department Store</Source>
-      <Dest>Dom Towarowy Fallona</Dest>
+      <Dest>法伦百货公司</Dest>
     </String>
     <String List="0">
       <EDID>PoseidonReservoir01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Poseidon Reservoir</Source>
-      <Dest>Zbiornik Poseidona</Dest>
+      <Dest>海神能源蓄水池</Dest>
     </String>
     <String List="0">
       <EDID>MassPikeTunnel01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Mass Pike Tunnel</Source>
-      <Dest>Tunel Mass Pike</Dest>
+      <Dest>麻州公路隧道</Dest>
     </String>
     <String List="0">
       <EDID>VaultTecOffice01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault-Tec Regional HQ</Source>
-      <Dest>Regionalna siedziba Vault-Tec</Dest>
+      <Dest>避难所科技地区总部</Dest>
     </String>
     <String List="0">
       <EDID>DBTechHighSchool01</EDID>
       <REC>CELL:FULL</REC>
       <Source>D.B. Technical High School</Source>
-      <Dest>Technikum D.B.</Dest>
+      <Dest>鲍思高技术高中</Dest>
     </String>
     <String List="0">
       <EDID>DLC06VaultWorkshop</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault 88</Source>
-      <Dest>Krypta 88</Dest>
+      <Dest>88号避难所</Dest>
     </String>
     <String List="0">
       <EDID>TiconderogaStation01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Ticonderoga</Source>
-      <Dest>Ticonderoga</Dest>
+      <Dest>提康德罗加</Dest>
     </String>
     <String List="0">
       <EDID>Commonwealth</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Commonwealth</Source>
-      <Dest>Wspólnota</Dest>
+      <Dest>联邦</Dest>
     </String>
     <String List="0">
       <EDID>DiamondCity</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Diamond City</Source>
-      <Dest>Diamond City</Dest>
+      <Dest>钻石城</Dest>
     </String>
     <String List="0">
       <EDID>Goodneighbor</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Goodneighbor</Source>
-      <Dest>Dobre Sąsiedztwo</Dest>
+      <Dest>芳邻镇</Dest>
     </String>
     <String List="0">
       <EDID>SanctuaryHillsWorld</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Sanctuary Hills</Source>
-      <Dest>Sanctuary Hills</Dest>
+      <Dest>庇护山丘</Dest>
     </String>
     <String List="0">
       <EDID>DLC03FarHarbor</EDID>
       <REC>WRLD:FULL</REC>
       <Source>The Island</Source>
-      <Dest>Wyspa</Dest>
+      <Dest>岛屿</Dest>
     </String>
     <String List="0">
       <EDID>DLC03VRWorldspace</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Simulation</Source>
-      <Dest>Symulacja</Dest>
+      <Dest>模拟</Dest>
     </String>
     <String List="0">
       <EDID>NukaWorld</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Nuka-World</Source>
-      <Dest>Nuka-World</Dest>
+      <Dest>核子世界</Dest>
     </String>
     <String List="0">
       <EDID>NukaWorldAmphitheater</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Bradberton Amphitheater</Source>
-      <Dest>Amfiteatr Bradbertona</Dest>
+      <Dest>布拉德伯顿圆形剧场</Dest>
     </String>
     <String List="0">
       <EDID>NukaWorldMarket</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Nuka-Town Market</Source>
-      <Dest>Rynek Nuka-Town</Dest>
+      <Dest>美国核子城市场</Dest>
     </String>
   </Content>
 </SSTXMLRessources>

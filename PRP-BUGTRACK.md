@@ -15,11 +15,15 @@ Current planned changes:
 
 Current known issues:
 
-- \[PRP-UF4OP2_1_4\] Verify the following areas: DmndSecurity01, 
-- \[Import\] Merge https://www.nexusmods.com/fallout4/mods/58671
+- \[PRP\] Look into manually patching https://www.nexusmods.com/fallout4/mods/64147
+- \[PRP\] ~~Exclude Sanctuary Bridge~~, and maybe all home roofs to support mesh replacers?
+- \[PRP\] Architecture\Buildings\Hightech\Skin\HitExtABaseCornerA01.nif has badly done collision 
+- \[PRP\] https://discord.com/channels/830436661736243230/954847055824687215/1008908652758974575
+- ~~\[PRP\] Vault75 needs some more work to plug previs holes.~~ Done, but needs checked.
+- \[PRP-UF4OP2_1_4\] Verify the following areas: DmndSecurity01
+- \[Import\] ~~ Merge https://www.nexusmods.com/fallout4/mods/58671 ~~
 - \[U31719\] SWCurbCurve03b.nif needs geometry corrected to properly fix that bug.
 - \[U28872\] Mark UDR newly added records that we fixed directly in DmndSecurity01 to mask previs holes in vanilla previs.
-- \[PRP, U24630\] Need to remember to UDR 07306B9E when 2.1.4 is out.
 - \[PRP\] (-3, 6, CW, and other locations): Investigate if Common_DisableMarker / Common_Walls_DisableLayer is actually used by the game.
 - \[PRP\] Base mesh EA905 (MetalRoofC1x2WallCover01Full01) is missing polygons on the external side (allowing view inside, can't be fixed without mesh editing)
 - \[PRP\] Review 1E33A0 and 1E33A1 for previs issues.
@@ -71,12 +75,22 @@ Models in the Meshes/ folder have been contributed from everyone listed on the m
 
 Current fixed issues list, anything marked 'Dedup' means Deduplication as in the record is at least one exact duplicate in the associated plugin master file:
 
-0.61
+0.64
 
-Coming Soon
 
-0.60
-
+- \[PRP\] (-19, 20, CW): Community request. XLRT NoCombo 1F970 (NorthBridge / Sanctuary bridge) to support easy mesh replacement.
+- \[PRP\] (Various): Implement separated material swaps and update records accordingly, as per the Underwater Glass Fix mod.
+- \[PRP\] (-26, -12, CW): Delete DBB88 which appears to be a wild edit.
+- \[PRP\] (-6, 2, CW) Tune 1BA193, 1BA194, 97A6C, 1BA17A, 1BA183 positions to fix wall seams.
+- \[PRP\] (BeaconHillBostonBugle) Fix x rotation on 22C378 to make it look correct.
+- \[PRP\] (1, -3, CW; 2, -4, CW) 176BE3, 176BE1, 176BE0 round Z pos to make Umbra happy.
+- \[~~U32322~~, U32590, PRP\] Create a new texswap to correctly address the debris hole issue and tag references as needed. So far, only a few nearest -10, 15, CW need it. More will probably show up at some point. Refs 1D0AE3, 1D0B36, 1D0B46
+- \[PRP\] Remove the five leftover FullLOD entries that were mistakenly copied over from UF4OP in the update migration to 2.1.4. The deletes were intentional. Not removing these could adversely affect LOD generation.
+- \[U32582\] (GlowingSeaPOIDB05Int): Tune position of 1F41E1. It's not set up very well to be looted.
+- \[U32572, FCF, PRP\] (7, -4): Swap 6662E door entry for static version. That door isn't going anywhere, and should not be interactable.
+- \[U32571\] (-8, 9): Add a new DecoManBDam1x1WallTrimBtm02 to mask a small hole due to nearby building meshes being relatively one sided. Placement is not the best.
+- \[PRP\] (Vault75) 19F927 needs moved upwards to stop clipping into the neighboring tunnel. Apply 1E340B, 221215, 1A8BA8 XLRT for previs exclude.
+- \[U23169\] Backport post-UF4OP 2.1.4 fix for the bugfix so that the helper border meshes are initially disabled by default.
 - \[U32436\] ~~(-9, -4, CW): 23C285 appears to have strangely left under the ground, with the only evidence of it's existence being the top of a hook. Mark for deletion and let UF4OP properly deal with it. Thanks to Marvesly for the report.~~ Merged upstream. IPTO will clean it out later.
 - ~~\[U32437\] (1, 1, CW): 15C768 has a missing piece of flooring that's exposed to the ground. Add a pair of DecoLobbyA1x1Cor01 refs to cover this up.~~
 - \[PRP\] (-1, 0, CW): 13FE52 needs brought forward slightly to prevent z-fighting with neighboring buildings.
@@ -115,7 +129,7 @@ Coming Soon
 - \[PRP\] (Vault11402): Apply XRLT 1E819A to 0007E795, 000A416F, 0007E79A
 - \[PRP\] (Vault95): Apply XRLT 1E819A to 1ECC30, 60234, lower placement of 1A488B and 1A488C to hopefully fix PA walking clearance.
 - \[PRP\] (Vault75): Explicitly mark 07038FB1 UDR, as the Z adjustment to the underlying ref fixed it proper. Also apply the XRLT 1E819A to ALL the UF4OP added ref in this interior.
-- \[PRP\] (Vault75): The below crossed out matswaps are not yet implemented.
+- \[PRP\] (Vault75): 
   - VaultDamageTheme01 Matswap 231e90: 001D4FF0, 001D4FE9, 001E347B, 001E347D, 001E347C, 001E343D, 001E3448, 000C276A, 001EB0A7, 001EB0A6, 001EB0A5, 001E34D1, 00210AAF, 00210AB1, 00210AB0, 00210AB2,  00210AB5, 00210AB7, 001A8BA7, 000C2723, 001E34AF, 001EB0A4, 00210B3D, 00210B3E, 00210B3B, 00210B3C, 001E345F, 001E3401, 000FCB5E, 000FCB73, 000FCB56, 000FCB49, 00210A8E, 00210A68, 00214AA1, 00214AA2, 00214AA3, 00214AA4, 00214AA5, 00214AA6, 00214AA7, 00214AA9, 00214AAA, 00214AAB, 00214AAC, 00214AAD, 00214AAE, 00214AAF, 00214A99, 00214A9A, 00214A9B, 00214A9C, 00214A9D, 00214A9E, 00214A9F, 00210A77, 00210A90, 00210A92, 00210A93, 00210A66, 00210A67, 00210A9F, 000FCB6C, 0018042A, 00210B37, 00210B3A, 001D8D97, 002147F0, 002147F5, 002147E7, 000C2288, 000C2289, 000C228A, 000C2269, 000C2268, 000C226B, 000C226A, 002147E6, 000C226C, 000C226D, 000C226E, 002147D4, 00214800, 000C235D, 000C2361, 000C235E, 000C2360, 000C235F, 000C2357, 000C2374, 000C2367, 000C2369, 00214826, 002147EA, 002147EB, 002147EC, 002147E8, 002147E9, 001A58DE, 001A58DF, 001A58E0, 001A58E1, 001A58E4, 001A58E5, 001A58E6, 001A58E7, 001A58F0, 001A58F1, 001A58F2, 001A58F3, 002147EF, 002147EE, 002147ED, 002147D5, 002147D6, 002147CE, 002147BF, 002147C5, 002147C4, 001E33C1, 001E33C3, 001E33C2, 000F044A, 000C28BE, 00214760, 00214761, 00214762, 00214659, 00214660, 00214656, 00210B52, 00210B4B, 00214A6C, 00214A6B, 00214A6A, 00214A6D, 00214A6E, 00214712, 00214713, 00214770, 001DF29B, 001DF2A9, 001DF2A4, 000C2127, 00210B48, 001EB050, 002146CF, 00214677, 002146C3, 002146C5, 00210B47, 00214731, 001E33A0, 000C222F, 001E33C0, 002147B1, 000C223C, 000C223D, 000C223E, 001E33A9, 001E33B4, 001E33B7, 001E339D, 001E33C7, 000C2946, 000C282E, 00214818, 0021481A, 00214817, 00214814, 00214813, 00214816, 0021480D, 00214812, 00214811, 0021480E, 0021480F, 00214810, 00180423, 0021481D, 00210B30, 00210B2D
   - VaultSignageTheme01_Damage Matswap 240304: 0019B7C2, 0019B7BC, 0019B7C1, 0019B7BD, 0019B7C4, 0019B7B1, 0019B7B5, 0019B7CB, 0019B7B4, 001A5DF7, 001A5DF8, 0019B7C9, 0019B7CA, 0019B7C8
   - VaultLightTheme01_Damage 240309: 00180438, 00180439, 001E348E, 0018043A, 00180415, 00180414, 001DF28F, 001DF290, 001DF2A0, 001DF2AB, 001DF32B, 001E3490, 001E348F, 000C5053, 0018043D, 001E34C7, 001E3460, 00182C43, 00182C42, 00182C3F, 00182C40, 00182C3E, 00180454, 00180442, 0018043C, 0018043B, 001D8D68, 001D8D67, 00227553, 00227552, 001D8D80, 001D8D83, 001D8D3A, 00210A5E, 001D8D2C, 00180456, 00180443, 001D4FF3, 001D4FF5, 001D4FF7, 001D4FCA, 001D4FF8, 001D8D11, 001D8D12, 00182C19, 00182C1A, 001D8D17, 001D8D27, 00210A7D, 001D8D2A, 001D8DB6, 001D8DB8, 00182C1D, 00182C48, 00182C12, 00182C10, 00182C11, 00182C1F, 001D9C5D, 001D9C5E, 001D9C5F, 001D9C6D, 001D9C40, 0021466A, 00214668, 0021466C, 002146BB, 001DF290, 001DF294, 001DF295, 001DF2A1, 001DF2A0, 001DF28F, 001DF291, 001D9CEC, 001DF28B, 001DF28C, 001DF28D, 001DF28E, 0021466D, 001DF2AC, 001DF2E9, 001DF2E8, 001DF32A, 001DF32B, 001DF2CC, 001DF305, 00182C2B, 001DF34F, 001DF33D, 001DF351, 001E33C4, 00182C22, 001E33C6, 001E33BF, 001E3398, 00182C29, 001E33BE, 001E33BD, 001E33BC, 00180426, 00180425, 00180427, 00180424, 0018044E, 0018041F, 0018041E, 0018041D, 00180420, 00182C3D
@@ -192,10 +206,7 @@ Coming Soon
 - \[PRP\] (Vault81): 19DA74 and 19DA75 got shoved closer to the wall. The folding chairs made no sense standing up like that.
 - \[PRP\] (DLC01FortHagenSatelliteArray01): Round up all values for all seven Crates that were previously touched in PPF to fix the same holes that have been plaguing previs since forever.
 - \[PRP\] (Vault75): ~~Fix 1A8BA8 Z pos in the same way as the UF4OP replacement to see if it finally fixes the previs hole. That's probably what's really going on here. If so, UF4OP's fix should be UDR'd. As of current dev, 07038FB1 is intentionally positioned upwards. Review this after 0.59's release to see if I'm right or not.~~ Reported fixed by Glitchfinder. Will mark UF4OP's fix as UDR in next build.
-- \[PRP\] Include ALL esm UDRs that you normally get after cleaning the DLC .esm files to remove the DLC Cleaning requirement. The sheer number will not be listed here for brevity, though one could easily look them up themselves against an unclean esm install.
-
-0.58
-
+- ~~\[PRP\] Include ALL esm UDRs that you normally get after cleaning the DLC .esm files to remove the DLC Cleaning requirement. The sheer number will not be listed here for brevity, though one could easily look them up themselves against an unclean esm install.~~ Reverted in minimal testing, moved to it's own plugin.
 - \[PRP\] (-4, 2, CW): Fix 30FEF positioning to correct z-fighting
 - \[PRP\] (ListeningPostBravo01): Slightly nudge 189557 and 18958E to hopefully fix "invisible world" syndrome for a certain angle. (Not saved to PPF)
 - \[PRP\] (-4, 4, CW): Change 17E458 from ShrubLarge05 to ShrubMedium03 and slightly fix positioning to stop some floating shrubbery.
@@ -652,9 +663,6 @@ Coming Soon
 - \[PRP\] Compacted PPF.esm to allow for ESL tagging.
 - \[PRP\] Included pair of SCOLs that came with Flicker Fixer into main archive.
 - \[PRP\] Import Flicker Fixer model set, to include in generation.
-
-0.56
-
 - \[PRP\] (DLC06VaultWorkshop): Dedup 05003C5A, 05001E78, 050022AB, 050022AD, 050022AF, 050022FD, 050022FF
 - Why the fuck is it called DLC06 when it's DLC05?
 - \[PRP\] (2, -4): Dedup 00187B4A, 001CA806
@@ -863,18 +871,12 @@ Coming Soon
 - ~~\[U32299\] ScrapPalaceExt04: 1A0CD5 Move armor workbench away from the crates it appears to be shoved inside of.~~ Merged upstream.
 - \[PRP\] CutlerBendExt07: Fix positioning of a pair of wrecks near a fence.
 - \[PRP\] QASmoke: Migrated DLC01 related cell changes to main cell. Non-essential bugfix.
-
-0.55
-
 - \[PRP\] WestRoxburyStationExt (-3, -15): Round off coords for 20E166 to hopefully fix the object flickering.
 - \[PRP\] WestRoxburyStationExt (-3, -15): Move the Motorcycle01 (1D3AE3) reference here to look more believable than stuck in the ground.
 - \[PRP\] CambridgePDExt02 (-8, 2): UDR'd 190B54, looked like it was overlapping 193670 presumably a development oversight at some point, maybe the original model didn't have windows on that side?
 - ~~\[U32174, PRP\] BunkerHillExt (4, 3): Added a RWPieceWallAStr01 to fill a hole that the RWPieceTopCapStr01a is showing on the left side from a certain angle. PRP record 12.~~ Merged upstream.
 - \[PRP\] ~~DLC01FortHagenSatelliteArray01: 01001D99, 01001D9B, 01001D9C, 01001D9D, 01001D9E, 01007430, 0100743F, 01008275, 01008816, 01008F2A, 0100A038, 0100A376, 0100D1C8, 0100EC9D, 0100EC9E, 0100ED55, 0100ED56 dedup'd.~~ Slated for revert in next build due to void holes in the area that appear unfixable. Will be saved to PPF when time allows.
 - ~~\[U31804, PRP\] -1, -15 CW 20B07, 20B3B/3C/3D/3E/3F/40/41/42/43/44/45/46/47/48/49 Various Skylight placement plate shifting to fix a previsibine issue, which fixes the occlusion, but as per the attached bug, the bug is really due to a missing flag in the material file. Placement fix pending removal in 0.55.xx~~ Material fix merged upstream. Revert in 0.60
-
-0.54 and earlier.
-
 - \[PRP\] 20, 17 CW: 1C9CD6 has a floating rear piece. ~~Since it's a SCOL, just nudge the placement.~~ Broke the SCOL at least for now. Not seeing a good way to fix this one.
 - \[PRP\] 16, 12 CW: 1B5509 grounded to fix bad placement that revealed a hole to the water nearby. Shoddy construction.
 - ~~\[U31795, PRP\] 12, 20 CW: 91591 needed raised above the sidewalk, shifted to work around navmesh in the area, positioning might need tuning.~~ Fixed in UF4OP 2.1.4 proper.
