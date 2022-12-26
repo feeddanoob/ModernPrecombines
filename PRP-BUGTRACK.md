@@ -13,60 +13,7 @@ Current planned changes:
 - More commonwealth deduplication (exteriors)
 - A shrubbery.
 
-Current known issues:
-
-- \[PRP\] Look into manually patching https://www.nexusmods.com/fallout4/mods/64147
-- \[PRP\] ~~Exclude Sanctuary Bridge~~, and maybe all home roofs to support mesh replacers?
-- \[PRP\] Architecture\Buildings\Hightech\Skin\HitExtABaseCornerA01.nif has badly done collision 
-- \[PRP\] https://discord.com/channels/830436661736243230/954847055824687215/1008908652758974575
-- ~~\[PRP\] Vault75 needs some more work to plug previs holes.~~ Done, but needs checked.
-- \[PRP-UF4OP2_1_4\] Verify the following areas: DmndSecurity01
-- \[Import\] ~~ Merge https://www.nexusmods.com/fallout4/mods/58671 ~~
-- \[U31719\] SWCurbCurve03b.nif needs geometry corrected to properly fix that bug.
-- \[U28872\] Mark UDR newly added records that we fixed directly in DmndSecurity01 to mask previs holes in vanilla previs.
-- \[PRP\] (-3, 6, CW, and other locations): Investigate if Common_DisableMarker / Common_Walls_DisableLayer is actually used by the game.
-- \[PRP\] Base mesh EA905 (MetalRoofC1x2WallCover01Full01) is missing polygons on the external side (allowing view inside, can't be fixed without mesh editing)
-- \[PRP\] Review 1E33A0 and 1E33A1 for previs issues.
-- \[PRP\] 1DF316 and 1DF320 needs a custom mesh to stop clipping into neighboring hallway
-- \[PRP\] There needs to be a damaged Vault Lighting texswap.
-- \[PRP\] Vault75 1E3491 is z-fighting in precombines, but the mesh itself appears to be fine in CK view?
-- \[PRP\] The clusterfuck nearest 1A48B3 in Vault95 is going to need some custom model work to get that fixed.
-- \[PRP\] SCOL BA70D DecoMainA2x1CornerWallDmg02_SG apparently has z-fighting that needs correction.
-- \[PRP\] Nearest 238d30, chair flickering as reported in comments.
-- \[PRP\] 030251C6 collision needs redone
-- \[PRP\] 1F57A3 previs issue
-- ??? Boston Public Library: Terminal hanging in midair in BoS cut content, last room of library nearest ruined blue electronic panels closest to bobblehead.
-- \[???\] Check Vault81 Room Bounds (Priority: Very Very Very Very Very Low)
-- \[PRP\] **World cell records may need reevaluated.**
-- \[PRP\] Vault81Secret Check invisbed records.
-- \[PRP\] Bandaid (non-occlude) the airplane wreck meshes as I reported with U32336.
-- \[PRP\] (-5, 1, CW): Leftovers from the Law Offices fixes, Architecture\Buildings\Metal\MetalIntWall1x1Str01.nif needs some cleanup, else z-flicker happens at the edges.
-- \[PRP, U32336\] (-2, 19, CW): 127495 is causing visual flicker as a result of improper collision between floors. Can't fix until collision is fixed in model.
-- \[PRP\] PosterArmy01.nif and PosterArmy02.nif from Flicker Fixer appears to have no geometry. This explains the exclusion from precombines.
-- \[PRP\] -24, -13, CW: 96911, 9696E, DB891, DB892 need to be tagged EnableParent for exclusion from Precombines to better support Maxwell's Worl
-- \[PRP\] Nearest 11A621: \"Captain's hatch\" walls suck and have holes as they are clearly not intended for this.
-- \[PRP\] Croup Manor 2F ref https://www.youtube.com/watch?v=qJAYTCSn7y8
-- \[PRP\] **High Priority** Once the new stable is set, rebuild ALL patches against it.
-- \[PRP\] Vault114: Third floor railing occlusion is broken \(haven't figured out a good way to fix, tried all the usual methods\)
-- \[PRP\] \[3, -3\] Commonwealth: 187B42/187BCB (Base 187C44) has no collision.
-- \[PRP\] \[3, -3\] Commonwealth: 973F7 cannot be seen from a certain distance.
-- \[PRP\] Crane in Mass Fusion Roof occlusion issue? (Unconfirmed)
-- \[PRP\] -11, 13 CW: 304F1 window is breaking occlusion, marking not occluded to work around
-- \[PRP\] USSConstitution01: Yet another previs model nudge to A3996, as the mast pole of the ship wasn't showing up. Status: Unfixed.
-- \[PRP\] DLC01FortHagenSatelliteArray01: Nearest 0100d2a5, more previs void, likely a leftover from the previous fix that wasn't accounted for.
-- \[PRP\] GoodneighborBobbisPlace: Needs checked. Previs hole.
-- \[PRP\] TheaterHub360Ext: Previs issues as reported on nexus. Unconfirmed.
-- \[PRP\] Financial06: Window void holes. Entire interior is missing external stuff like the sky and shit.
-- \[PRP\] ThicketExcavationExt02: Previs issue?, multiple water volumes.
-- \[PRP\] ???: 80812 as reported by Hap.
-- \[PRP\] MassFusion01: Elevator apparently has broken occlusion? Unconfirmed.
-- \[U32298\] Vault95: 13096E door buttons positions are way too far than they need to be. A model issue. Punted to UF4OP.
-- \[PRP\] (1, -7): Previs hole in-between a pair of buildings closest to 16c07e?
-
-List of areas to blacklist from the next build due to problems that have yet to be fixed:
-All Hidden Interior cells and test areas in the game, DLC01FortHagenSatelliteArray01, ...
-
-\(UF4OP bug numbers shown as Uxxxxx, FCF is Frost Cell Fixes, krrptd's version of PRP\)
+\(UF4OP bug numbers shown as Uxxxxx anything crossed out is implemented upstream, FCF is Frost Cell Fixes, krrptd's version of PRP\)
 CW - Commonwealth, FH - Far Harbor, NW - Nuka World, SHW - Sanctuary Hills World (Intro), GN - Goodneighbor, DC - Diamond City, NWM - Nuka World Market, NWA - Nuka World Amphitheater, FHVR - Far Harbor VR Simulation
 
 Models marked non-occlude (bandaid fix): 60138D1 (DLC04ZooCageWallTallDoorSingle01), DF8E9, 15C6B4, 19AEFF, 2039F7, 144F62
@@ -75,8 +22,21 @@ Models in the Meshes/ folder have been contributed from everyone listed on the m
 
 Current fixed issues list, anything marked 'Dedup' means Deduplication as in the record is at least one exact duplicate in the associated plugin master file:
 
-0.64
+🟥: Removed, 🟩: Added, 🟨: Changed
 
+0.66 and newer
+
+- Chg \[Documentation\] Starting with this version, documentation style update. Older notes will be updated and fleshed out at a later date.
+- New \[-3, 3, CW\] Tune 87420 and 8741F to placate Umbra and thus fix a "see through lane" between the two buildings. On a side note, the collision on the base objects looks a bit half assed.
+- New \[NatickSubstation\] Move 1622DF to hide a floating edge in the mesh as per Glitchfinder.
+- New \[BackStreetApparel01\] Adjust 64B6F, 1EF092 and 1EF0A2 to fix z-fighting and in the case of the last ref, make it look somewhat more natural for floor clutter.
+- New \[-7, -6, CW\] \[U00TBD\] Add a new RWPieceGrassStr01 next to it's brethren to plug a noticeable hole that was omitted in dev, clearly. (-25156.800781, -21460.675781, 805.914124 rot z 77.1086)
+- New \[3, -3, CW\] Tune 2D1DF and 19784 to make Umbra happy. What a pain.
+- New \[1, -7, CW\] More tuning for Umbra, 17EAB1. May have to return to this one. 
+- New \[AtomatoysCorporateHQ01\] \[U00TBD\] 1FB9FC is a duplicate desk, delete it and keep the other.
+- New \[0, 1, CW\] Adjust position of AAAA2, 1727F9, and 1727FA to close a hole inside a building.
+
+0.65
 
 - \[PRP\] (-19, 20, CW): Community request. XLRT NoCombo 1F970 (NorthBridge / Sanctuary bridge) to support easy mesh replacement.
 - \[PRP\] (Various): Implement separated material swaps and update records accordingly, as per the Underwater Glass Fix mod.
@@ -174,7 +134,7 @@ Current fixed issues list, anything marked 'Dedup' means Deduplication as in the
 - \[PRP\] (-5, -7, CW): 22DA61 clear null LOD XLKR ref
 - \[PRP\] (1, 15, FH): 303F748 and 303F747, UDR and NULL XLKR song and dance
 - \[PRP\] (0, 0, DC): Remove EnableParent on 1347.
-- \[PRP\] (x, x, CW): 1BF97E and 1BF97D needs pulled forward to fix a building hole.
+- \[PRP\] (0, 2, CW): 1BF97E and 1BF97D needs pulled forward to fix a building hole.
 - \[PRP\] (-16, 10, CW): 893D3 got moved to the plateau nearby to stop the branches from outright floating.
 - ~~\[U32472\] (0, 4, CW): A9416 and A9411 has a rather visible seam.~~
 - \[PRP\] (3, 10, CW): Dedup 98F06, create and apply texswap to 981EC, ~~copied textures are the same as base game intentionally.~~ Texture replacement artists should look at and create replacements that fit the style with the filename set of PaintedWoodWhiteDirty01 in the Textures/SetDressing/Fences directory. The versions in the game intro are untouched. pointythunder654 has contributed a set of textures to fix this issue for our side.
