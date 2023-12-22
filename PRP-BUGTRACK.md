@@ -1,6 +1,7 @@
 Deduplication tracker remaining:
 
-- Fallout4.esm \[ 1862 (61 Persistent Exterior) of 3300 \]
+- Fallout4.esm \[ 670 (61 Persistent Exterior) of 3300 \]
+- Side note: MassFusion01 had a lot of false positives that need reviewed later.
 - DLC01Robot \[ 343 Interior of 358 \]
 - DLC02Workshop01 \[ N/A \]
 - DLC03Coast \[ 85 Interior of 459 \]
@@ -28,13 +29,147 @@ Current fixed issues list, anything marked 'Dedup' means Deduplication as in the
 
 TODO
 
+- New\ \[Various\] CC related compat updates. Work in progress.
 - New\ \[???\] I remember a mesh that had bad occlusion that I need to find and tag non-occlude.
+- New\ \[CorvegaAssemblyPlantExt01\] Seen a road chunk that has a bad occlusion set in the railing that needs looked at during a stream.
 - New\ \[Waterfront12\] Elevator group might need adjustment due to the mesh being one sided. TBD
 - New\ \[Various\] Fix 00163A1C placements (Eight MacDetailGreeble21 entries are in the wrong rotation, among other issues, held pending figuring out how to properly service the SCOL definition
 - New\ \[Various\] Went through and updated a **lot** of existing meshes in base game and UF4OP/PRP to not have absolute paths anymore. This won't fix missing texture and material paths, but unlocks texture swaps that did not work correctly until this point. This affects mostly home meshes and buildings in areas like Concord and such. If there's outliers as a result of this fix that looks rather awful, file a bug. The updated filename and SCOL meshes will NOT be on the git repo due to filesize. (Updated, was in Build 71, skipping for 72, local testing did not have much improvement, this will be done again at a later date)
 
-72
+74
 
+- New\ \[
+
+73
+
+- New\ \[MiltonGeneral01\] Dedup 00113C2A, 00113C29, 00113C02, 00113C01, 00113C00, 00113BFF, 000E6572, 000E64AA, 000E67DB, 0002A1B0
+- New\ \[ConcordMuseum01\] Dedup 0018DEE2, 000A2797, 000A14B1, 00044175, 00044174, 00044173, 00044169, 00044167, 000440BC, 000440B7, 0005C67F, 00018069, 00017EB2, 00018938, 0001F191, 0001E9BD, 0001CBF9, 000B1A93
+- New\ \[GoodneighborOldStateHouse\] Dedup 0010B512, 0015A103
+- New\ \[REObject02Interior\] Dedup 0015B718
+- New\ \[GNN01\] Dedup 001FAAD5, 001FA831, 001FA6A2, 001F78E9, 0002D3E0, 0002DF26
+- New\ \[HubrisComics01\] Dedup 0018BB9E, 00144898, 00101D4B, 00101D4C, 00066953, 0006687C
+- New\ \[WaldenPond01\] Dedup 001D5294, 001D51F8, 0002F7D2
+- New\ \[PoseidonEnergy01\] Dedup 0009864A, 000A7E00, 000A777B, 000A777A, 000A7779, 000A7778, 000A7777, 000506F7, 0004F189, 00125872
+- New\ \[PoseidonEnergy02\] Dedup 0017AC34, 0017AC2F, 0017ABF8
+- New\ \[AndrewStation01\] Dedup 002049A6, 001B2474, 001A8836, 0009C709, 00074D42
+- New\ \[zLexingtonGarage\] Dedup 00222E56
+- New\ \[zUnusedSubwayTerminalShowcase\] Dedup 0010CB06, 0010CAB0, 00152A8D
+- New\ \[GoodneighborTheMemoryDen\] Dedup 0023B6D5
+- New\ \[HestersRobotics01\] Dedup 001525A6
+- New\ \[DmndOutfieldShengsHouse01\] Dedup 00139F78, 000C66F8
+- New\ \[MedfordMemorial01\] Dedup 0020B6CA, 0020B680, 0020B570, 00100921, 000A7B85, 0007DB3E, 0017D7BB [upstream], 0020B90D [upstream]
+- New\ \[Vault81\] Dedup 0022DA35, 0020A1D8, 001D1230, 001A6064 [upstream], 0023895F [upstream], 00238961 [upstream]
+- New\ \[UFOCrashSite01\] Dedup 00187020
+- New\ \[Theater16PearwoodResidences01\] Dedup 0021B6A4, 0021B69A, 0021B5DD, 001CC2FD
+- New\ \[Waterfront02\] Dedup 00219E47 [No bones about it, this femur was duplicated.], 001CA5AF
+- New\ \[EsplanadeChurch01\] Dedup 001AFF1D
+- New\ \[MassFusion01\] Dedup 000F8D63 [0015D453 is in the floor], 000F64D1, 000F64CF, 000920D3, 00092698, 000968D1, 00098C6E, 00098C82, 00098C83, 00098C84, 00098D18, 0009D4E1, 000F591B, 000F5931, 000F5C0B
+- New\ \[InstituteAdvSystems\] Dedup 001D0E31
+- New\ \[Vault81Secret\] Dedup 001AB354, 000B2BDA, 0011353C, 000D98E8, 00088326
+- New\ \[CambridgePolymerLabs01\] Dedup 000B3E53, 000A76C3, 0009C2BD [devnote: hidden by another ref], 0016D869, 00150613
+- New\ \[InstituteReactor\] Dedup 0012A1D4 [devnote: this one isn't tagged in FX layer, other is, report to UF4OP?]
+- New\ \[USSConstitution01\] Dedup 0018E52A
+- New\ \[InstituteTunnel01\] Dedup 00204F97, 00204F96, 00151144, 00150B3C, 00150B34, 00215FD0, also fix position and scaling on 198EF8
+- New\ \[GwinnettBrewery01\] Dedup 001F87B5, 000AD8AF, 000AD891, 0004E924, 0004E923, 0004E8B0
+- New\ \[Vault11402\] Dedup 000D3844
+- New\ \[zLexingtonApartments\] Dedup 001379D0
+- New\ \[SandyCovesHome01\] Dedup 000261F3, 0002560B
+- New\ \[MahkraFishpacking01\] Dedup 001C445E
+- New\ \[DmndArturosHouse01\] Dedup 000FCDC5
+- New\ \[FourLeafFishpacking01\] Dedup 0010F48D, 0010F25C, 0010F25B, 0016BB52
+- New\ \[RailroadHQ01\] Dedup 0003A44D, 000359CF, 00020A90, 00095C9B
+- New\ \[TrinityChurch01\] Dedup 000E55E0
+- New\ \[BostonCommon02\] Dedup 001AD601
+- New\ \[GlowingSeaPOIDB06Int\] Dedup 001F5F38, 001F5F37, 001F5F32, 001F5F31, 001F5C69, 001F59D0 [ACTI, UF4OP?]
+- New\ \[CambridgeEastCITRaiderCamp01\] Dedup 002263C5
+- New\ \[TheaterMassBayMedicalCenter02\] Dedup 001C570E
+- New\ \[-21, -2, CW\] Swap E4039 BunExtWall01 to BunExtWallWin01 to fix an issue with looking into the void of madness that is a level designer. [note: not actually done yet, needs done in xEdit]
+- New\ \[-10, 8, CW\] Attempt to simplify positioning of 2FAFC, 2FAFE, and 2FB04 to resolve an umbra floating point edge case. This will probably need reviewed again in 73.
+- New\ \[-23, -7, CW\] Import TunnelCap.esp from Glitchfinder ( ref https://discord.com/channels/830436661736243230/954847055824687215/1167188537674825759 src: CM PRP Bugs channel )
+- New\ \[SouthBoston25\] Dedup 0009B4C4, 0009B4C0, 0009B49A
+- New\ \[GeneralAtomicsGalleria01\] Dedup 001E3105, 0014342D, 000E7C28, 000E7C27
+- New\ \[zUnusedGrenades\] Dedup 000F98AB
+- New\ \[TheaterMassBayMedicalCenter01\] Dedup 00231711, 0023021B
+- New\ \[BackStreetApparel01\] Dedup 0006498C, 00087888
+- New\ \[Waterfront12\] Dedup 00223BAF, 0022FF24
+- New\ \[InstituteOldRobotics01\] Dedup 001C2196
+- New\ \[zUnusedFinancial23\] Dedup 0004EEB1, 0004E1C8
+- New\ \[Financial14\] Dedup 001CA716
+- New\ \[DmndCitySurplus01New\] Dedup 00139E19
+- New\ \[ShamrockTaphouse01\] Dedup 000F4337
+- New\ \[FensBank01\] Dedup 001B4A26
+- New\ \[FortHagen02\] Dedup 000D107B, 00099074
+- New\ \[UniversityPoint01\] Dedup 000ED671, 00034A53, 00034CB0
+- New\ \[zInstituteRotunda\] Dedup 0022DF1C, 000C762D, 000C3035, 000C1C5E, 000C0FC2
+- New\ \[WarrenTheater01\] Dedup 000B7FE6
+- New\ \[InstituteFEVlab\] Dedup 002274B1, 002274B0
+- New\ \[JamaicaPlain01\] Dedup 000E9A26, 0005C821
+- New\ \[ParsonsState02\] Dedup 0010EE5F
+- New\ \[zUnusedCellar02\] Dedup 000E1B7E
+- New\ \[FensKenmoreStation\] Dedup 00218559
+- New\ \[CambridgeParkingGarage01\] Dedup 0023CC2B
+- New\ \[BeaconHillBostonBugle\] Dedup 00150DE3, 00150DB2
+- New\ \[LongneckLukowskis01\] Dedup 000FE686, 000FE684, 000FE682, 000242DA, 0003F018, 0003F010
+- New\ \[NationalGuardTrainingYard03\] Dedup 001CB978, 001CB977, 001CB90F, 001CB90E
+- New\ \[BeaconHillPub\] Dedup 0016C4DF
+- New\ \[TheaterHub360\] Dedup 000CFC29, 000CF72C, 000CF729, 000CF728, 002262A8
+- New\ \[IrishPrideShipyard01\] Dedup 00136274, 000D6944, 000D623C, 000D61F7, 00165274, 00043139, 0004312F, 0004312E, 00043123, 00047AE0
+- New\ \[BostonMayoralShelter01\] Dedup 00170EB0, 00206444, 0020B266
+- New\ \[Vault95\] Dedup 002148F4, 0021489B, 000DFC62, 0014B0CA
+- New\ \[WestonWaterTreatment01\] Dedup 001ED2A4, 001ED099, 001302B5, 000E6B09 [other elevator object is linkref, this one isn't], 001F3952
+- New\ \[GeneralAtomicsFactory01\] Dedup 0021399E, 002138C5, 002135AE, 002134D1, 0019C830, 00099B3E, 000813C1, 000811E0
+- New\ \[CambridgeMonsignorPlaza01\] Dedup 0022C21A
+- New\ \[FederalSurvCenter01\] Dedup 000936D9, 0021B8A7, 0021FFE2
+- New\ \[BostonAirportRuins01\] Dedup 0020BC2A, 000D6BC2, 000B9A05, 000B9973, 0004D4A7, 0004CFF4, 00048D95
+- New\ \[OldGulletSinkhole01\] Dedup 0003A8E6
+- New\ \[MedTekResearch02\] Dedup 000C3620, 0007C972
+- New\ \[CovenantHQ01\] Dedup 00205B37, 0004E1DC
+- New\ \[Vault81Entry\] Dedup 0020A190, 00153933, 000A9CFA, 000A9CF9
+- New\ \[Vault111Cryo\] Dedup 001B5EBA, 001B0FF4, 001B0FF3, 000AD65D, 0008B8DC, 0005327E, 0005327F, 0002B5C4, 0002B5C6, 0002B5C9, 0002B5CB
+- New\ \[MedTekResearch01\] Dedup 0018F36B, 0001FC88, 0001FC87, 0001FB8D, 0008277F, 00082659, 00082657, 0007AE58, 0007ADDE, 0007ADDD, 0007ADDC, 0007ABE2, 000B03E7, 000B0446, 000B9103, 0022BEC7
+- New\ \[NationalGuardTrainingYard02\] Dedup 001CA0A2, 00174813, 000E3073, 000E305D
+- New\ \[CombatZone01\] Dedup 00205199, 0023B065
+- New\ \[NHMFreightDepot01\] Dedup 000AA220
+- New\ \[RelayTowerInt09\] Dedup 001B5AA1
+- New\ \[FallonsDepartmentStore01\] Dedup 001C05CF, 001C04D7, 001BDB23, 00174969
+- New\ \[PoseidonReservoir01\] Dedup 00053C09, 00053C05
+- New\ \[BunkerHill01\] Dedup 000FB0B0
+- New\ \[MassPikeTunnel01\] Dedup 0019C721, 0019C6EC, 0019C6BB, 0019C6AA, 001518B5, 000FC3A8
+- New\ \[NorthEndBoxingGym\] Dedup 001ACE9D, 000A5F84
+- New\ \[zPOIJoel06\] Dedup 00230C69
+- New\ \[MaldenCenter01\] Dedup 00049F35, 00049E11, 0019DCD1, 0019DCD0, 0011CBAA, 0005DA5A, 0005DA58, 0005DA56, 0005DA55, 000B2B9A, 000BA772, 001C490E
+- New\ \[GreentechGenetics01\] Dedup 000B9AC4
+- New\ \[NahantOceanSociety02\] Dedup 0020CCA0, 002052A4
+- New\ \[AtomatoysCorporateHQ01\] Dedup 000EE986, 000EE984, 00091BEE, 00091A06, 000916CD
+- New\ \[WestRoxboryStation01\] Dedup 0003F059, 0002D90F, 0002D8E9, 001780B3, 001780E9, 00178175, 001804A8, 00044922
+- New\ \[OldNorthChurch01\] Dedup 0006A9EC, 0006A9EB, 00066F3E
+- New\ \[CambridgeChurchGraveyard01\] Dedup 001BAF3B, 001BAE25
+- New\ \[Yangtze01\] Dedup 001B41FD, 0008BDFF, 0017F894, 0017F4F3, 0017F4F2, 0006291A
+- New\ \[GorskiCabin01\] Dedup 0006745D, 00067447
+- New\ \[CharlestownLaundry\] Dedup 001A054B
+- New\ \[DBTechHighSchool02\] Dedup 0019DD4F, 0019DD4E, 0019DD46, 0019DD45, 0019DD3D, 0019DD3C, 0019DD34, 0019DD33, 001951D7, 0014E482, 000E88D3
+- New\ \[VaultTecOffice01\] Dedup 0008E6D9, 0008E6D8, 0008E6D7, 0008E6D6, 0008E6D5, 0008E6D4, 0008E6D3, 0008E6D2, 0008E6D1, 0008E6D0, 0008E6CF, 0008E6CE, 0008E6CD, 0008E6CC, 0008E6CB, 0008E6CA, 0008E6C9, 0008E6C8, 0008E68D, 000496D7
+- New\ \[ParsonsState03\] Dedup 002172B5, 001F1D90
+- New\ \[SuffolkCountyCharterSchool01\] Dedup 001D35F0, 001D234C, 001CC4FC, 001938B9, 000F061B, 000EFF1F, 000EFD5F, 000EFD5C, 000EFD52, 00029D8E, 001D3707
+- New\ \[DBTechHighSchool01\] Dedup 000ABA50, 0014E25F, 000E2400, 000E2349, 0007E128, 0007CC49, 0007CC48, 0004849C, 0004849A, 00048422, 0004841F, 0004841E, 0004836D, 0004836C, 0004836B, 0004836A, 00048369, 00048368, 0003BFF7, 0003BDFD, 0003B90B, 0003B837, 0003B82F, 0003B82D
+- New\ \[DmndStandsCodman01\] Dedup 000C6DD3
+- New\ \[CaboutHouse01\] Dedup 00216ADE, 0015627D
+- New\ \[DmndSolomonsHouse01\] Dedup 000C6AB5 (pile of concrete near wall)
+- New\ \[TiconderogaStation01\] Dedup 00206017, 00205F05, 00047013
+- New\ \[MuseumOfWitchcraft01\] A duplicate set of railing was installed on the stairs. Scrap it. 001609F9
+- New\ \[6, 19, CW\] Fragment 1E75A0 to better finetune individual debris placement as a piece of it is floating. 
+- New\ \[zLexingtonApartments\] Nudge 137A00, 1379DE, 1379DF, 1379E1, 1379E2, 1379E3, 1379E7 for umbra happiness and hopefully eliminate seams.
+- New\ \[FortHagen02\] Duplicate the nearby HitDebrisPileCeiling03 and plug the hole at 9A003 [upstreamable]
+- New\ \[MassFusion01\] Slap in a brand new HitFloorSolidTop01 to fix up an oversight in the interior, as the above floor piece was designed to be seen one way. [todo: upstream]
+- New\ \[3, -2, CW\] Disable 20E937, reposition 16D4DE so it's not underground (on top of the shelving nearby), and move 20E92D away to compensate.
+- New\ \[3, -3, CW\] Update 195C0 to hopefully further resolve an umbra edge case.
+- New\ \[CorvegaAssemblyPlantExt01\] Disable 35D98 (Industrial lighting that appears to have been a dev leftover intended to be attached to a spotlight of some sort)
+- New\ \[14, 14, CW\] Shore up an umbra edge case nearest 247950
+- New\ \[USAFSatellite01\] Resolve minor z-flicker with 7521A and 75BD5 (trash decals near the quest object chest on the lower floor)
+- Changed\ \[Various\] Updated SCOL meshes to reflect the deadbrush mesh updates.
+- New\ \[CambridgeConstructionSiteWarehouse01\] **U33191** Update Materials\Architecture\Warehouse\WrhsRoofPlywood01.bgsm to be double sided so that a wood chunk isn't treated by the game as invisible.
+- New\ \[Various\] Apply location changes from the Dead Zone Fixes mod (max compat version).
+- Changed\ \[Various\] Resolve a file conflict between Flicker Fixer eXofixed and Glitchfinder's patch for BillBoardBldgVerticalSm03.nif
 - New\ \[1, 2, CW\] Cap a building hole with a DecoMainA1x2WinB01CapTop01 [todo: file bug upstream]
 - New\ \[Various\] New contributed model fixes. (RedR_SmBldg01_PumpMeterFREE01/02.nif, VltLGHallHalf01.nif, FancyLightSingleOff01.nif)
 - New\ \[CambridigePlumbing01\] Add WrhsMainLoftCatwalk meshes to non-occluder list.
@@ -70,7 +205,7 @@ TODO
 - New\ \[1, 11, CW\] Lower 7EDED to close some shitty construction work in the settlement.
 - New\ \[8, 0, CW\] Reset scale on 0019DE07 to fix the world holes the smaller size was showing.
 - New\ \[FourLeafFishpacking01\] 0010F3A0 needed moved to fix a hole in the interior's room ceiling.
-- New\ \[Various\] Mesh updates from Glitchfinder, Exoclyps, and Pra, see git commit IDs a7beb7a, b68a0d7, 7aa2aa3, and 818bb0b for specifics. In the case of Pra's Mesh Bound Fixes, temporary until they get accepted upstream.
+- New\ \[Various\] Mesh updates from Glitchfinder, Exoclyps, and Pra, see git commit IDs a7beb7a, b68a0d7, 7aa2aa3, and 818bb0b for specifics.
 - New\ \[-7, -5, CW\] **U32904** The building hole nearest 1B50BA needs filled. Added new DecoMainA1x1Wall01 ref to cover it up. Found by ShadowoftheWind (CRP dev)
 - New\ \[21, 18, CW\] Fix 1AB0B6 positioning, as it appears perpendicular to the wall.
 - New\ \[1, 4, CW\] Update ref type for 17B565 and 17B567 from DecoMainC1x1WinA02Full01 to DecoMainC1x1WinA02Full02 to correct a window that shouldn't be able to be seen through.
