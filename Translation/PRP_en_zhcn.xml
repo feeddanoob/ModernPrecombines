@@ -14,12 +14,6 @@
       <Dest>BenRierimanu</Dest>
     </String>
     <String List="0">
-      <EDID>[00000000]</EDID>
-      <REC>TES4:SNAM</REC>
-      <Source>https://www.nexusmods.com/fallout4/mods/46403 0.59</Source>
-      <Dest>https://www.nexusmods.com/fallout4/mods/46403 0.59</Dest>
-    </String>
-    <String List="0">
       <EDID>CroupManor01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Croup Manor Basement</Source>
@@ -192,6 +186,12 @@
       <REC>CELL:FULL</REC>
       <Source>Layton Towers</Source>
       <Dest>克莱顿塔楼</Dest>
+    </String>
+    <String List="0">
+      <EDID>ElevTransHiTechInstitute</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Elevator</Source>
+      <Dest>电梯</Dest>
     </String>
     <String List="0">
       <EDID>DLC01Lair01</EDID>
@@ -572,12 +572,6 @@
       <Dest>普利德温号主甲板</Dest>
     </String>
     <String List="0">
-      <EDID>zUnusedTheaterLaundromat</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Quick Test Cell</Source>
-      <Dest>快速测试房间</Dest>
-    </String>
-    <String List="0">
       <EDID>DLC04GZVaultTec01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault-Tec: Among the Stars</Source>
@@ -588,6 +582,12 @@
       <REC>CELL:FULL</REC>
       <Source>The Castle Tunnels</Source>
       <Dest>城堡隧道</Dest>
+    </String>
+    <String List="0">
+      <EDID>ElevTransVault</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Elevator</Source>
+      <Dest>电梯</Dest>
     </String>
     <String List="0">
       <EDID>RelayTowerInt14</EDID>
@@ -638,12 +638,6 @@
       <Dest>学院次层21-D</Dest>
     </String>
     <String List="0">
-      <EDID>DLC03FringeCoveDocks01</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Quick Test Cell</Source>
-      <Dest>快速测试房间</Dest>
-    </String>
-    <String List="0">
       <EDID>DLC04TransitCenter01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Nuka-World Transit Center</Source>
@@ -686,18 +680,6 @@
       <Dest>庇护所</Dest>
     </String>
     <String List="0">
-      <EDID>WarehouseIndustrialMachines</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>The Incredible Machines</Source>
-      <Dest>惊奇机器</Dest>
-    </String>
-    <String List="0">
-      <EDID>ccTOSFO4001</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Noir Penthouse</Source>
-      <Dest>黑暗阁楼</Dest>
-    </String>
-    <String List="0">
       <EDID>DmndDugoutInn01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Dugout Inn</Source>
@@ -708,12 +690,6 @@
       <REC>CELL:FULL</REC>
       <Source>Cambridge Police Station</Source>
       <Dest>剑桥警察局</Dest>
-    </String>
-    <String List="0">
-      <EDID>REHoldingCell</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Quick Test Cell</Source>
-      <Dest>快速测试房间</Dest>
     </String>
     <String List="0">
       <EDID>MiltonGeneral01</EDID>
@@ -762,6 +738,12 @@
       <REC>CELL:FULL</REC>
       <Source>Hubris Comics</Source>
       <Dest>虎不理漫画</Dest>
+    </String>
+    <String List="0">
+      <EDID>ElevMinUseTransUtil</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Elevator</Source>
+      <Dest>电梯</Dest>
     </String>
     <String List="0">
       <EDID>WaldenPond01</EDID>
@@ -1112,10 +1094,22 @@
       <Dest>崔尼帝教堂</Dest>
     </String>
     <String List="0">
+      <EDID>ElevTransHiTech</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Elevator</Source>
+      <Dest>电梯</Dest>
+    </String>
+    <String List="0">
       <EDID>DmndWaterfrontSunsHouse01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Doctor Sun&apos;s House</Source>
       <Dest>孙医生的家</Dest>
+    </String>
+    <String List="0">
+      <EDID>ElevTransUtil</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Elevator</Source>
+      <Dest>电梯</Dest>
     </String>
     <String List="0">
       <EDID>DmndPembrokesHouse01</EDID>
@@ -1454,12 +1448,6 @@
       <Dest>B监听站</Dest>
     </String>
     <String List="0">
-      <EDID>QASmoke</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Tunnels</Source>
-      <Dest>通道</Dest>
-    </String>
-    <String List="0">
       <EDID>LongneckLukowskis01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Longneck Lukowski&apos;s Cannery</Source>
@@ -1538,12 +1526,6 @@
       <Dest>95号避难所</Dest>
     </String>
     <String List="0">
-      <EDID>WarehouseWorkbenches</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Workbench Bonanza</Source>
-      <Dest>工作台富源区</Dest>
-    </String>
-    <String List="0">
       <EDID>WestonWaterTreatment01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Weston Water Treatment Plant</Source>
@@ -1554,6 +1536,12 @@
       <REC>CELL:FULL</REC>
       <Source>Ticker Tape Lounge</Source>
       <Dest>彩带休息室</Dest>
+    </String>
+    <String List="0">
+      <EDID>MassFusion02Trans</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Mass Fusion Elevator</Source>
+      <Dest>麻州核聚变厂电梯</Dest>
     </String>
     <String List="0">
       <EDID>InstituteBioScience</EDID>
@@ -1638,6 +1626,12 @@
       <REC>CELL:FULL</REC>
       <Source>Med-Tek Sub-Levels</Source>
       <Dest>曼科药物研究所次层</Dest>
+    </String>
+    <String List="0">
+      <EDID>ElevTransPub</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Elevator</Source>
+      <Dest>电梯</Dest>
     </String>
     <String List="0">
       <EDID>CovenantHQ01</EDID>
@@ -1775,7 +1769,7 @@
       <EDID>zPOIJoel06</EDID>
       <REC>CELL:FULL</REC>
       <Source>Electrical Hobbyist&apos;s Club Cellar</Source>
-      <Dest>电子爱好者俱乐部地窖</Dest>
+      <Dest>电气同好俱乐部地窖</Dest>
     </String>
     <String List="0">
       <EDID>DLC03POI40Int</EDID>
@@ -1838,12 +1832,6 @@
       <Dest>老北教堂</Dest>
     </String>
     <String List="0">
-      <EDID>zUnusedTheater46A</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Quick Test Cell</Source>
-      <Dest>快速测试房间</Dest>
-    </String>
-    <String List="0">
       <EDID>CambridgeChurchGraveyard01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Union&apos;s Hope Cathedral</Source>
@@ -1898,12 +1886,6 @@
       <Dest>帕森斯州地下室</Dest>
     </String>
     <String List="0">
-      <EDID>Vault111Start</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Vault 111 Main Entrance</Source>
-      <Dest>111号避难所正门</Dest>
-    </String>
-    <String List="0">
       <EDID>DmndRadio01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Diamond City Radio</Source>
@@ -1920,12 +1902,6 @@
       <REC>CELL:FULL</REC>
       <Source>D.B. Technical High School</Source>
       <Dest>鲍思高技术高中</Dest>
-    </String>
-    <String List="0">
-      <EDID>CombatZone02</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>Quick Test Cell</Source>
-      <Dest>快速测试房间</Dest>
     </String>
     <String List="0">
       <EDID>DLC03AlderseaDaySpa01</EDID>
@@ -1986,12 +1962,6 @@
       <REC>CELL:FULL</REC>
       <Source>Apartments</Source>
       <Dest>公寓</Dest>
-    </String>
-    <String List="0">
-      <EDID>WarehouseTraps</EDID>
-      <REC>CELL:FULL</REC>
-      <Source>The most dangerous cell</Source>
-      <Dest>最危险的囚房</Dest>
     </String>
     <String List="0">
       <EDID>DmndGreenhouse01</EDID>
@@ -2060,52 +2030,10 @@
       <Dest>联邦</Dest>
     </String>
     <String List="0">
-      <EDID>DiamondCity</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>Diamond City</Source>
-      <Dest>钻石城</Dest>
-    </String>
-    <String List="0">
-      <EDID>Goodneighbor</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>Goodneighbor</Source>
-      <Dest>芳邻镇</Dest>
-    </String>
-    <String List="0">
-      <EDID>SanctuaryHillsWorld</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>Sanctuary Hills</Source>
-      <Dest>庇护山丘</Dest>
-    </String>
-    <String List="0">
-      <EDID>DLC03FarHarbor</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>The Island</Source>
-      <Dest>岛屿</Dest>
-    </String>
-    <String List="0">
-      <EDID>DLC03VRWorldspace</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>Simulation</Source>
-      <Dest>模拟</Dest>
-    </String>
-    <String List="0">
       <EDID>NukaWorld</EDID>
       <REC>WRLD:FULL</REC>
       <Source>Nuka-World</Source>
       <Dest>核子世界</Dest>
-    </String>
-    <String List="0">
-      <EDID>NukaWorldAmphitheater</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>Bradberton Amphitheater</Source>
-      <Dest>布拉德伯顿圆形剧场</Dest>
-    </String>
-    <String List="0">
-      <EDID>NukaWorldMarket</EDID>
-      <REC>WRLD:FULL</REC>
-      <Source>Nuka-Town Market</Source>
-      <Dest>美国核子城市场</Dest>
     </String>
   </Content>
 </SSTXMLRessources>
