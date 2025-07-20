@@ -1,12 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SSTXMLRessources>
   <Params>
-    <Addon>PRP.esp</Addon>
+    <Addon>prp.esp</Addon>
     <Source>en</Source>
     <Dest>ja</Dest>
     <Version>2</Version>
   </Params>
   <Content>
+    <String List="0" Partial="2">
+      <EDID>[00000000]</EDID>
+      <REC>TES4:CNAM</REC>
+      <Source>BenRierimanu</Source>
+      <Dest>BenRierimanu</Dest>
+    </String>
+    <String List="0" Partial="2">
+      <EDID>[00000000]</EDID>
+      <REC>TES4:SNAM</REC>
+      <Source>Build Version: 74.14 NG
+Previsibines Repair Pack ESP
+Built from 1.10.984 and requires all DLC.
+Please see the nexus mod page or git repository for extended author credits and community contributions.</Source>
+      <Dest>Build Version: 74.14 NG
+Previsibines Repair Pack ESP
+Built from 1.10.984 and requires all DLC.
+Please see the nexus mod page or git repository for extended author credits and community contributions.</Dest>
+    </String>
     <String List="0">
       <EDID>CroupManor01</EDID>
       <REC>CELL:FULL</REC>
@@ -47,7 +65,7 @@
       <EDID>CambridgeMassChemical01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Mass Chemical</Source>
-      <Dest>マサチューセッツ・ケミカル</Dest>
+      <Dest>大量の薬品</Dest>
     </String>
     <String List="0">
       <EDID>Switchboard</EDID>
@@ -257,7 +275,7 @@
       <EDID>InstituteConcourse</EDID>
       <REC>CELL:FULL</REC>
       <Source>The Institute</Source>
-      <Dest>インスティテュート</Dest>
+      <Dest>インスティチュート</Dest>
     </String>
     <String List="0">
       <EDID>DmndValentines01</EDID>
@@ -413,7 +431,7 @@
       <EDID>FourLeafFishpacking02</EDID>
       <REC>CELL:FULL</REC>
       <Source>Marowski&apos;s Chem Lab</Source>
-      <Dest>マロースキーの薬物ラボ</Dest>
+      <Dest>マロースキーの薬品ラボ</Dest>
     </String>
     <String List="0">
       <EDID>DLC03KitteredgePass01</EDID>
@@ -506,6 +524,12 @@
       <Dest>ダートマス・PROビル</Dest>
     </String>
     <String List="0">
+      <EDID>zUnusedFalloutShelter02</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Shelter</Source>
+      <Dest>シェルター</Dest>
+    </String>
+    <String List="0">
       <EDID>DmndChoiceChops01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Polly&apos;s House</Source>
@@ -563,7 +587,7 @@
       <EDID>DLC04GZVaultTec01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault-Tec: Among the Stars</Source>
-      <Dest>Vaul-Tec:アモングスターズ</Dest>
+      <Dest>Vault-Tec:アマング・ザ・スター</Dest>
     </String>
     <String List="0">
       <EDID>TheCastle01</EDID>
@@ -605,7 +629,7 @@
       <EDID>DLC04SafariBearCave</EDID>
       <REC>CELL:FULL</REC>
       <Source>Bear Cave</Source>
-      <Dest>ベアの洞くつ</Dest>
+      <Dest>クマの洞くつ</Dest>
     </String>
     <String List="0">
       <EDID>GoodneighborBobbisPlace</EDID>
@@ -641,7 +665,7 @@
       <EDID>PrydwenHull03</EDID>
       <REC>CELL:FULL</REC>
       <Source>Prydwen Quarters</Source>
-      <Dest>プリドゥエンの宿舎</Dest>
+      <Dest>プリドゥエンのコーター</Dest>
     </String>
     <String List="0">
       <EDID>DmndFallons01</EDID>
@@ -749,7 +773,7 @@
       <EDID>PoseidonEnergy02</EDID>
       <REC>CELL:FULL</REC>
       <Source>Poseidon Energy Sublevels</Source>
-      <Dest>ポセイドンエネルギー地下</Dest>
+      <Dest>サブレベル</Dest>
     </String>
     <String List="0">
       <EDID>AndrewStation01</EDID>
@@ -762,6 +786,12 @@
       <REC>CELL:FULL</REC>
       <Source>Lexington Parking Garage</Source>
       <Dest>レキシントン駐車場</Dest>
+    </String>
+    <String List="0">
+      <EDID>zUnusedSubwayTerminalShowcase</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Terminals &amp; Holotapes, Oh My.</Source>
+      <Dest>ターミナル&amp;ホロテープ、おやおや</Dest>
     </String>
     <String List="0">
       <EDID>DLC04SafariWelcomeCenter</EDID>
@@ -1154,6 +1184,12 @@
       <Dest>バック・アレイ・ボーリング</Dest>
     </String>
     <String List="0">
+      <EDID>zUnusedGrenades</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Cellar</Source>
+      <Dest>地下室</Dest>
+    </String>
+    <String List="0">
       <EDID>TheaterMassBayMedicalCenter01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Mass Bay Medical Center</Source>
@@ -1170,6 +1206,12 @@
       <REC>CELL:FULL</REC>
       <Source>Fizztop Grille</Source>
       <Dest>フィズトップ・グリル</Dest>
+    </String>
+    <String List="0">
+      <EDID>zUnusedCave</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Breakheart Banks</Source>
+      <Dest>ブレイクハート・バンクス</Dest>
     </String>
     <String List="0">
       <EDID>ShenleysOysterBar01</EDID>
@@ -1217,13 +1259,19 @@
       <EDID>DLC04SafariPrimateHouse</EDID>
       <REC>CELL:FULL</REC>
       <Source>Primate House</Source>
-      <Dest>霊長目ハウス</Dest>
+      <Dest>霊長類ハウス</Dest>
     </String>
     <String List="0">
       <EDID>InstituteOldRobotics01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Old Robotics</Source>
       <Dest>古いロボットラボ</Dest>
+    </String>
+    <String List="0">
+      <EDID>zUnusedFinancial23</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Atlantic Offices</Source>
+      <Dest>アトランティック・オフィス</Dest>
     </String>
     <String List="0">
       <EDID>GwinnettBrewery02</EDID>
@@ -1362,6 +1410,12 @@
       <REC>CELL:FULL</REC>
       <Source>Parsons State Insane Asylum</Source>
       <Dest>パーソンズ州立病院</Dest>
+    </String>
+    <String List="0">
+      <EDID>zUnusedCellar02</EDID>
+      <REC>CELL:FULL</REC>
+      <Source>Cellar</Source>
+      <Dest>地下室</Dest>
     </String>
     <String List="0">
       <EDID>zLexingtonLaundromat</EDID>
@@ -1697,7 +1751,7 @@
       <EDID>FallonsDepartmentStore01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Fallon&apos;s Department Store</Source>
-      <Dest>ファロン・デパート</Dest>
+      <Dest>ファロンデパート</Dest>
     </String>
     <String List="0">
       <EDID>PoseidonReservoir01</EDID>
@@ -1937,7 +1991,7 @@
       <EDID>RelayTowerInt15B</EDID>
       <REC>CELL:FULL</REC>
       <Source>Reactor Level</Source>
-      <Dest>リアクターレベル</Dest>
+      <Dest>リアクターのある階層</Dest>
     </String>
     <String List="0">
       <EDID>SlocumsJoeHQOffice</EDID>

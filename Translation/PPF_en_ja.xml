@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SSTXMLRessources>
   <Params>
-    <Addon>PPF.esm</Addon>
+    <Addon>ppf.esm</Addon>
     <Source>en</Source>
     <Dest>ja</Dest>
     <Version>2</Version>
@@ -16,13 +16,13 @@
     <String List="0" Partial="2">
       <EDID>[00000000]</EDID>
       <REC>TES4:SNAM</REC>
-      <Source>Build Version: 74.5
+      <Source>Build Version: 74.21 NG
 Previsibines Repair Pack ESM
-Built from 1.10.163 and requires all DLC.
+Built from 1.10.984 and requires all DLC.
 Please see the nexus mod page or git repository for extended author credits and community contributions.</Source>
-      <Dest>Build Version: 74.5
+      <Dest>Build Version: 74.21 NG
 Previsibines Repair Pack ESM
-Built from 1.10.163 and requires all DLC.
+Built from 1.10.984 and requires all DLC.
 Please see the nexus mod page or git repository for extended author credits and community contributions.</Dest>
     </String>
     <String List="0">
@@ -71,7 +71,7 @@ Please see the nexus mod page or git repository for extended author credits and 
       <EDID>CambridgeMassChemical01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Mass Chemical</Source>
-      <Dest>マサチューセッツ・ケミカル</Dest>
+      <Dest>大量の薬品</Dest>
     </String>
     <String List="0">
       <EDID>Switchboard</EDID>
@@ -401,7 +401,7 @@ Please see the nexus mod page or git repository for extended author credits and 
       <EDID>DLC04GZVaultTec01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Vault-Tec: Among the Stars</Source>
-      <Dest>Vaul-Tec:アモングスターズ</Dest>
+      <Dest>Vault-Tec:アマング・ザ・スター</Dest>
     </String>
     <String List="0">
       <EDID>TheCastle01</EDID>
@@ -547,7 +547,7 @@ Please see the nexus mod page or git repository for extended author credits and 
       <Source>Andrew Station</Source>
       <Dest>アンドリュー駅</Dest>
     </String>
-    <String List="0" Partial="1">
+    <String List="0">
       <EDID>zLexingtonGarage</EDID>
       <REC>CELL:FULL</REC>
       <Source>Lexington Parking Garage</Source>
@@ -694,7 +694,7 @@ Please see the nexus mod page or git repository for extended author credits and 
     <String List="0">
       <EDID>InstituteTunnel01</EDID>
       <REC>CELL:FULL</REC>
-      <Source>Public Works Maintenence Area</Source>
+      <Source>Public Works Maintenance Area</Source>
       <Dest>公共事業メンテナンスエリア</Dest>
     </String>
     <String List="0">
@@ -731,7 +731,7 @@ Please see the nexus mod page or git repository for extended author credits and 
       <EDID>DLC04BottlingPlant02</EDID>
       <REC>CELL:FULL</REC>
       <Source>Secure Beverageer Lab</Source>
-      <Dest>ビバレッジャーのラボを確保する</Dest>
+      <Dest>保安ビバレッジャーラボ</Dest>
     </String>
     <String List="0">
       <EDID>SandyCovesHome01</EDID>
@@ -1205,7 +1205,7 @@ Please see the nexus mod page or git repository for extended author credits and 
       <EDID>FallonsDepartmentStore01</EDID>
       <REC>CELL:FULL</REC>
       <Source>Fallon&apos;s Department Store</Source>
-      <Dest>ファロン・デパート</Dest>
+      <Dest>ファロンデパート</Dest>
     </String>
     <String List="0">
       <EDID>PoseidonReservoir01</EDID>
@@ -1464,6 +1464,12 @@ Please see the nexus mod page or git repository for extended author credits and 
       <REC>WRLD:FULL</REC>
       <Source>Nuka-Town Market</Source>
       <Dest>ヌカ・タウン・マーケット</Dest>
+    </String>
+    <String List="1">
+      <EDID>PRP_Dev_Notice</EDID>
+      <REC>MESG:DESC</REC>
+      <Source>I found some strawberry cheesecake!</Source>
+      <Dest>ストロベリーチーズケーキを見つけたんだ！</Dest>
     </String>
   </Content>
 </SSTXMLRessources>
