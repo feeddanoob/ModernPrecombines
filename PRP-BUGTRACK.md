@@ -42,7 +42,27 @@ TODO (Outdated since Branch 74)
 
 Branch 78
 
-- New\ \[todo\] Update 22236C to not use the Glowing Sea variant of it's mesh.
+- New\ \[0, 2, CW\] Delete a pair of wall refs and a plywood door leftover near 1bc02f that the player can't see
+- New\ \[0, 3, CW\] Delete 15A827 (Errant trash decal leftover) TODO: Reset position
+- New\ \[0, 3, CW\] Bring 1BF9D1 and 1BF9D2 to close up a gap by their neighboring reference chunks.
+- New\ \[0, 3, CW\] Fixed up a gap in the walls near 1BF826
+- New\ \[1, 3, CW\] Nudge d0805 a bit to stop it from clipping into the nearby building.
+- New\ \[1, 2, CW\] Unused floor tile reference. 1bff6
+- New\ \[0, 2, CW\] Unusued sidewalk reference chunk. 89033
+- New\ \[-2, 2, CW\] Slightly adjust 152985 so it doesn't appear haunted (floating).
+- New\ \[AndrewStation01\] Disable 74DA1 and 74DA0 as they appear to be development leftover references from the room that can't be entered anyway.
+- New\ \[-1, -8, CW\] Change 215D34 to use it's NOLOD variant to prevent further z-fighting for LOD.
+- New\ \[4, -2, CW\] Delete errant 5BA9E, 97678, 9767A, and 9767B to fix z-fighting in LOD generation.
+- New\ \[13, 20, CW\] Add a new DecoBaseA1x1Cor03 and DecoBaseA1x1Wall01 to adjust for some shoddy craftsmanship at the Parsons State Building near it's neighbors.
+- New\ \[13, 7, CW\] Slightly adjust 171350, 1712F3, 1712EF, 171362, 171339, 17133C, and 171347 to minimize z-fighting.
+- New\ \[0, 3, CW\] Disable several references hidden away behind the building nearest 16D940 and associated building blocks, apparently unused content?
+- New\ \[Various\] Architecture\Unique\Cabins\Cabin01.nif needed reverted, it was a fixed mesh from two years ago that was intended to fix a different mesh than the ruined version.
+- New\ \[-21, 15, CW\] Blended a landscape texture seam nearest 2158C7.
+- New\ \[-21, 5, CW\] Slightly adjust the ground near FF830's entrance (Wicked Shipping, middle trailer) to make the debris less awkward looking and more natural
+- New\ \[-22, 9, CW\] Lower the ground for that one corner of the warehouse building at the Co-Op so it doesn't clip through the building. (D4AF8 and it's associated group of refs)
+- New\ \[-20, 11, CW\] Shift 97551 slightly so it doesn't float.
+- New\ \[-25, 10, CW\] Move 144419 so it doesn't float.
+- New\ \[-26, 14, CW\] Update 22236C to not use the Glowing Sea variant of it's mesh.
 - New\ \[-27, 13, CW\] Another reference hole masked by landscape shifting. This one might not be seen much as it's in the borderlands.
 - New\ \[-26, 19, CW\] More landscape adjustments to mask a hole in a rock reference.
 - New\ \[-26, 21, CW\] Adjust landscape a bit to cover up a hole that the reference 2222BC had exposed.
