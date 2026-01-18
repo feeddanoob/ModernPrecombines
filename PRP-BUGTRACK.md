@@ -1,94 +1,77 @@
-Deduplication tracker remaining:
-
-- Fallout4.esm \[ 259 (61 Persistent Exterior) of 3300 \] (First pass completed!)
-- Side note: MassFusion01 had a lot of false positives that need reviewed later.
-- DLC01Robot \[ 24 Interior of 358 \] (Main pass completed, remaining entries are for upstream)
-- DLC02Workshop01 \[ N/A \]
-- DLC03Coast \[ 39 Interior of 459 \] (Main pass completed, remaining entries are for upstream)
-- DLC04Workshop02 \[ N/A \]
-- DLC05Workshop03 \[ Completed \]
-- DLC06NukaWorld \[ 89 Interior of 977 \] (Main pass completed, see above)
-
-Current planned changes:
-
-- More commonwealth deduplication (exteriors)
-- A shrubbery.
-
-\(UF4OP bug numbers shown as Uxxxxx anything crossed out is implemented upstream, FCF is Frost Cell Fixes, krrptd's version of PRP\)
-CW - Commonwealth, FH - Far Harbor, NW - Nuka World, SHW - Sanctuary Hills World (Intro), GN - Goodneighbor, DC - Diamond City, NWM - Nuka World Market, NWA - Nuka World Amphitheater, FHVR - Far Harbor VR Simulation
-
-Models marked non-occlude (bandaid fix): 60138D1 (DLC04ZooCageWallTallDoorSingle01), DF8E9, 15C6B4, 19AEFF, 2039F7, 144F62, 90EE5
-
-Models in the Meshes/ folder have been contributed from everyone listed on the mod description page and their associated mods, if you have contributed and it's not on there, let me know so I can fix it.
-
-Known issues that can't be fixed by me at this time (mesh related):
+Yes, I'm aware this changelog is ugly as sin. Hopefully at some point I can finally fix this.
 
 Current fixed issues list, anything marked 'Dedup' means Deduplication as in the record is at least one exact duplicated object reference at the same exact position in the associated plugin master file:
 
 🟥: Removed, 🟩: Added, 🟨: Changed
 
-TODO (Outdated since Branch 74)
+There are lines below with extra spacing, from Absterge documentation merges that I still need to clean up.
 
-- New\ \[Various\] CC related compat updates. Work in progress.
-- New\ \[???\] I remember a mesh that had bad occlusion that I need to find and tag non-occlude.
-- New\ \[CorvegaAssemblyPlantExt01\] Seen a road chunk that has a bad occlusion set in the railing that needs looked at during a stream.
-- New\ \[Waterfront12\] Elevator group might need adjustment due to the mesh being one sided. TBD
-- New\ \[Various\] Went through and updated a **lot** of existing meshes in base game and UF4OP/PRP to not have absolute paths anymore. This won't fix missing texture and material paths, but unlocks texture swaps that did not work correctly until this point. This affects mostly home meshes and buildings in areas like Concord and such. If there's outliers as a result of this fix that looks rather awful, file a bug. The updated filename and SCOL meshes will NOT be on the git repo due to filesize. (Updated, was in Build 71, skipping for 72, local testing did not have much improvement, this will be done again at a later date)
-- New\ \[DLC01Lair01\] 0100BD35 and neighbors might need z-adjustment to fix a floor seam.
-- New\ \[Various\] Reapply all non-occluder meshes as copied base records and apply them to fix issues previously bandaid'd to minimize issues. (Dev note: 060138D1, 30314, 72375, 89720, 89721, 89722, 89726, 89727, 90EE5, DF8E9, 15C6B4, 19AEFF, 2039F7, 144F62)
-- New\ \[Various\] Reconcile with UFO4P 2.1.6
-- New\ \[-22, 1, CW\] Adjust the navmesh (ugh) and also figure out what to do about 855D2 (WrhsPlatStairsDown01Terrain01 missing collision)
+-- **81**
 
-Branch 79
-Dev note: Below text block with extra spacing is from absterge's recent merge, I'll clean it up later.
+- New\ \[E69C\] Update landscape as well related to the below line and also fix the water assignment to the correct texture set. ExtOceanWater -> ExtRiverCharlesUpper
+- New\ \[E67B\] Fixed up a quad of texture seams nearest 168F37, also near 822A9
+- New\ \[E67D\] Raised parts of the landscape to hide parts of 163F1D that were sticking out of the shore nearby.
+- New\ \[E5D1\] Shored up the landscape near 151796, and also adjusted navmesh in the area to compensate. My navmesh skills are not that great, so I may have to go back and fix this.
+- New\ \[E59D\] Patched up some errant landscape painting near 14F87A.
+- New\ \[DEE6\] Lowered 17A40C to make one of the trees stop floating and fixed yet another landscape texture seam.
+- New\ \[E419\] More landscape patchwork, nearest 149281 this time, though it also touches neighboring cell blocks as well.
+- New\ \[DEF9\] More landscape patchwork, nearest A8E80 this time.
+- New\ \[DLC03NucleusCommandCenter01\] Swap 03024044 BASE to 73EBA
+- New\ \[03000BDB\] Patched up a landscape texture seam near 03005DE3
+- New\ \[E59A\] More landscape texture patching. Nearest 20A091
+- New\ \[DEC7\] Subtle adjustments to the landscape to better hide a small gap between the landscape and the debris near 893DB
+- New\ \[WaldenPondExt04\] More landscape texture work near 199CBE
+- New\ \[DEAA\] Patched up a landscape texture seam near 95C90
+- New\ \[DE8D\] Patched up a landscape texture seam near 96B60
+- New\ \[E4D8\] Disabled 1BE2F8 (BlastedForestLeafPile01) as it was floating considerably at one side against the road it was placed on.
+- New\ \[VaultTecOfficeExt01\] Brought 70F5F forward to properly display it's advertisement on the wall. Texture has a minor clip issue that can be seen on the top which is probably why it was hidden.
+- New\ \[BeaconHillPlaygroundExt\] Disabled 1D1363, the decal was inside the wall and would have covered up the nearby fake windows if in it's intended position.
+- New\ \[BostonCommonExt\] Moved 2320D2, 2320D3 and 2320D4 (A pair of billboards and supporting building parts) so they aren't floating against the nearby wall.
+- New\ \[Varies\] Merged PRPWireFixes.prp, Absterge had updated a bunch of spline locations in response to reference moves previously made.
+- New\ \[E0B6\] Reposition 132D92 so it's actually attached to the wall.
+- New\ \[E4EC\] Move 1AC9D8 slightly to stop y-fighting.
+- New\ \[03000DA9\] Lower 0303FB5B so it properly looks connected to the roof.
+- New\ \[03000D98\] Lower 0302D98D, 0302D96E and 0302D996 to have the debris and trash not float above the road chunk.
+- New\ \[03000D99\] Lower 030569F9 to the flooring.
+- New\ \[03000C0E\] Flipped around and repositioned 0301B770 and 0301B772 to mask a small hole that one can see just at the side nearest the walls in front of it.
+- New\ \[03000C0F\] Tune position of 0304DBF9 and 0304D8C9 so they are actually against the wall they are supposed to be attached to instead of floating.
+- New\ \[03000C3E\] Remove 0302DB02 as it appears to be a duplicate wall reference on top of 0302CD0A (TODO: Compare records, this should have been picked up by the duplicates script)
+- New\ \[03000C64\] Move 03018B29 to resolve reference z-fighting with it's neighbor.
+- New\ \[03000C77\] Disabled some leftover references that was probably from an attempt to design an interior with the building attached to 03006A1A, refs 030069E3, 030069F3, 03006A0D, 03006A26, 0302DB02
+- New\ \[03000C65\] Raised a small chunk of the landscape to make it look a bit more natural and not have a gaping hole in the water that looks like someone slammed a 1d4 in the ground near 03018CC4
+
+~~- New\ \[03000C74\] Repositioned 03044299 with respect to the home it's attached to and also adjust the leaf pile nearby (0304BA1C) to better coverup the porch as intended.~~ Held, navmesh seems to suggest this is intended
+- New\ \[E52B\] Updated position and rotation of 1B042C so that both sets of wheels actually are on the ground.
+- New\ \[DEFB\] Updated landscape texture painting to better match up with a neighboring quad to clean up a merge error.
+
+-- 80
+
+- New\ \[Switchboard\] Lowered 1924EF to rest above it's neighboring crate.
+- New\ \[-2, 14, CW\] Repositioned 1E98DF above ground.
 - New\ \[POIMilitaryMC05\] Lowered 1F9E4F, 1F9E5A, 1F9E5B so the trash piles are no longer floating.
-
 - New\ \[-10, 3, CW\] Lowered 1F9F1C, 1FA009 so they are no longer floating.
-
 - New\ \[-2, 1, CW\] Disabled 1723FD, 1723FC, 17242C, 172497 as they were hidden inside other walls and never seen. Fixed Z-fighting for 13FBFF. Moved over 17AB18 as it was clipping through the wall. Also nudged 1723CA to cover up an exposed wall that was clipping through. Swapped out 172449 to a DecoMainA1x1Wall01Full01 as the original didn't work with the exterior of the building and added (New FormID here) to complete the look of the building and cover up a small gap. Adjusted 13FC21 so that it no longer clips through the wall. Also swapped out 16FA3A, 16FA63, 16FA64, 16FA65, 16FA68, 16FA67, 16FA66, 16FA69, 16FA6A, 16FA6B, 16FA6C, 172424, 172425, 172426, 172427, 172428, 172429, 17242A, 17242B, 1723A4, 1723A5, 1723A6, 1723B8, 1723B9 for their non-full versions to reduce draw calls.
-
 - New\ \[-2, 2, CW\] Nudged 16fb00 a tiny bit to fix some axis-fighting with the window. Adjusted 16A0E5, 147AE6 to stop the trash piles from clipping through the wall and ceiling. Moved up 1484A3, 1483FF, 1483DF, 147A9B, 147A97, C069D, 147A02 as they were underneath the surface for some reason. Adjusted 1483B3, 1483B2, 1484B0 in an attempt to make them less floaty on the sidewalk. Placed (2 new Form IDs here) corner walls to fill a gap in a building. Disabled 1BCF50, 1BCF4E, 1BCF4F as they are hidden behind other walls. Raised up B1EA1, 17E4F2, 15A56E, B1EAE from below the surface so they are visible. Moved 15A542, 15A543, 15A544 closer to the building to close a small gap. Disabled 1539E3, 1539E2, 1483C2 as part of a clean-up effort. Swapped out 15A5A7 for the correct window piece - disabled 153DB3 and adjusted 15A5A6, 15A5A8 because of this fix. Also swapped out 15A595, 15A596, 15A597, 15A598, 15A5D1, 15A5D2, 15A5D3, 15A5D4, 15A5D5, 15A5D6, 16FAC8, 16FAC6, 16FAC5, 16FAC7, 16FAC4, 16FAC3, 16FA9F, 16FB04, 15A661, 15A662, 15A663, 15A664 for their non-full versions to save some draw calls.
-
 - New\ \[-3, 2, CW\] Moved 14852D, 148531, 148530 out of the building so the chunks of sidewalk are actually visible. Disabled 152938, 15292F, 1BCEF1, 1BCEF0, 1BCF24 as they were placed inside of an unenterable building and impossible to see. Adjusted 1BCF34 to fix some y-fighting. Also disabled 1BCF29, 1BCF28 as they were hidden behind walls and couldn't be seen. Placed (New Form ID here) to cover a large gap in the roof. Swapped out 16C74E for its non-full version to save a draw call.
-
 - New\ \[GreenetechGeneticsExt\] Disabled 1BEE8, 1B5182, 1B8F9C, 1B8F9B due to them being hidden underground. Fixed the matswaps on 172591, 8AD22 to match the building. Disabled 17255D, 172500, 172586, 172606, 172506 as they were placed inside of a building and couldn't be seen. Cleaned up the parking garage by disabling B8E53, B8D28, B8D29. Raised up 8B12F so that it's actually visible on the side of the wall. Swapped out 175F79, 1750FB, 175F52, 175F51 for their non-full versions to reduce draw calls. Rotated 16D7DF to close a gap and match the rest of the building. Moved forward 8AD2E, 8AD2F, 8AD30 to close a gap in the building.
-
 - New\ \[-2, 0, CW\] Disabled 1C1B7 due to it being hidden underground. Moved up 8AD11 so that 8AD12 could be disabled.
-
 - New\ \[CambridgeCraterExt\] Disabled C3C2C, 16A6E4 as part of the clean up of the parking garage in GreentechGeneticsExt. Swapped out BA637, BA636 for their non-full versions to reduce draw calls.
-
 - New\ \[0, 0, CW\] Nudged 1BC0C7 slightly to fix some x-fighting. Swapped out 16CC89 for its non-full version to save a draw call.
-
 - New\ \[-3, 1, CW\] Disabled 9C4D4, 9C48A as they are never seen by the player. Swapped out 9F45C, 9F460, 9F461, 9F462, 9F46A, 9F46B, 9F441, 9F443, 9F444, 9F445, 9F44F, 9F450, A979C, A979D, A9792 for their non-full versions to reduce draw calls.
-
 - New\ \[BackBayCarDealershipExt\] Disabled 116AEB, 116AEC, 116AED, 116AEE, 1CFD1A as part of a clean-up effort. Adjusted 1683DC slightly in an attempt to make it less floaty. Rotated 168359, 168358 so the windows actually face the outside of the building.
-
 - New\ \[AtomatoysCorporateHQExt\] Nudged 168417 to fix some x-fighting with other posters. Swapped out 17EC5E, 17EC60, 17EC6A, A1EF2, A1EF3, 17EC34, 17EC36, 17EC37, 17EC38, 17EC39, 17EC3A, 17EC47, 17EC91, 17EC92, 17EC93, 17EC94 for their non-full versions to reduce draw calls.
-
 - New\ \[BostonCommonExt04\] Moved 172904, 16BDED so they are no longer clipping through the wall. Disabled 17EBDA, 165574, 657C5, 657C6, 657E5, 657E6 as part of a clean-up effort. Swapped out 17796D, 1779D9 for a roof piece to reduce draw calls. Also swapped out 175CBA, 175CB1 for their non-full versions to save more draw calls.
-
 - New\ \[EastBostonPrepSchoolExt03\] Moved 1465A5, 1465A3, 1507F3 flat against the wall so they no longer float. Swapped out 130F1C for its non-full version to save some draw calls. Disabled DF1CB, DF1B8, DF1A0, DF178, DF179, DF146 as part of a clean-up effort.
-
 - New\ \[EastCityDownsExt03\] Moved 14B776, 14B777 flat against the wall so they no longer float. Swapped out 123730, 123731, 123732, 123733, 123734, 123735, 123736, 123737, 123738, 123739, 12373A, 12373B, 12373C, 12373D, EF9B5 for their non-full versions to reduce draw calls.
-
 - New\ \[MS04NorthyHideout\] Raised 15A56F, 17E4EA from under the landscape to make it actually visible. Adjusted 17A2B9, 17A1BC to fix some instances of minor clipping. Swapped 179FA1 to TrashClump03 as the original was clipping through the roof. Disabled 15A4BF, 15A4BE as part of a clean-up effort. Swapped out 15A4D4, 15A4D5, 15A4D6, 15A4D7, 15A4EA, 15A45F, 15A460, 15A461, 15A462, 15A463, 15A464 for their non-full versions to reduce draw calls.
-
 - New\ \[CambridgeCraterExt02\] Fixed the matswap on 1BFAFA to match the rest of the building. Disabled 1BFB70, 1BFB6F, 1BFB5E, 1BFB5F, 1BFB29, 1BFB28, 1BFB1D, 1BFB1E, 1BFA87, 1BFA9D, 1BFA9C, 1BFA86, 1BFAC6, 1BFAC9, 1BFAC8, 1BFACC, 1BFAD1, 1BFAD0, 1BFA35, 1BFA92, 1BFA91, 1BFA95, 1BFA94, 1BFA9A, 1BFA33, 1BFA32, 1BFA21, 1BFA25, 1BFA24, 1BFA20, 1BFAF3, 1BFAF2, 1BFAF5, 1BFAF7, 1BFAF8, 1BFAF4 as part of a clean-up effort. Nudged 1BFBA1, 1BFB65, 1BFA74, 1BFA3F to prevent some x-fighting with the roof.
-
 - New\ \[0, 3, CW\] Lowered 17E5B3, D08FC, 1BF9AF a tiny bit so they no longer float. Disabled 16D932, A07B4, A07AE, A07C4, A07C5 as part of a clean-up effort. Nudged A07D0, A07E4 a tiny bit to prevent some x-fighting with the roof.
-
 - New\ \[ProspectHillExt\] Moved D08C0, D08C1 from under the surface so they can be seen. Swapped out 1E0A62, 1E0AC7 for their non-full versions to reduce draw calls.
-
 - New\ \[ProspectParkExt02\] Nudged A945F a tiny bit to prevent some x-fighting with the roof. Swapped 16A27D for the post-war version of the rug instead of the pre-war one. Disabled A9468 as part of a clean-up effort. Swapped out 16D8D9, 16D8DF, 16D8E0, 16D8E6 for their non-full versions to reduce draw calls. Also nudged 16A29C to prevent some z-fighting between the trash and the rug.
-
 - New\ \[-3, 3, CW\] Adjusted 17A591 to stop it clipping through the walls. Moved B1E89 up from the surface so that it is visible. Adjusted 13541F so the greeb is actually connected to the wall.
-
 - New\ \[-3, 4, CW\] Moved 13541A up from the surface so that it is visible.
-
 - New\ \[KendallHospitalExt\] Disabled 50AA4, 35D21, 360BC, 3168E as part of a clean-up effort. Raised up B789A from inside the building to the surface so that it is actually visible. Nudged 30BE4 slightly to fix some x-fighting.
-
 - New\ \[-4, 1, CW\] Disabled 31808 as part of a clean-up effort.
-
 - New\ \[-4, 3, CW\] Disabled AA0CE, 16619D, 16619E, 16619F, 166195, 166196, 166197, 166198, 166199, 16619A, 2385D5, 2385D6 as part of a clean-up effort. Adjusted 2212B9 slightly to properly cover up the clipping floor piece from the building.
 
 - New\ \[-3, 5, CW\] Disabled 10CC0F as the wall was placed inside of another wall. Nudged 145C42 a tiny bit to fix some z-fighting with the roof. Lowered 1A88B0, 1A88AF to close a small gap. Also disabled 10CBFC as it was under the surface.
@@ -748,7 +731,7 @@ Dev note: Below text block with extra spacing is from absterge's recent merge, I
 - New\ \[SouthBoston25\] Adjusted 1C7BB3, 1C7BB4, 23ECDD closer to the walls so they are no longer floating. Swapped out 09B4F3, 09B4F4, 09B4F5, 09B4F6, 09B4F7, 09B4F8 for their static version as they are unreachable by the player and can now be precombined. Nudged 1C7BE3, 1C7BF3 so the glass is no longer covering up the details of the windows. Disabled 09B497, 1C7B1F, 1C7B24, 1C7B29, 1C7B2E, 1C7B33, 1C7B38, 1C7B3D, 1C7B3E, 1C7B3F, 1C7B40, 1C7B41, 1C7B42, 1C7B4B, 001C7B50, 1C7B58 due to them being outside of the playable area and never seen by the player. (As contributed by Absterge)
 - New\ \[4, -2, CW and neighboring blocks\] Same verse as the previous entry, but intended for the Mass Fusion building.
 - New\ \[1, -6, CW and neighboring blocks\] Trinity Tower's massive set of references needed tagged MultiRefLOD for future FOLIP work, courtesy of DoubleYou.
-- New\ \[8, -12, CW\] Swap base on 16F445 and add associated parts of the church to fix up missing collision from a mesh that's only used once here in the entire game. Thanks to DoubleYou and friends for this one. The original chruch mesh also has a missing texture that was hidden from being submerged into the ground.
+- New\ \[8, -12, CW\] Swap base on 16F445 and add associated parts of the church to fix up missing collision from a mesh that's only used once here in the entire game. Thanks to DoubleYou and friends for this one. The original chruch mesh also has a missing texture that was hidden from being submerged into the ground. Also disable the collision box from AFK35576 that I requested for consoles.
 - New\ \[FensParkviewApartments02\] Add new alternate of CounterOuterCrnIn01 to resolve z-fighting for 001DF3BE and it's neighbor 001DF3BD
 - New\ \[Needs Documented\] Merged prp78mergefixes.esp
 - New\ \[Needs Documented\] Merged AbstergePRP78Fixes.esp
@@ -971,12 +954,11 @@ Dev note: Below text block with extra spacing is from absterge's recent merge, I
 - New\ \[SlocumsJoeHQExt\] Adjusted 1F761B so it connects to the wall.
 - New\ \[WestEverettEstatesExt04\] Adjusted 1B9768, 1B976A to fix trash piles floating.
 - New\ \[WestEverettEstatesExt06\] Attempted to adjust 1E4CD0 to reduce the floating of the rubble.
-- New\ \[MassFusionExt\] Moved 09FB54 from under a rubble pile. (Forward to UFO4P)
 - New\ \[BostomCommonExt\] Lowered 17FD3E to fix x-fighting. Adjusted 23210C, 17FD3D to close a gap in their respective buildings.
 - New\ \[HalluciGenExt\] Adjusted 20C6B0, 20C6B4, 20C6B9, 20C7BA, 20C7BB, 20C804 so they are connected to the wall. 
 - New\ \[SwansPondExt\] Adjusted 23846E so that it's connected to the wall.
 - New\ \[CambridgeCampKendallExt\] Adjusted 0A708F so that it's connected to the wall.
-- New\ \[0, -3, CW\] Adjusted 15BF25, 15BF26 so that the benches are no longer floating. (Forward to UFO4P).
+- New\ \[0, -3, CW\] Adjusted 15BF25 so that the benches are no longer floating. (Forward to UFO4P).
 - New\ \[0, -4, CW\] Adjusted 17865B to fix x-fighting. Also adjusted 0020C7A5, 0020CAFD, 0020CAFE, 0020CAFF, 0020CB00, 0020CB01, 0020CB19 so that the trash piles no longer float.
 - New\ \[-20, 11, CW\] Lowered 0974EA so that it no longer floats.
 - New\ \[-6, 3, CW\] Adjusted 170385 to close a gap.
@@ -992,7 +974,7 @@ Dev note: Below text block with extra spacing is from absterge's recent merge, I
 - New\ \[-3, 0, CW\] Deleted 1A651D and adjusted 1A651E, 1A651F to make the area look identical.
 - New\ \[FraternalPost115Ext\] Adjusted 0AAED2 to close a gap. 0AAECE, 0AAECF were also moved to accommodate this fix. Also adjusted 239957 to fix z-fighting.
 - New\ \[LexingtonExt04\] Adjusted 0EA9C7, 0EA9C8 to stop them clipping through the windows. 0EA9C9, 0EA9C1, 0EA9C6, 0EA9C5 were also moved to accommodate this fix. Lowered 0FCEEB, 0FCEEC to fix some Z-Fighting. Also adjusted 0FCED3 to hide some flickering on the wall texture.
-- New\ \[-6, -1, CW\] Lowered 2392EC, 2392F8, 2392F9 so they no longer float. Adjusted 2393EA to fix y-fighting. (Forward to UFO4P)
+- New\ \[-6, -1, CW\] Adjusted 2393EA to fix y-fighting.
 - New\ \[CambridgePolymerLabsExt\] Adjusted 160954, 160955 so the benches are no longer floating. (Forward to UFO4P)
 - New\ \[-7, -2, CW\] Rotated 16C309, 239A50 so they are no longer floating.
 - New\ \[-1, -3, CW\] Adjusted 15BF24 so the bench is no longer floating. (Forward to UFO4P)
