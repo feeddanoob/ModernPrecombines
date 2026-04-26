@@ -1,12 +1,89 @@
-Yes, I'm aware this changelog is ugly as sin. Hopefully at some point I can finally fix this.
+Yes, I'm aware this changelog is ugly as sin. Hopefully at some point I can finally fix this. Help wanted for CSS and cleanup.
 
 Current fixed issues list, anything marked 'Dedup' means Deduplication as in the record is at least one exact duplicated object reference at the same exact position in the associated plugin master file:
 
-🟥: Removed, 🟩: Added, 🟨: Changed
+🟥: Removed, 🟩: Added (Any line with New\ just needs a find and replace with that), 🟨: Changed
 
 There are lines below with extra spacing, from Absterge documentation merges that I still need to clean up.
 
--- **81**
+-- **82**
+
+
+- New\ \[DFCC\] Improved placement for 18355C, but it's not the best.
+- New\ \[E40E\] Adjusted a pyramid landscape near 1BD0E7
+- New\ \[E494\] Adjust 221129 so that the windows aren't floating against the wall.
+- New\ \[E4B5\] Lowered 1A76D5 and 2882B so they aren't floating.
+- New\ \[DBA2\] Lowered EC722 so it's not floating.
+- New\ \[E2E4\] Moved 1D9561 to have that plant less shoved into the nearby corpse.
+- New\ \[E2C5\] Moved up 11963E as it was partially submerged.
+- New\ \[E285\] Move 1D86CC so it's not in the middle of the nearby wall for ... reasons?
+- New\ \[06003107\] Also 0602fdae
+- New\ \[060030C8\] Patched up a small landscape texture seam near 060345a6
+- New\ \[0600310A\] Cleaned up exposed landscape poking through 0601ef3c
+- New\ \[E6C2\] Also 12A394
+- New\ \[E683\] Also 159E55
+- New\ \[E61F\] Also 177274
+- New\ \[E61E\] Also 17725F and 17718E
+- New\ \[E61D\] Touch up the landscape near 1CF08F and 1CF0E6
+- New\ \[E604\] Disable 177482, another case of reintroducing it would require navmesh work.
+- New\ \[E61F\] 17B4BA, will it blend?
+- New\ \[E6C2\] 12A3A0, will it blend?
+- New\ \[E6A1\] Yet more blending patches. Near 159CF0 this time.
+- New\ \[E5B8\] Fixed floating bushes position for ref 15CAF6.
+- New\ \[DFC0\] Restored 9F3AF to it's rightful position. Navmesh in this block sucks rocks, though.
+- New\ \[zPOIJoel06\] Move 16FDDD and 16FDDE so they aren't floating (needs review, related to Neon Flats compat, need to check what UFO4P did to compat)
+- New\ \[DEDF\] Reposition FCEAC, FCEAE, 49C41, and 49C42 so that the left end isn't sticking out of the nearby wall.
+- New\ \[DEFA\] Another one. A90E6
+- New\ \[DAC8\] Landscape texture merge error near 98241 needed repainted. I swear, there's like a thousand of these.
+- New\ \[D937\] Make the landscape texturing look more natural near AB509
+- New\ \[DA9D\] Fix the floating magical car corpse C33FB so it's grounded.
+- New\ \[DA7F\] Disable C35E5 (under the landscape), as bringing it up would require unwanted navmesh work right now
+- New\ \[DA1B\] Touch up some underwater texturing near 1B0643
+- New\ \[DECB\] Adjust Z of 2736B for better integration with neighboring references (body should be leaning against burnt out tree stump)
+- New\ \[DEAA\] Yet more landscape touch ups, near 26B5B
+- New\ \[DEC8\] More landscape touch ups, this one near 199CF9
+- New\ \[DF29\] More landscape touch ups, this time near 17A172
+- New\ \[SuffolkCountyChaterSchool01\] Round coords for 1939C3, 1939C2 and 29DA8 in an attempt to resolve Umbra brain damage. I suspect I'll be coming back to this one.
+- New\ \[3000C61\] Same as the previous line, near 0302CEF4 and 0300FE06
+- New\ \[3000C73\] Yet another landscape touch up near 0302CFCD.
+- New\ \[DE85\] More painting, near 198001
+- New\ \[E0D3\] Disable 17BD2F and put a new decomainc1x1wall01 in it's place, to fix the original ref sticking out of it's neighbor. (todo: new matswap to fix the color, none of the built in ones are suitable)
+- New\ \[E03A\] Sealed a landscape crack near 1C1330 and lowered the bramble reference while touching up the landscape painting in the nearby area to look a bit more natural where possible (the roadchunks aren't paintable)
+- New\ \[DAF5\] Disabled A06B4 (DriedGrass version) in favor of the alternate A06BA that is in the same exact place.
+- New\ \[DBB7\] Blend the landscape texture near 7D1A0 a bit better. (This one was a bit difficult to preserve the look it previously had)
+- New\ \[DEFA\] Another one to the pile, near A90F3
+- New\ \[DB02\] More landscape texture patching near 1B47E4
+- New\ \[E2C2\] Patch up the landscape texture below 1A6873
+- New\ \[E05C\] Yet another landscape texture patchwork near 1D17DB
+- New\ \[03000D09\] More landscape texture work near 0302C745
+- New\ \[03000BEE\] Fixed the landscape texture merge error near 03023128 (this one was pretty obvious, too)
+- New\ \[DDA3\] Addressed some landscape texture chunk merge errors (landscape panting again) in the water near 18E2F8
+- New\ \[D9C8\] Disabled E7399, the navmesh in the area of that reference is so awful that it's not worth reintegrating this reference back into the worldspace from where it was hidden.
+- New\ \[D96B\] More landscape painting adjustments, near 1D56B4
+- New\ \[E73A\] Adjusted rotation for 12BCC0 to address mesh flickering at certain angles. There's probably a material issue with this mesh that hasn't been resolved yet.
+- New\ \[E445\] Patched up the landscape painting near 1643A4
+- New\ \[DEFB\] Touched up a large landscape painting error from a bad merge that happened probably in development years ago nearest 140048
+- New\ \[DED8\] Touched up a landscape painting error next to A8E83 and near 9E498
+- New\ \[DB08\] Outright removed 9E523 (A trash clump seemingly stuck on top of a tree outside WestEverettEstatesExt04, which is only visible in one direction. No idea what was up with it. If it was deliberate, it's a silly placement.)
+- New\ \[DB32\] Lowered a landscape node to make the beach look more believable (near the fish corpse CAF1F)
+- New\ \[DB31\] Disabled a set of branches that were below the landscape.
+- New\ \[DF2F\] A longer set of landscape seams to repaint, near 9D069
+- New\ \[E444\] More of the same, a small blotch near D4581, also address a line of bad painting near 82B46
+- New\ \[E422\] Address yet more landscape texture seams nearest 15CE5A
+- New\ \[Vault75\] Move 1AB061 so that the debris isn't floating partially.
+- New\ \[D92C\] Address the floating plank (1EC6EA) that was previously reported but skipped in previous dev work runs, it actually is on the ground proper now.
+- New\ \[DEA9\] Touch up landscape textures near 26B0A.
+- New\ \[DE88\] Fix up a texture seam in the landscape next to 94D21
+- New\ \[DF47\] Fix a minor texture seam in the landscape near D87D3 (the fence)
+- New\ \[E400\] Disable a few leftover references that I think might have been accidentally moved to the reference graveyard, I suspect this might have been a workaround for their tools back in the day with respect to previs. 03032CCA, [billboard], 2481D0 There's also considerable landscape painting issues here but it's not visible, so I'm not going to bother.
+- New\ \[E135\] Fix up the landscape painting behind 1683D3
+- New\ \[E4A7\] Raise and smooth out the landscape to make the sidewalk chunks less of an eyesore with respect to it's missing faces below the light pole 1B61DF. [Navmesh]
+- New\ \[E0F7\] Adjust and smooth out landscape near the wall chunk 1755A9, needs some navmesh movement to compensate. [navmesh]
+- New\ \[E18E\] Smooth out the landscape to fill a hole just above 1752C6, also swap 17529B for it's Half01 version to save a draw call. [position needs double checked]
+- New\ \[E18F\] Adjust rotation and properly ground 1D1745 so that the plant clump isn't floating so much on one side.
+- New\ \[E1AD\] Raised part of the landscape to mask some placement jank next to 1D34BC, as an aside the navmesh for this block is badly placed.
+
+-- 81
 
 - New\ \[D9BD\] Added a new dynamic disable for the CSEP Buzzard's Bounties VC at the request of Pig. (58626)
 - New\ \[E69C\] Update landscape as well related to the below line and also fix the water assignment to the correct texture set. ExtOceanWater -> ExtRiverCharlesUpper
@@ -44,9 +121,6 @@ There are lines below with extra spacing, from Absterge documentation merges tha
 ~~- New\ \[03000C74\] Repositioned 03044299 with respect to the home it's attached to and also adjust the leaf pile nearby (0304BA1C) to better coverup the porch as intended.~~ Held, navmesh seems to suggest this is intended
 - New\ \[E52B\] Updated position and rotation of 1B042C so that both sets of wheels actually are on the ground.
 - New\ \[DEFB\] Updated landscape texture painting to better match up with a neighboring quad to clean up a merge error.
-
--- 80
-
 - New\ \[Switchboard\] Lowered 1924EF to rest above it's neighboring crate.
 - New\ \[-2, 14, CW\] Repositioned 1E98DF above ground.
 - New\ \[POIMilitaryMC05\] Lowered 1F9E4F, 1F9E5A, 1F9E5B so the trash piles are no longer floating.
@@ -1023,7 +1097,7 @@ There are lines below with extra spacing, from Absterge documentation merges tha
 - New\ \[USAFSatellite01\] Fix z-fighting, 75BD3
 - New\ \[DmndRadio01\] Fix floating 146F80 Console SCOL. (forwardable?)
 
-Branch 74
+-- 74
 
 - New\ \[Various\] Hopefully all the remaining instances of dynamic disables that need covered.
 - New\ \[Vaults\] Fix enable state of locker references for the vault suit compatibility. They were incorrectly set due to me not paying attention.
@@ -1295,7 +1369,7 @@ Branch 74
 - New\ \[6, -5, CW\] Additional object moves. D0233, 20557A, 205582, 205583, add new HitExtACapLongTop01 (Glitchfinder import)
 - New\ \[6, -6, CW\] Various object moves to fix up Shamrock Taphouse's roof. Refs 1BB389, 1BB38E, 1BB38F, 1BB390, 1BB396, 1BB397, 1BB398, 1BB399, 1BB39A, 1BB39B, 1BB39D, 1BB39E, 1BB39F, 1BB3A0, 1BB3A1, 1BB3A2, 1BB3A7, 1BB3A9, 1BB3AA, 1BB3AE, 1BB3AF, 1BB3FD. Also add missing CapLongTop01 refs as needed (Glitchfinder import)
 
-Branch 69
+-- 69
 
 - New\ \[Import\] Updated RR floor mesh contributed by Sakamoto-San in discord as per https://discord.com/channels/830436661736243230/954847055824687215/1075829817464868907. As per their description: The mesh is not linked to the material file and the specular map is not assigned in the material too, leading to a reflective/wet floor
 - New\ \[Various in FH\] Import the removed placement fixes from UF4OP that got removed as a result of U31597 (as of 2.1.5)
@@ -1539,7 +1613,7 @@ Branch 69
 - 🟩 \[4, -3, CW\] Dedup 001D14FA, 001D14F5, 001D14F4, 000C4ADF, 00118E7E, 00118E7F, 0002CBBB, 0002CBED, 0002CDE2, 002185B7
 - 🟩 \[5, -3, CW\] Dedup 0011485A
 
-Branch 65
+-- 65
 
 - \[PRP\] (-19, 20, CW): Community request. XLRT NoCombo 1F970 (NorthBridge / Sanctuary bridge) to support easy mesh replacement.
 - \[PRP\] (Various): Implement separated material swaps and update records accordingly, as per the Underwater Glass Fix mod.
@@ -1648,7 +1722,7 @@ Branch 65
 - \[PRP, U28904\] (CambridgeMassChemical01): Shift position of C983C to fix bad placement. Create new material swap and apply to C980B and C98E6 to fix blue bricks that should not be there. Add 1E819A XLRT to 1C7EE0
 - ~~\[PRP, U31719\] (-8, 0, CW): 16002F and 16002A missing side of SCOL mesh \(sidewalk\), break them and delete the relevant sidewalk pieces. One left side isn't even visible, and the two right side ones need some welding or model work to make them useable without glaring visual issues.~~
 
-Branch 59
+-- 59
 
 - ~~\[U32372\] (-24, -1, CW): Add a brand new pallet to cover up a nasty looking landscape crack at 1.5x size. PRP ID 0800002B (Please note, records were compacted, and new records listed before this point are probably wrong.)~~
 - \[PRP\] (6, 13, FH): Reported visibility break in the area, fix pending.
@@ -2116,9 +2190,6 @@ Branch 59
 - \[PRP\] Fix positioning of 68A78 to stop z-fighting. I doubt anyone's going to notice the extra block from where it currently sits.
 - ~~\[U32328\] Fix 1E7723 clipping through roof.~~
 - \[PRP\] Import remaining Flicker Fixer model set from 5.7 release. (HouseKit/, meshes already in git)
-
-Branch 57
-
 - \[PRP\] Fixed missing header forward in previous release.
 - \[PRP\] Added Meshes (NOT textures, we don't do those) from the Airport Transparency Fix.
 - \[PRP\] Generated MDHT for Nuka World.
